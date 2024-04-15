@@ -21,6 +21,7 @@ final class AuthOtpController: TemplateViewController<AuthOtpView> {
     override func setup() {
         super.setup()
         setupBindings()
+        //navigationController?.navigationBar.isHidden = false
     }
 
     private func setupBindings() {
