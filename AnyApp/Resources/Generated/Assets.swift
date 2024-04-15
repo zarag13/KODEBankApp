@@ -25,10 +25,16 @@ public typealias AssetImageTypeAlias = ImageAsset.Image
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 public enum Asset {
   public static let accentColor = ColorAsset(name: "AccentColor")
+  public static let bitmap = ImageAsset(name: "Bitmap")
   public static let logoL = ImageAsset(name: "LogoL")
   public static let logoM = ImageAsset(name: "LogoM")
   public static let logoS = ImageAsset(name: "LogoS")
   public static let leftBackIcon = ImageAsset(name: "leftBackIcon")
+  public static let detail = ImageAsset(name: "detail")
+  public static let month = ImageAsset(name: "month")
+  public static let phone = ImageAsset(name: "phone")
+  public static let settings = ImageAsset(name: "settings")
+  public static let share = ImageAsset(name: "share")
   public static let user = ImageAsset(name: "user")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name

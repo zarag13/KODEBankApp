@@ -20,6 +20,7 @@ public enum ForegroundStyle {
 // Defines borderColor
 public enum BorderStyle {
     case none
+    case template // Remove after 3-d lection
 }
 
 // Defines font
@@ -73,6 +74,8 @@ public extension BorderStyle {
         switch self {
         case .none:
             UIColor.clear
+        case .template:
+            UIColor.red
         }
     }
 }
