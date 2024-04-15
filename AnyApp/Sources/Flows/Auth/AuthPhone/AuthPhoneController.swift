@@ -21,6 +21,7 @@ final class AuthPhoneController: TemplateViewController<AuthPhoneView> {
     override func setup() {
         super.setup()
         setupBindings()
+        navigationController?.navigationBar.isHidden = true
     }
 
     private func setupBindings() {

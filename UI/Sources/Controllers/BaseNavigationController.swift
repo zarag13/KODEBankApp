@@ -23,7 +23,7 @@ open class BaseNavigationController: UINavigationController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    open func setup() { }
+    open func setup() {}
 
     deinit {
         Logger().logDeinit(self)
