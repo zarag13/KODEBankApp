@@ -16,12 +16,23 @@ final class OtpTextField: BackgroundPrimary {
         case codeIsEntered
     }
 
+    var otpEvent: ((Event) -> Void)?
+
     private var cancelable = [AnyCancellable]()
-    private var labels = [Label]()
-    private var tf = TextField()
     private var curentSelectedLabel = PassthroughSubject<Int, Never>()
 
-    var otpEvent: ((Event) -> Void)?
+    private var labels = [Label]()
+    private lazy var tf: TextField = {
+        TextField(configurator: { tf in
+            #warning("сделать отдельный метод для textContentType")
+            tf.textContentType = .oneTimeCode
+            tf.delegate = self
+        })
+            .tintColor(.clear)
+            .textColor(.clear)
+            .backgroundColor(.clear)
+            .keyboardType(.numberPad)
+    }()
 
     override func setup() {
         super.setup()
@@ -29,31 +40,25 @@ final class OtpTextField: BackgroundPrimary {
     }
 
     private func body() -> UIView {
-        tf = TextField(configurator: { tf in
-            #warning("сделать отдельный метод для textContentType")
-            tf.textContentType = .oneTimeCode
-            let content = createStackLabelForTextField()
-            tf.addSubview(content)
-            content.snp.makeConstraints { make in
-                make.edges.equalToSuperview()
+        ZStack(positioningMode: .fill) {
+            HStack {
+                tf
             }
-            tf.delegate = self
-        })
-            .tintColor(.clear)
-            .textColor(.clear)
-            .backgroundColor(.clear)
-            .keyboardType(.numberPad)
-        return tf
+            HStack(distribution: .fill) {
+                createStackLabelForTextField()
+                FlexibleSpacer()
+            }
+        }
     }
 
     private func createStackLabelForTextField(count: Int = 6) -> UIView {
         if count % 2 == 0 {
-            return HStack(alignment: .fill, distribution: .fillProportionally, spacing: 6) {
-                ForEach(collection: 1...count / 2, distribution: .fillEqually, spacing: 6, axis: .horizontal) { value in
+            return HStack(distribution: .fill, spacing: 6) {
+                ForEach(collection: 1...(count / 2), distribution: .fillEqually, spacing: 6, axis: .horizontal) { value in
                     self.createLabelForTextField(tagForLineView: value)
                 }
                 createSeparatorForTextField()
-                ForEach(collection: count/2 + 1...count, distribution: .fillEqually, spacing: 6, axis: .horizontal) { value in
+                ForEach(collection: (count / 2 + 1)...count, distribution: .fillEqually, spacing: 6, axis: .horizontal) { value in
                     self.createLabelForTextField(tagForLineView: value)
                 }
             }
@@ -62,58 +67,54 @@ final class OtpTextField: BackgroundPrimary {
                 ForEach(collection: 1...count, distribution: .fillEqually, spacing: 6, axis: .horizontal) { value in
                     self.createLabelForTextField(tagForLineView: value)
                 }
-                FlexibleSpacer()
-                    .minWidth(40)
-                    .minHeight(48)
             }
         }
     }
 
     private func createLabelForTextField(tagForLineView: Int) -> UIView {
-        let view = BackgroundView()
+        ZStack(positioningMode: .fill) {
+            VStack() {
+                setupLabel()
+            }
+            VStack(alignment: .fill) {
+                FlexibleSpacer()
+                BackgroundView(configurator: { view in
+                    view.tag = tagForLineView
+                    curentSelectedLabel.sink { value in
+                        if view.tag == value {
+                            view.isHidden = false
+                        } else {
+                            view.isHidden = true
+                        }
+                    }.store(in: &cancelable)
+                })
+                    .backgroundColor(.orange)
+                    .height(2)
+                    .isHidden(true)
+            }
+                .layoutMargins(.make(vInsets: 10, hInsets: 8))
+                .onTap {
+                    self.tf.becomeFirstResponder()
+                    let current = self.labels.first { label in
+                        label.text?.isEmpty == true
+                    }
+                    self.curentSelectedLabel.send(current?.tag ?? 1)
+                }
+        }
+    }
+    private func setupLabel() -> Label {
+        let label = Label()
             .minWidth(40)
             .minHeight(48)
-            .huggingPriority(.defaultLow, axis: .horizontal)
-            .backgroundColor( try? UIColor(hexString: "403A47"))
             .cornerRadius(12)
-        let label = Label()
+            .clipsToBounds(true)
             .textAlignment(.center)
             .fontStyle(FontStyle.title)
+            .huggingPriority(.defaultLow, axis: .horizontal)
+            .backgroundColor( try? UIColor(hexString: "403A47"))
             .textColor(.white)
         labels.append(label)
-        view.addSubview(label)
-        let lineView = UIView()
-        lineView.backgroundColor = try? UIColor(hexString: "6C78E6")
-        lineView.tag = tagForLineView
-        lineView.isHidden = true
-        view.addSubview(lineView)
-
-        lineView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(8)
-            make.bottom.equalToSuperview().inset(10)
-            make.height.equalTo(2)
-        }
-        label.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
-        curentSelectedLabel.sink { value in
-            if lineView.tag == value {
-                lineView.isHidden = false
-            } else {
-                lineView.isHidden = true
-            }
-        }.store(in: &cancelable)
-        
-        view.onTap {
-            self.tf.becomeFirstResponder()
-            let current = self.labels.first { label in
-                label.text?.isEmpty == true
-            }
-            self.curentSelectedLabel.send(current?.tag ?? 1)
-        }
-        view.cornerRadius(12)
-        return view
+        return label
     }
 
     private func createSeparatorForTextField() -> UIView {

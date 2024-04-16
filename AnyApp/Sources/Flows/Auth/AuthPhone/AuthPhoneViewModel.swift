@@ -5,10 +5,11 @@ final class AuthPhoneViewModel {
 
     enum Output {
         case otp
+        case incorrectNumber
     }
 
     enum Input {
-        case phoneEntered
+        case phoneEntered(String)
     }
 
     var onOutput: ((Output) -> Void)?
@@ -20,15 +21,23 @@ final class AuthPhoneViewModel {
     init(authRequestManager: AuthRequestManagerAbstract) {
         self.authRequestManager = authRequestManager
     }
-
+    
+#warning("донастроить кол-во кейсов с ошибками и т.д")
     func handle(_ input: Input) {
-        switch input {
-        case .phoneEntered:
-            login()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            switch input {
+            case .phoneEntered(let phone):
+                let clearPhone = phone.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+                if clearPhone.count == 11 {
+                    self.login(phone: clearPhone)
+                } else {
+                    self.onOutput?(.incorrectNumber)
+                }
+            }
         }
     }
 
-    private func login() {
+    private func login(phone: String) {
         authRequestManager.authLogin(phone: "")
             .sink(
                 receiveCompletion: { _ in

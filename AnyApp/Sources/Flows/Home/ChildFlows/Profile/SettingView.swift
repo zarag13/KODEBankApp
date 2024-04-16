@@ -31,14 +31,6 @@ final class SettingView: BackgroundPrimary {
         }
     }
 
-//    public func configure(image: UIImage, settingName: String, isDetailed: Bool) -> Self {
-//        self.setiingIcon = image
-//        self.settingName = settingName
-//        self.isDetailed = isDetailed
-//        body().embed(in: self)
-//        return self
-//    }
-
     public func configure2(settingsInfo: SettingsInfo) -> Self {
         switch settingsInfo {
         case .settingInfo(image: let image, title: let title, isDetailed: let isDetailed):

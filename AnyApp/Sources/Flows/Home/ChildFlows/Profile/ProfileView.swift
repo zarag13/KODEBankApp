@@ -23,11 +23,11 @@ final class ProfileView: BackgroundPrimary {
                 .height(50)
             settingsStackView
             FlexibleSpacer()
-            //Spacer(.px32)
-//            ButtonPrimary(title: "Разлогиниться")
-//                .onTap { [weak self] in
-//                    self?.onLogout?()
-//                }
+            Spacer(.px32)
+            ButtonPrimary(title: "Разлогиниться")
+                .onTap { [weak self] in
+                    self?.onLogout?()
+                }
         }.layoutMargins(.make(vInsets: 16, hInsets: 16))
     }
 }

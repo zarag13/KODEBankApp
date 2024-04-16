@@ -89,11 +89,12 @@ public final class SnackView: View {
         }
 
         titleLabel.text(props.message)
-//        backgroundStyle(
-//            props.style == .basic
+        #warning("добавить в backgroundStyle красный цвет для алертов с ошибкой и использовать его тут")
+        backgroundStyle(
+            props.style == .basic ? .backgroundPrimary : .none
 //                ? .layerContrast
 //                : .layerNegative
-//        )
+        )
 
         cornerRadius(12)
 //        shadowStyle(ShadowStyle.calendar)
@@ -112,7 +113,7 @@ public final class SnackView: View {
     }
 
     // MARK: - Private Methods
-
+    #warning("добавить кнопку закрытия - крестик")
     private func body() -> UIView {
         BackgroundView(vPadding: 14, hPadding: 16) {
             titleLabel
