@@ -74,7 +74,7 @@ final class AuthPhoneTextField: BackgroundPrimary {
     private func body() -> UIView {
         VStack {
             HStack(spacing: 16) {
-                ImageView(image: Asset.user.image, foregroundStyle: .contentPrimary)
+                ImageView(image: Asset.Icon24px.phone.image)
                     .huggingPriority(.defaultHigh, axis: .horizontal)
                 authTF
                 spinner

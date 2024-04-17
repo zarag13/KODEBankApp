@@ -27,7 +27,7 @@ final class SettingView: BackgroundPrimary {
                 .huggingPriority(.defaultHigh, axis: .horizontal)
             Label(text: settingName)
                 .huggingPriority(.defaultLow, axis: .horizontal)
-            ImageView(image: Asset.detail.image)
+            ImageView(image: Asset.Icon24px.chevronRight.image)
                 .huggingPriority(.defaultHigh, axis: .horizontal)
                 .isHidden(!isDetailed)
         }

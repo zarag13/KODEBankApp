@@ -26,6 +26,15 @@ public enum BorderStyle {
 // Defines font
 public enum FontStyle {
     case title
+    case largeTitle
+    case subtitle
+    case body20r
+    case body17m
+    case body17r
+    case body15r
+    case body15sb
+    case caption13
+    case caption11
     case button
 }
 
@@ -88,6 +97,24 @@ public extension FontStyle {
             Typography.title
         case .button:
             Typography.button
+        case .largeTitle:
+            Typography.largeTitle
+        case .subtitle:
+            Typography.subtitle
+        case .body20r:
+            Typography.body20r
+        case .body17m:
+            Typography.body17m
+        case .body17r:
+            Typography.body17r
+        case .body15r:
+            Typography.body15r
+        case .body15sb:
+            Typography.body15sb
+        case .caption13:
+            Typography.caption1
+        case .caption11:
+            Typography.caption2
         }
     }
 }

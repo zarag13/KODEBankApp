@@ -12,10 +12,10 @@ import Combine
 
 final class SettingsShimerStackView: BackgroundPrimary {
     private var settingsInfo: [SettingsInfo] = [
-        .settingInfo(image: Asset.settings.image, title: "О приложении", isDetailed: true, state: .none),
-        .settingInfo(image: Asset.month.image, title: "Тема приложения", isDetailed: true, state: .none),
-        .settingInfo(image: Asset.phone.image, title: "Служба поддержки", isDetailed: false, state: .none),
-        .settingInfo(image: Asset.share.image, title: "Выход", isDetailed: false, state: .none)
+        .settingInfo(image: Asset.Icon24px.settings.image, title: "О приложении", isDetailed: true, state: .none),
+        .settingInfo(image: Asset.Icon24px.moonStars.image, title: "Тема приложения", isDetailed: true, state: .none),
+        .settingInfo(image: Asset.Icon24px.phoneCall.image, title: "Служба поддержки", isDetailed: false, state: .none),
+        .settingInfo(image: Asset.Icon24px.accountOut.image, title: "Выход", isDetailed: false, state: .none)
     ]
 
     override func setup() {

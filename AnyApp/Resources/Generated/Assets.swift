@@ -13,8 +13,6 @@
 #endif
 
 // Deprecated typealiases
-@available(*, deprecated, renamed: "ColorAsset.Color", message: "This typealias will be removed in SwiftGen 7.0")
-public typealias AssetColorTypeAlias = ColorAsset.Color
 @available(*, deprecated, renamed: "ImageAsset.Image", message: "This typealias will be removed in SwiftGen 7.0")
 public typealias AssetImageTypeAlias = ImageAsset.Image
 
@@ -24,86 +22,144 @@ public typealias AssetImageTypeAlias = ImageAsset.Image
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 public enum Asset {
-  public static let accentColor = ColorAsset(name: "AccentColor")
   public static let bitmap = ImageAsset(name: "Bitmap")
+  public enum Icon24px {
+    public static let gibdd = ImageAsset(name: "Icon24px/GIBDD")
+    public static let internet = ImageAsset(name: "Icon24px/Internet")
+    public static let jkh = ImageAsset(name: "Icon24px/JKH")
+    public static let accountIn = ImageAsset(name: "Icon24px/accountIn")
+    public static let accountOut = ImageAsset(name: "Icon24px/accountOut")
+    public static let accountPay = ImageAsset(name: "Icon24px/accountPay")
+    public static let accountToAccount = ImageAsset(name: "Icon24px/accountToAccount")
+    public static let addPlus = ImageAsset(name: "Icon24px/addPlus")
+    public static let arrowSwipe = ImageAsset(name: "Icon24px/arrowSwipe")
+    public static let back = ImageAsset(name: "Icon24px/back")
+    public static let bank = ImageAsset(name: "Icon24px/bank")
+    public static let bankAccount = ImageAsset(name: "Icon24px/bankAccount")
+    public static let bankomat = ImageAsset(name: "Icon24px/bankomat")
+    public static let camera = ImageAsset(name: "Icon24px/camera")
+    public static let cancel = ImageAsset(name: "Icon24px/cancel")
+    public static let card = ImageAsset(name: "Icon24px/card")
+    public static let cardOut = ImageAsset(name: "Icon24px/cardOut")
+    public static let cardPay = ImageAsset(name: "Icon24px/cardPay")
+    public static let cardWhite = ImageAsset(name: "Icon24px/cardWhite")
+    public static let `case` = ImageAsset(name: "Icon24px/case")
+    public static let check = ImageAsset(name: "Icon24px/check")
+    public static let checkOff = ImageAsset(name: "Icon24px/checkOff")
+    public static let checkOn = ImageAsset(name: "Icon24px/checkOn")
+    public static let chevronDown = ImageAsset(name: "Icon24px/chevronDown")
+    public static let chevronRight = ImageAsset(name: "Icon24px/chevronRight")
+    public static let chevronUp = ImageAsset(name: "Icon24px/chevronUp")
+    public static let close = ImageAsset(name: "Icon24px/close")
+    public static let contacts = ImageAsset(name: "Icon24px/contacts")
+    public static let delete = ImageAsset(name: "Icon24px/delete")
+    public static let doll = ImageAsset(name: "Icon24px/doll")
+    public static let edit = ImageAsset(name: "Icon24px/edit")
+    public static let eur = ImageAsset(name: "Icon24px/eur")
+    public static let exchangeRates = ImageAsset(name: "Icon24px/exchange_rates")
+    public static let eye = ImageAsset(name: "Icon24px/eye")
+    public static let eyeOff = ImageAsset(name: "Icon24px/eyeOff")
+    public static let fee = ImageAsset(name: "Icon24px/fee")
+    public static let filter = ImageAsset(name: "Icon24px/filter")
+    public static let filterBadge = ImageAsset(name: "Icon24px/filterBadge")
+    public static let fingerprint = ImageAsset(name: "Icon24px/fingerprint")
+    public static let headerShareIcon = ImageAsset(name: "Icon24px/headerShareIcon")
+    public static let headphone = ImageAsset(name: "Icon24px/headphone")
+    public static let history = ImageAsset(name: "Icon24px/history")
+    public static let hold = ImageAsset(name: "Icon24px/hold")
+    public static let info = ImageAsset(name: "Icon24px/info")
+    public static let input = ImageAsset(name: "Icon24px/input")
+    public static let loader = ImageAsset(name: "Icon24px/loader")
+    public static let lock = ImageAsset(name: "Icon24px/lock")
+    public static let lockWhite = ImageAsset(name: "Icon24px/lockWhite")
+    public static let mail = ImageAsset(name: "Icon24px/mail")
+    public static let mainProduct = ImageAsset(name: "Icon24px/mainProduct")
+    public static let marker = ImageAsset(name: "Icon24px/marker")
+    public static let message = ImageAsset(name: "Icon24px/message")
+    public static let mobile = ImageAsset(name: "Icon24px/mobile")
+    public static let mobilePay = ImageAsset(name: "Icon24px/mobilePay")
+    public static let moonStars = ImageAsset(name: "Icon24px/moonStars")
+    public static let next = ImageAsset(name: "Icon24px/next")
+    public static let nfc = ImageAsset(name: "Icon24px/nfc")
+    public static let other = ImageAsset(name: "Icon24px/other")
+    public static let payPass = ImageAsset(name: "Icon24px/payPass")
+    public static let payment = ImageAsset(name: "Icon24px/payment")
+    public static let pdf = ImageAsset(name: "Icon24px/pdf")
+    public static let phone = ImageAsset(name: "Icon24px/phone")
+    public static let phoneCall = ImageAsset(name: "Icon24px/phoneCall")
+    public static let phoneGreen = ImageAsset(name: "Icon24px/phoneGreen")
+    public static let photo = ImageAsset(name: "Icon24px/photo")
+    public static let question = ImageAsset(name: "Icon24px/question")
+    public static let radioOff = ImageAsset(name: "Icon24px/radioOff")
+    public static let radioOn = ImageAsset(name: "Icon24px/radioOn")
+    public static let recoverPassword = ImageAsset(name: "Icon24px/recoverPassword")
+    public static let refresh = ImageAsset(name: "Icon24px/refresh")
+    public static let rename = ImageAsset(name: "Icon24px/rename")
+    public static let repay = ImageAsset(name: "Icon24px/repay")
+    public static let requisites = ImageAsset(name: "Icon24px/requisites")
+    public static let reverse = ImageAsset(name: "Icon24px/reverse")
+    public static let route = ImageAsset(name: "Icon24px/route")
+    public static let rubs = ImageAsset(name: "Icon24px/rubs")
+    public static let search = ImageAsset(name: "Icon24px/search")
+    public static let settings = ImageAsset(name: "Icon24px/settings")
+    public static let share = ImageAsset(name: "Icon24px/share")
+    public static let shopping = ImageAsset(name: "Icon24px/shopping")
+    public static let star = ImageAsset(name: "Icon24px/star")
+    public static let starCircle = ImageAsset(name: "Icon24px/starCircle")
+    public static let taxes = ImageAsset(name: "Icon24px/taxes")
+    public static let touch = ImageAsset(name: "Icon24px/touch")
+    public static let trash = ImageAsset(name: "Icon24px/trash")
+    public static let user = ImageAsset(name: "Icon24px/user")
+    public static let userCircle = ImageAsset(name: "Icon24px/userCircle")
+  }
+  public enum Icon40px {
+    public static let icon = ImageAsset(name: "Icon40px/@icon")
+    public static let acado = ImageAsset(name: "Icon40px/Acado")
+    public static let golden = ImageAsset(name: "Icon40px/Golden")
+    public static let mts = ImageAsset(name: "Icon40px/MTS")
+    public static let masterCard32 = ImageAsset(name: "Icon40px/MasterCard32")
+    public static let pochtaBank = ImageAsset(name: "Icon40px/PochtaBank")
+    public static let tinkoff = ImageAsset(name: "Icon40px/Tinkoff")
+    public static let account = ImageAsset(name: "Icon40px/account")
+    public static let add = ImageAsset(name: "Icon40px/add")
+    public static let alternativa = ImageAsset(name: "Icon40px/alternativa")
+    public static let beeline = ImageAsset(name: "Icon40px/beeline")
+    public static let bind = ImageAsset(name: "Icon40px/bind")
+    public static let energo = ImageAsset(name: "Icon40px/energo")
+    public static let gaz = ImageAsset(name: "Icon40px/gaz")
+    public static let icEur = ImageAsset(name: "Icon40px/ic_eur")
+    public static let icUsd = ImageAsset(name: "Icon40px/ic_usd")
+    public static let kode = ImageAsset(name: "Icon40px/kode")
+    public static let mediumIcon = ImageAsset(name: "Icon40px/medium icon")
+    public static let megafon = ImageAsset(name: "Icon40px/megafon")
+    public static let off = ImageAsset(name: "Icon40px/off")
+    public static let on = ImageAsset(name: "Icon40px/on")
+    public static let rostelecom = ImageAsset(name: "Icon40px/rostelecom")
+    public static let tele2 = ImageAsset(name: "Icon40px/tele2")
+    public static let vodokanal = ImageAsset(name: "Icon40px/vodokanal")
+    public static let whiteMe = ImageAsset(name: "Icon40px/white_me")
+    public static let whiteMinus = ImageAsset(name: "Icon40px/white_minus")
+    public static let whitePlus = ImageAsset(name: "Icon40px/white_plus")
+    public static let yantar = ImageAsset(name: "Icon40px/yantar")
+    public static let yota = ImageAsset(name: "Icon40px/yota")
+  }
   public static let logoL = ImageAsset(name: "LogoL")
   public static let logoM = ImageAsset(name: "LogoM")
   public static let logoS = ImageAsset(name: "LogoS")
-  public static let leftBackIcon = ImageAsset(name: "leftBackIcon")
-  public static let detail = ImageAsset(name: "detail")
-  public static let month = ImageAsset(name: "month")
-  public static let phone = ImageAsset(name: "phone")
-  public static let settings = ImageAsset(name: "settings")
-  public static let share = ImageAsset(name: "share")
-  public static let user = ImageAsset(name: "user")
+  public enum SmallIcon {
+    public static let masterCard = ImageAsset(name: "SmallIcon/MasterCard")
+    public static let messages = ImageAsset(name: "SmallIcon/Messages")
+    public static let notificationBadge = ImageAsset(name: "SmallIcon/Notification Badge")
+    public static let property1Normal = ImageAsset(name: "SmallIcon/Property 1=Normal")
+    public static let property1Modle = ImageAsset(name: "SmallIcon/Property 1=modle")
+    public static let property1Small = ImageAsset(name: "SmallIcon/Property 1=small")
+    public static let visa = ImageAsset(name: "SmallIcon/Visa")
+    public static let whitePlusDots = ImageAsset(name: "SmallIcon/white_plus dots")
+  }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
 // MARK: - Implementation Details
-
-public final class ColorAsset {
-  public fileprivate(set) var name: String
-
-  #if os(macOS)
-  public typealias Color = NSColor
-  #elseif os(iOS) || os(tvOS) || os(watchOS)
-  public typealias Color = UIColor
-  #endif
-
-  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)
-  public private(set) lazy var color: Color = {
-    guard let color = Color(asset: self) else {
-      fatalError("Unable to load color asset named \(name).")
-    }
-    return color
-  }()
-
-  #if os(iOS) || os(tvOS)
-  @available(iOS 11.0, tvOS 11.0, *)
-  public func color(compatibleWith traitCollection: UITraitCollection) -> Color {
-    let bundle = BundleToken.bundle
-    guard let color = Color(named: name, in: bundle, compatibleWith: traitCollection) else {
-      fatalError("Unable to load color asset named \(name).")
-    }
-    return color
-  }
-  #endif
-
-  #if canImport(SwiftUI)
-  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-  public private(set) lazy var swiftUIColor: SwiftUI.Color = {
-    SwiftUI.Color(asset: self)
-  }()
-  #endif
-
-  fileprivate init(name: String) {
-    self.name = name
-  }
-}
-
-public extension ColorAsset.Color {
-  @available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)
-  convenience init?(asset: ColorAsset) {
-    let bundle = BundleToken.bundle
-    #if os(iOS) || os(tvOS)
-    self.init(named: asset.name, in: bundle, compatibleWith: nil)
-    #elseif os(macOS)
-    self.init(named: NSColor.Name(asset.name), bundle: bundle)
-    #elseif os(watchOS)
-    self.init(named: asset.name)
-    #endif
-  }
-}
-
-#if canImport(SwiftUI)
-@available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-public extension SwiftUI.Color {
-  init(asset: ColorAsset) {
-    let bundle = BundleToken.bundle
-    self.init(asset.name, bundle: bundle)
-  }
-}
-#endif
 
 public struct ImageAsset {
   public fileprivate(set) var name: String

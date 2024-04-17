@@ -18,7 +18,7 @@ final class AuthPhoneView: BackgroundPrimary {
 
     override func setup() {
         super.setup()
-        body2().embed(in: self)
+        body().embed(in: self)
         onTap { [weak self] in
             self?.endEditing(true)
         }
@@ -52,9 +52,10 @@ final class AuthPhoneView: BackgroundPrimary {
         .layoutMargins(.make(vInsets: 16, hInsets: 16))
     }
     
+    
+    
     private func body2() -> UIView {
         let about = AboutAppView()
-        
         return about
     }
 }

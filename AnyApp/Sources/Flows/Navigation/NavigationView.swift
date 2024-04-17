@@ -14,7 +14,7 @@ final class MainNavigationBar: BackgroundPrimary {
 
     @Published private var title: String?
     private var cancellable = Set<AnyCancellable>()
-    private var leftImage: UIImage = Asset.leftBackIcon.image
+    private var leftImage: UIImage = Asset.Icon24px.back.image
     @Published private var rightImage: UIImage?
 
     override func setup() {
