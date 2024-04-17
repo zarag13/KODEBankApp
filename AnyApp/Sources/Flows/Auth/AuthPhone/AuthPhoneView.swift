@@ -43,8 +43,6 @@ final class AuthPhoneView: BackgroundPrimary {
     private func body() -> UIView {
         VStack(spacing: 20) {
             ImageView(image: Asset.logoS.image, foregroundStyle: .contentPrimary)
-            MainNavigationBar()
-                .setuptile(title: "12312311323112")
             authPhoneTextField
             FlexibleGroupedSpacer()
         }

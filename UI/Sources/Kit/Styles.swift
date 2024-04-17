@@ -3,8 +3,17 @@ import UIKit
 // Defines background color
 public enum BackgroundStyle {
     case none
-
     case backgroundPrimary
+    case backgroundSecondary
+    case contentPrimary
+    
+    case indicatorContentError
+    case indicatorContentDone
+    case indicatorContentSuccess
+    
+    case backgroundBottomMenu
+    case overlay
+    case calendarPeriod
 }
 
 // Defines textColor and tintColor
@@ -15,6 +24,19 @@ public enum ForegroundStyle {
     case textPrimary
 
     case button
+    
+    case indicatorContentError
+    case indicatorContentDone
+    case indicatorContentSuccess
+    
+    case contentAccentPrimary
+    case contentTertiary
+    case contentAccentSecondary
+    case contentSecondary
+    case contentAccentTertiary
+    
+    case textTertiary
+    case textSecondary
 }
 
 // Defines borderColor
@@ -57,6 +79,23 @@ public extension BackgroundStyle {
             UIColor.clear
         case .backgroundPrimary:
             Palette.Surface.backgroundPrimary
+        case .backgroundSecondary:
+            Palette.Surface.backgroundSecondary
+        case .contentPrimary:
+            Palette.Content.primary
+        case .backgroundBottomMenu:
+            Palette.Surface.backgroundBottomMenu
+        case .overlay:
+            Palette.Surface.overlay
+        case .calendarPeriod:
+            Palette.Surface.calendarPeriod
+            
+        case .indicatorContentError:
+            Palette.ErrorColor.indicatorContentError
+        case .indicatorContentDone:
+            Palette.ErrorColor.indicatorContentDone
+        case .indicatorContentSuccess:
+            Palette.ErrorColor.indicatorContentSuccess
         }
     }
 }
@@ -73,6 +112,26 @@ public extension ForegroundStyle {
             Palette.Text.primary
         case .button:
             Palette.Button.buttonText
+        case .indicatorContentError:
+            Palette.ErrorColor.indicatorContentError
+        case .indicatorContentDone:
+            Palette.ErrorColor.indicatorContentDone
+        case .indicatorContentSuccess:
+            Palette.ErrorColor.indicatorContentSuccess
+        case .contentAccentPrimary:
+            Palette.Content.accentPrimary
+        case .contentTertiary:
+            Palette.Content.tertiary
+        case .contentAccentSecondary:
+            Palette.Content.accentSecondary
+        case .contentSecondary:
+            Palette.Content.secondary
+        case .contentAccentTertiary:
+            Palette.Content.accentTertiary
+        case .textTertiary:
+            Palette.Text.tertiary
+        case .textSecondary:
+            Palette.Text.secondary
         }
     }
 }
