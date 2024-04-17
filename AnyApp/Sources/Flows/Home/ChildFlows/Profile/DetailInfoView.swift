@@ -22,9 +22,11 @@ final class DetailInfoView: BackgroundPrimary {
             Spacer(.px16)
             Label(text: "Филипп Ребийяр Олегович")
                 .textAlignment(.center)
+                .textColor(.white)
             Spacer(.px4)
             Label(text: "+7 (951) *** - ** - 24 ")
                 .textAlignment(.center)
+                .textColor(.white)
         }
     }
 }

@@ -41,3 +41,4 @@ final class AuthPhoneController: TemplateViewController<AuthPhoneView> {
         }
     }
 }
+

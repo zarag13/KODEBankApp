@@ -8,30 +8,46 @@
 import UI
 import UIKit
 import AppIndependent
-import Combine
-
-enum SettingsInfo {
-    case settingInfo(image: UIImage, title: String, isDetailed: Bool)
-}
 
 final class SettingsStackView: BackgroundPrimary {
     private var settingsInfo: [SettingsInfo] = [
-        .settingInfo(image: Asset.settings.image, title: "О приложении", isDetailed: true),
-        .settingInfo(image: Asset.month.image, title: "Тема приложения", isDetailed: true),
-        .settingInfo(image: Asset.phone.image, title: "Служба поддержки", isDetailed: false),
-        .settingInfo(image: Asset.share.image, title: "Выход", isDetailed: false)
+        .settingInfo(image: Asset.settings.image, title: "О приложении", isDetailed: true, state: .aboutApp),
+        .settingInfo(image: Asset.month.image, title: "Тема приложения", isDetailed: true, state: .themeApp),
+        .settingInfo(image: Asset.phone.image, title: "Служба поддержки", isDetailed: false, state: .supportService),
+        .settingInfo(image: Asset.share.image, title: "Выход", isDetailed: false, state: .exit)
     ]
+
+    var action: SettingViewAction?
+    var settingsViews: [SettingView] = []
 
     override func setup() {
         super.setup()
         body().embed(in: self)
+        setupBindings()
     }
 
     private func body() -> UIView {
-        ForEach(collection: settingsInfo, alignment: .fill, distribution: .fillEqually, spacing: 18, axis: .vertical) { value in
-            SettingView()
-                .configure2(settingsInfo: value)
+        ScrollView(axis: .vertical) {
+            ForEach(collection: settingsInfo, alignment: .fill, distribution: .fillEqually, spacing: 18, axis: .vertical) { value in
+                self.cresteSettingView()
+                    .configure2(settingsInfo: value)
+            }
         }
-        .layoutMargins(.make(vInsets: 18))
+            .layoutMargins(.make(vInsets: 18))
+    }
+
+    func cresteSettingView() -> SettingView {
+        let settingsView = SettingView()
+        settingsViews.append(settingsView)
+        return settingsView
+    }
+
+    func setupBindings() {
+        for view in settingsViews {
+            view
+                .onTap {
+                    self.action?(view.state)
+                }
+        }
     }
 }

@@ -3,18 +3,37 @@ import UIKit
 import AppIndependent
 
 final class ProfileView: BackgroundPrimary {
+    typealias StateView = ((State) -> Void)
 
+    enum State {
+        case isBeingDownloadData
+        case hasBeenDownloadData
+    }
+    
     var onLogout: VoidHandler?
+    var state: StateView?
 
     let detailInfoView = DetailInfoView()
     let settingsStackView = SettingsStackView()
+    let shimer = SettingsShimerStackView()
+    let shimer2 = ShimmerDetailInfoView()
 
     override func setup() {
         super.setup()
-        body().embed(in: self)
+        state = { [weak self] state in
+            guard let strSelf = self else { return }
+            switch state {
+            case .isBeingDownloadData:
+                strSelf.shimmerBody().embed(in: strSelf)
+            case .hasBeenDownloadData:
+                strSelf.shimmerBody().removeFromSuperview()
+                strSelf.contentBody().embed(in: strSelf)
+            }
+        }
+        setupBindings()
     }
 
-    private func body() -> UIView {
+    private func contentBody() -> UIView {
         VStack {
             NavigationBar()
                 .height(52)
@@ -23,11 +42,35 @@ final class ProfileView: BackgroundPrimary {
                 .height(50)
             settingsStackView
             FlexibleSpacer()
-            Spacer(.px32)
-            ButtonPrimary(title: "Разлогиниться")
-                .onTap { [weak self] in
-                    self?.onLogout?()
-                }
-        }.layoutMargins(.make(vInsets: 16, hInsets: 16))
+        }.layoutMargins(.init(top: 0, left: 16, bottom: 24, right: 16))
+    }
+
+    private func shimmerBody() -> UIView {
+        VStack {
+            NavigationBar()
+                .height(52)
+            shimer2
+            View()
+                .height(50)
+            shimer
+            FlexibleSpacer()
+        }.layoutMargins(.init(top: 0, left: 16, bottom: 24, right: 16))
+    }
+    
+    func setupBindings() {
+        settingsStackView.action = { value in
+            switch value {
+            case .aboutApp:
+                print("tap aboutApp")
+            case .themeApp:
+                print("tap themeApp")
+            case .supportService:
+                print("tap supportService")
+            case .exit:
+                self.onLogout?()
+            case .none:
+                print("tap aboutApp")
+            }
+        }
     }
 }

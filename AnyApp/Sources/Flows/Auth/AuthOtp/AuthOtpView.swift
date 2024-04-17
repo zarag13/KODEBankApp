@@ -22,7 +22,8 @@ final class AuthOtpView: BackgroundPrimary {
 
     private func body() -> UIView {
         VStack {
-            navigationBar
+            MainNavigationBar()
+            //navigationBar
             VStack {
                 Label(text: "На ваш номер отправлено SMS с кодом подтверждения", foregroundStyle: .textPrimary, fontStyle: .button)
                     .linesCount(0)
@@ -37,22 +38,22 @@ final class AuthOtpView: BackgroundPrimary {
             Spacer(.px32)
         }.layoutMargins(.make(vInsets: 16, hInsets: 16))
     }
-    
-    private var navigationBar: NavigationBar {
-        NavigationBar { view in
-            body().embed(in: view)
-            func body() -> UIView {
-                HStack {
-                    ImageView(image: Asset.leftBackIcon.image)
-                        .height(24)
-                        .width(24)
-                        .huggingPriority(.defaultHigh, axis: .horizontal)
-                        .onTap {
-                            print("back")
-                        }
-                    FlexibleSpacer()
-                }.layoutMargins(.make(vInsets: 10))
-            }
-        }
-    }
+//    
+//    private var navigationBar: NavigationBar {
+//        NavigationBar { view in
+//            body().embed(in: view)
+//            func body() -> UIView {
+//                HStack {
+//                    ImageView(image: Asset.leftBackIcon.image)
+//                        .height(24)
+//                        .width(24)
+//                        .huggingPriority(.defaultHigh, axis: .horizontal)
+//                        .onTap {
+//                            print("back")
+//                        }
+//                    FlexibleSpacer()
+//                }.layoutMargins(.make(vInsets: 10))
+//            }
+//        }
+//    }
 }

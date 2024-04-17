@@ -15,6 +15,10 @@ final class ProfileController: TemplateViewController<ProfileView> {
     override func setup() {
         super.setup()
         setupBindings()
+        rootView.state?(.isBeingDownloadData)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.rootView.state?(.hasBeenDownloadData)
+        }
     }
 
     private func setupBindings() {
