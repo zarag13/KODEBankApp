@@ -32,12 +32,12 @@ final class AuthPhoneView: BackgroundPrimary {
             }
         }
 
-//        actionButton = ButtonPrimary(title: "Войти")
-//            .onTap { [weak self] in
-//                self?.authPhoneTextField.isActivate = .beginning
-//                self?.onAuth?(self?.authPhoneTextField.text ?? "")
-//            }
-//        moveActionButtonWithKeyboard = true
+        actionButton = ButtonPrimary(title: "Войти")
+            .onTap { [weak self] in
+                self?.authPhoneTextField.isActivate = .beginning
+                self?.onAuth?(self?.authPhoneTextField.text ?? "")
+            }
+        moveActionButtonWithKeyboard = true
     }
 
     private func body() -> UIView {

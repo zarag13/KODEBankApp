@@ -26,10 +26,12 @@ final class AuthPhoneTextField: BackgroundPrimary {
     public var text: String = ""
 
     // UI
-    private let spinner = MediumSpinner(style: .button)
+    private var leftIcon = ImageView(image: Asset.Icon24px.phone.image, foregroundStyle: .indicatorContentSuccess)
+    private let spinner = MediumSpinner(style: .contentAccentPrimary)
     private lazy var authTF: TextField = {
         TextField(placeholder: "Телефон", configurator: { textField in
             textField.becomeFirstResponder()
+            textField.textColor = ForegroundStyle.textPrimary.color
             textField.textPublisher
                 .map { ($0.formatUserInput(pattern: "+7 (###) ### ## ##" )) }
                 .assign(to: \.text, on: textField)
@@ -42,6 +44,9 @@ final class AuthPhoneTextField: BackgroundPrimary {
         })
             .huggingPriority(.defaultLow, axis: .horizontal)
             .keyboardType(.numberPad)
+            .placeholderFontStyle(.body15r)
+            .placeholderForegroundStyle(.textTertiary)
+            .fontStyle(.body15r)
     }()
 
     override func setup() {
@@ -63,9 +68,13 @@ final class AuthPhoneTextField: BackgroundPrimary {
             self.isActivate = .stop
             switch value {
             case .error:
-                self.authTF.textColor = .red
+                self.leftIcon
+                    .foregroundStyle(.indicatorContentError)
+                self.authTF.textColor = ForegroundStyle.indicatorContentError.color
             case .corrcet:
-                self.authTF.textColor = .white
+                self.leftIcon
+                    .foregroundStyle(.indicatorContentSuccess)
+                self.authTF.textColor = ForegroundStyle.textPrimary.color
             }
         }
             .store(in: &cancelable)
@@ -74,15 +83,15 @@ final class AuthPhoneTextField: BackgroundPrimary {
     private func body() -> UIView {
         VStack {
             HStack(spacing: 16) {
-                ImageView(image: Asset.Icon24px.phone.image)
+                leftIcon
                     .huggingPriority(.defaultHigh, axis: .horizontal)
                 authTF
                 spinner
                     .huggingPriority(.defaultHigh, axis: .horizontal)
-                    .tintColor(.white)
             }
             .layoutMargins(.init(top: 14, left: 24, bottom: 14, right: 16))
         }
-        .backgroundColor(ForegroundStyle.contentPrimary.color).cornerRadius(26)
+            .backgroundColor(ForegroundStyle.contentPrimary.color)
+            .cornerRadius(26)
     }
 }
