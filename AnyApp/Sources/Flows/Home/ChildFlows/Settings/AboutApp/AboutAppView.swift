@@ -18,17 +18,15 @@ final class AboutAppView: BackgroundPrimary {
 
     func body() -> UIView {
         VStack {
-            VStack {
-                MainNavigationBar()
-                    .setuptile(title: "O приложения")
-                View().height(99)
+            MainNavigationBar()
+                .setuptile(title: "O приложения")
+            ZStack(positioningMode: .center) {
                 VStack(alignment: .center, distribution: .fill, spacing: 16) {
                     ImageView(image: Asset.logoL.image)
                     Label(text: "Версия 0.0.1 beta")
-                        .fontStyle(.button)
-                        .textColor(try? UIColor(hexString: "F678BA"))
+                        .foregroundStyle(.contentAccentSecondary)
+                        .fontStyle(.caption11)
                 }
-                FlexibleSpacer()
             }
         }
         .layoutMargins(.make(hInsets: 16))

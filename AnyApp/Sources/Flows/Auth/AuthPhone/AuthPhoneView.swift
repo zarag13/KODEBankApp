@@ -18,7 +18,7 @@ final class AuthPhoneView: BackgroundPrimary {
 
     override func setup() {
         super.setup()
-        body().embed(in: self)
+        body2().embed(in: self)
         onTap { [weak self] in
             self?.endEditing(true)
         }
@@ -53,7 +53,7 @@ final class AuthPhoneView: BackgroundPrimary {
     
     
     private func body2() -> UIView {
-        let about = AboutAppView()
+        let about = ThemeAppStackView()
         return about
     }
 }

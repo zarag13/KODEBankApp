@@ -25,11 +25,15 @@ final class SettingView: BackgroundPrimary {
         HStack(spacing: 16) {
             ImageView(image: setiingIcon)
                 .huggingPriority(.defaultHigh, axis: .horizontal)
+                .foregroundStyle(.contentTertiary)
             Label(text: settingName)
+                .fontStyle(.body15r)
+                .foregroundStyle(.textPrimary)
                 .huggingPriority(.defaultLow, axis: .horizontal)
             ImageView(image: Asset.Icon24px.chevronRight.image)
                 .huggingPriority(.defaultHigh, axis: .horizontal)
                 .isHidden(!isDetailed)
+                .foregroundStyle(.contentTertiary)
         }
     }
 

@@ -21,12 +21,14 @@ final class DetailInfoView: BackgroundPrimary {
                 .huggingPriority(.defaultHigh, axis: .horizontal)
             Spacer(.px16)
             Label(text: "Филипп Ребийяр Олегович")
+                .fontStyle(.subtitle17sb)
+                .foregroundStyle(.textPrimary)
                 .textAlignment(.center)
-                .textColor(.white)
             Spacer(.px4)
             Label(text: "+7 (951) *** - ** - 24 ")
+                .fontStyle(.caption11)
                 .textAlignment(.center)
-                .textColor(.white)
+                .foregroundStyle(.textSecondary)
         }
     }
 }

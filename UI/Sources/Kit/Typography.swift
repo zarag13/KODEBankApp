@@ -29,6 +29,12 @@ public enum Typography {
         weight: .semibold,
         lineHeight: 25
     )
+    public static let subtitle17sb = TextStyle(
+        name: "subtitle17sb",
+        size: 17,
+        weight: .semibold,
+        lineHeight: 22
+    )
 
     public static let body20r = TextStyle(
         name: "Body",

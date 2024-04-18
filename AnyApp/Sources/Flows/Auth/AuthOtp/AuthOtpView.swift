@@ -23,37 +23,18 @@ final class AuthOtpView: BackgroundPrimary {
     private func body() -> UIView {
         VStack {
             MainNavigationBar()
-            //navigationBar
             VStack {
-                Label(text: "На ваш номер отправлено SMS с кодом подтверждения", foregroundStyle: .textPrimary, fontStyle: .button)
+                Label(text: "На ваш номер отправлено SMS с кодом подтверждения", foregroundStyle: .textPrimary, fontStyle: .body15r)
                     .linesCount(0)
                 Spacer(.px24)
                 otp
                     .height(48)
                 Spacer(.px24)
-                Label(text: "Повторить через 2:59", foregroundStyle: .textPrimary, fontStyle: .button)
+                Label(text: "Повторить через 2:59", foregroundStyle: .textSecondary, fontStyle: .caption13)
             }
                 .layoutMargins(.make(vInsets: 16))
             FlexibleSpacer()
             Spacer(.px32)
         }.layoutMargins(.make(vInsets: 16, hInsets: 16))
     }
-//    
-//    private var navigationBar: NavigationBar {
-//        NavigationBar { view in
-//            body().embed(in: view)
-//            func body() -> UIView {
-//                HStack {
-//                    ImageView(image: Asset.leftBackIcon.image)
-//                        .height(24)
-//                        .width(24)
-//                        .huggingPriority(.defaultHigh, axis: .horizontal)
-//                        .onTap {
-//                            print("back")
-//                        }
-//                    FlexibleSpacer()
-//                }.layoutMargins(.make(vInsets: 10))
-//            }
-//        }
-//    }
 }

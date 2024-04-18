@@ -29,6 +29,7 @@ final class MainNavigationBar: BackgroundPrimary {
                 .onTap {
                     print("back")
                 }
+                .foregroundStyle(.textPrimary)
             createLable()
             createRightImage()
                 .huggingPriority(.defaultLow, axis: .horizontal)
@@ -40,7 +41,8 @@ final class MainNavigationBar: BackgroundPrimary {
         let label = Label(text: title)
             .huggingPriority(.defaultHigh, axis: .horizontal)
             .textAlignment(.center)
-            .textColor(.white)
+            .foregroundStyle(.textPrimary)
+            .fontStyle(.subtitle17sb)
         $title.sink { value in
             label.text = value
         }

@@ -11,10 +11,10 @@ import AppIndependent
 
 final class SettingsStackView: BackgroundPrimary {
     private var settingsInfo: [SettingsInfo] = [
-        .settingInfo(image: Asset.Icon24px.settings.image, title: "О приложении", isDetailed: true, state: .none),
-        .settingInfo(image: Asset.Icon24px.moonStars.image, title: "Тема приложения", isDetailed: true, state: .none),
-        .settingInfo(image: Asset.Icon24px.phoneCall.image, title: "Служба поддержки", isDetailed: false, state: .none),
-        .settingInfo(image: Asset.Icon24px.accountOut.image, title: "Выход", isDetailed: false, state: .none)
+        .settingInfo(image: Asset.Icon24px.settings.image, title: "О приложении", isDetailed: true, state: .aboutApp),
+        .settingInfo(image: Asset.Icon24px.moonStars.image, title: "Тема приложения", isDetailed: true, state: .themeApp),
+        .settingInfo(image: Asset.Icon24px.phoneCall.image, title: "Служба поддержки", isDetailed: false, state: .supportService),
+        .settingInfo(image: Asset.Icon24px.accountOut.image, title: "Выход", isDetailed: false, state: .exit)
     ]
 
     var action: SettingViewAction?

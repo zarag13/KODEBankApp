@@ -50,6 +50,7 @@ public enum FontStyle {
     case title
     case largeTitle
     case subtitle
+    case subtitle17sb
     case body20r
     case body17m
     case body17r
@@ -89,7 +90,6 @@ public extension BackgroundStyle {
             Palette.Surface.overlay
         case .calendarPeriod:
             Palette.Surface.calendarPeriod
-            
         case .indicatorContentError:
             Palette.ErrorColor.indicatorContentError
         case .indicatorContentDone:
@@ -174,6 +174,8 @@ public extension FontStyle {
             Typography.caption1
         case .caption11:
             Typography.caption2
+        case .subtitle17sb:
+            Typography.subtitle17sb
         }
     }
 }

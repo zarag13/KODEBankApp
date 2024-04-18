@@ -24,7 +24,6 @@ final class OtpTextField: BackgroundPrimary {
     private var labels = [Label]()
     private lazy var tf: TextField = {
         TextField(configurator: { tf in
-            #warning("сделать отдельный метод для textContentType")
             tf.textContentType = .oneTimeCode
             tf.delegate = self
         })
@@ -88,31 +87,31 @@ final class OtpTextField: BackgroundPrimary {
                         }
                     }.store(in: &cancelable)
                 })
-                    .backgroundColor(.orange)
+                .backgroundStyle(.indicatorContentSuccess)
                     .height(2)
                     .isHidden(true)
             }
                 .layoutMargins(.make(vInsets: 10, hInsets: 8))
                 .onTap {
                     self.tf.becomeFirstResponder()
-                    let current = self.labels.first { label in
+                    let currentIndex = self.labels.firstIndex { label in
                         label.text?.isEmpty == true
                     }
-                    self.curentSelectedLabel.send(current?.tag ?? 1)
+                    self.curentSelectedLabel.send((currentIndex ?? 0) + 1)
                 }
         }
     }
     private func setupLabel() -> Label {
-        let label = Label()
+        let label = Label(text: "")
             .minWidth(40)
             .minHeight(48)
             .cornerRadius(12)
             .clipsToBounds(true)
             .textAlignment(.center)
-            .fontStyle(FontStyle.title)
+            .fontStyle(FontStyle.subtitle)
             .huggingPriority(.defaultLow, axis: .horizontal)
-            .backgroundColor( try? UIColor(hexString: "403A47"))
-            .textColor(.white)
+            .backgroundColor(ForegroundStyle.contentSecondary.color)
+            .foregroundStyle(.textPrimary)
         labels.append(label)
         return label
     }
@@ -120,7 +119,7 @@ final class OtpTextField: BackgroundPrimary {
     private func createSeparatorForTextField() -> UIView {
         BackgroundView { view in
             let lineView = UIView()
-            lineView.backgroundColor = try? UIColor(hexString: "6C78E6")
+            lineView.backgroundColor = ForegroundStyle.contentTertiary.color
             view.addSubview(lineView)
             lineView.snp.makeConstraints { make in
                 make.centerX.centerY.equalToSuperview()

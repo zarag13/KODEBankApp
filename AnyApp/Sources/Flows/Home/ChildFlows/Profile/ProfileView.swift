@@ -9,7 +9,7 @@ final class ProfileView: BackgroundPrimary {
         case isBeingDownloadData
         case hasBeenDownloadData
     }
-    
+
     var onLogout: VoidHandler?
     var state: StateView?
 
@@ -56,7 +56,7 @@ final class ProfileView: BackgroundPrimary {
             FlexibleSpacer()
         }.layoutMargins(.init(top: 0, left: 16, bottom: 24, right: 16))
     }
-    
+
     func setupBindings() {
         settingsStackView.action = { value in
             switch value {
@@ -69,7 +69,7 @@ final class ProfileView: BackgroundPrimary {
             case .exit:
                 self.onLogout?()
             case .none:
-                print("tap aboutApp")
+                print("tap none")
             }
         }
     }
