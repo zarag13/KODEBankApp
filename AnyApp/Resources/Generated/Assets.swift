@@ -22,6 +22,9 @@ public typealias AssetImageTypeAlias = ImageAsset.Image
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 public enum Asset {
+  public enum BigBankCard {
+    public static let debit = ImageAsset(name: "BigBankCard/Debit")
+  }
   public static let bitmap = ImageAsset(name: "Bitmap")
   public enum Icon24px {
     public static let gibdd = ImageAsset(name: "Icon24px/GIBDD")
@@ -113,7 +116,6 @@ public enum Asset {
     public static let userCircle = ImageAsset(name: "Icon24px/userCircle")
   }
   public enum Icon40px {
-    public static let icon = ImageAsset(name: "Icon40px/@icon")
     public static let acado = ImageAsset(name: "Icon40px/Acado")
     public static let golden = ImageAsset(name: "Icon40px/Golden")
     public static let mts = ImageAsset(name: "Icon40px/MTS")
@@ -135,6 +137,7 @@ public enum Asset {
     public static let off = ImageAsset(name: "Icon40px/off")
     public static let on = ImageAsset(name: "Icon40px/on")
     public static let rostelecom = ImageAsset(name: "Icon40px/rostelecom")
+    public static let rub = ImageAsset(name: "Icon40px/rub")
     public static let tele2 = ImageAsset(name: "Icon40px/tele2")
     public static let vodokanal = ImageAsset(name: "Icon40px/vodokanal")
     public static let whiteMe = ImageAsset(name: "Icon40px/white_me")
@@ -155,6 +158,12 @@ public enum Asset {
     public static let property1Small = ImageAsset(name: "SmallIcon/Property 1=small")
     public static let visa = ImageAsset(name: "SmallIcon/Visa")
     public static let whitePlusDots = ImageAsset(name: "SmallIcon/white_plus dots")
+  }
+  public enum MiniBankCard {
+    public static let bankCard = ImageAsset(name: "miniBankCard/BankCard")
+    public static let bankCardDisable = ImageAsset(name: "miniBankCard/BankCardDisable")
+    public static let raiffaizen = ImageAsset(name: "miniBankCard/Raiffaizen")
+    public static let sberbank = ImageAsset(name: "miniBankCard/Sberbank")
   }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name

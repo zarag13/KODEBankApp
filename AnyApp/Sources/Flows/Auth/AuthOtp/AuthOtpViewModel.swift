@@ -4,11 +4,12 @@ import Combine
 final class AuthOtpViewModel {
 
     enum Input {
-        case otpEntered
+        case otpEntered(String)
     }
 
     enum Output {
         case userLoggedIn
+        case codeError
     }
 
     var onOutput: ((Output) -> Void)?
@@ -18,18 +19,28 @@ final class AuthOtpViewModel {
 
     private var cancellables = Set<AnyCancellable>()
 
+    let configModel: ConfigModel
+
     init(
         authRequestManager: AuthRequestManagerAbstract,
-        appSession: AppSession
+        appSession: AppSession,
+        configModel: ConfigModel
     ) {
         self.authRequestManager = authRequestManager
         self.appSession = appSession
+        self.configModel = configModel
     }
 
     func handle(_ input: Input) {
         switch input {
-        case .otpEntered:
-            confirmOtp()
+        case .otpEntered(let code):
+            if code == configModel.code {
+                print("код верный")
+                confirmOtp()
+            } else {
+                self.onOutput?(.codeError)
+                print("код неверный")
+            }
         }
     }
 

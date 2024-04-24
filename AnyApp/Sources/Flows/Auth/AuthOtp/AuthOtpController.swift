@@ -21,18 +21,22 @@ final class AuthOtpController: TemplateViewController<AuthOtpView> {
     override func setup() {
         super.setup()
         setupBindings()
-        //navigationController?.navigationBar.isHidden = false
+        rootView
+            .configure(leght: viewModel.configModel.leghtCode)
+        rootView.navigationBar.popController(navigation: self.navigationController)
     }
 
     private func setupBindings() {
-        rootView.onOtpFilled = { [weak self] in
-            self?.viewModel.handle(.otpEntered)
+        rootView.onOtpFilled = { [weak self] code in
+            self?.viewModel.handle(.otpEntered(code))
         }
 
         viewModel.onOutput = { [weak self] output in
             switch output {
             case .userLoggedIn:
                 self?.onEvent?(.userLoggedIn)
+            case .codeError:
+                self?.rootView.handle(.error)
             }
         }
     }
