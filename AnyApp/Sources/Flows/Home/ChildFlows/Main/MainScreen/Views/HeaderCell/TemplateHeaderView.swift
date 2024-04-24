@@ -6,7 +6,7 @@ final class TemplateHeaderView: BackgroundPrimary {
 
     // MARK: - Private Properties
 
-    private let titleLabel = Label(foregroundStyle: .textPrimary, fontStyle: .title)
+    private let titleLabel = Label(foregroundStyle: .textTertiary, fontStyle: .body15sb)
 
     private var props: Props?
 
@@ -15,6 +15,7 @@ final class TemplateHeaderView: BackgroundPrimary {
     override public func setup() {
         super.setup()
         body().embed(in: self)
+            .backgroundColor(BackgroundStyle.backgroundSecondary.color)
     }
 
     // MARK: - Private methods
@@ -22,8 +23,10 @@ final class TemplateHeaderView: BackgroundPrimary {
     private func body() -> UIView {
         VStack {
             titleLabel
+                .fontStyle(.body15sb)
+                .foregroundStyle(.textTertiary)
         }
-        .layoutMargins(.all(16))
+        .layoutMargins(.make(vInsets: 17, hInsets: 16))
     }
 }
 

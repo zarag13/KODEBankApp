@@ -7,8 +7,9 @@ final class MainView: BackgroundPrimary {
     var onNewProduct: VoidHandler?
 
     private let tableView = BaseTableView()
-    private let button = ButtonPrimary(title: "!Новый продукт")
+    private let button = ButtonPrimary(title: "Открыть новый счет или продукт")
     private lazy var dataSource = MainDataSource(tableView: tableView)
+    let navigationBar = MainNavigationBar()
 
     override func setup() {
         super.setup()
@@ -17,7 +18,12 @@ final class MainView: BackgroundPrimary {
     }
 
     private func body() -> UIView {
-        tableView
+        VStack {
+            navigationBar
+                .setuptile(title: "Главная")
+                .leftImageIsHidden()
+            tableView
+        }
     }
 
     private func setupButton() {
@@ -30,18 +36,6 @@ final class MainView: BackgroundPrimary {
             self?.onNewProduct?()
         }
     }
-
-//    ScrollView {
-//        VStack {
-//            HStack {
-//                profileAvatarHeaderView
-//                Spacer(.px20)
-//                ForEach(collection: settings, spacing: 30) {
-//                    Label(text: $0.rawValue)
-//                }
-//            }
-//        }
-//    }
 }
 
 extension MainView: ConfigurableView {
@@ -49,5 +43,11 @@ extension MainView: ConfigurableView {
 
     func configure(with model: MainViewProps) {
         dataSource.apply(sections: model.sections)
+    }
+    func addNewItems(nweItems: [MainViewProps.Item], into section: MainViewProps.Item) {
+        dataSource.applyNewItemInSection(nweItems: nweItems, into: section)
+    }
+    func closeNewItems(nweItems: [MainViewProps.Item]) {
+        dataSource.closeNewItemInSection(nweItems: nweItems)
     }
 }

@@ -23,13 +23,18 @@ final class HomeFlowCoordinator: Coordinator {
         }
         mainController.tabBarItem = .init(
             title: "Главная",
-            image: UIImage(systemName: "star"),
-            selectedImage: UIImage(systemName: "star")
+            image: Asset.Icon24px.mainProduct.image,
+            selectedImage: Asset.Icon24px.mainProduct.image
         )
 
         guard let profileController = createProfileController() else {
             fatalError("Error during initialization of ProfileController")
         }
+        profileController.tabBarItem = .init(
+            title: "Профиль",
+            image: Asset.Icon24px.userCircle.image,
+            selectedImage: Asset.Icon24px.userCircle.image
+        )
 
         let controllers = [
             mainController,
@@ -46,23 +51,15 @@ private extension HomeFlowCoordinator {
 
     func createMainController() -> UIViewController? {
         DIContainer.shared.assemble(assembly: MainFlowAssembly())
-
-        let coordinator = resolver ~> MainFlowCoordinator.self
+        let coordinator = resolver ~> (MainFlowCoordinator.self, router)
         addDependency(coordinator)
-
         return coordinator.mainController()
     }
 
     func createProfileController() -> UIViewController? {
-        //            DIContainer.shared.assemble(assembly: ProfileAssembly())
-        //
-        //            let coordinator = resolver ~> ProfileCoordinator.self
-        //            addDependency(coordinator)
-        //
-        //            return coordinator.profileController()
-        let viewModel = ProfileViewModel(appSession: resolver ~> AppSession.self)
-        let controller = ProfileController(viewModel: viewModel)
-        controller.tabBarItem = .init(title: "Профиль", image: UIImage(systemName: "star"), selectedImage: UIImage(systemName: "star"))
-        return controller
+        DIContainer.shared.assemble(assembly: ProfileFlowAssembly())
+        let coordinator = resolver ~> (ProfileFlowCoordinator.self, router)
+        addDependency(coordinator)
+        return coordinator.profileController()
     }
 }

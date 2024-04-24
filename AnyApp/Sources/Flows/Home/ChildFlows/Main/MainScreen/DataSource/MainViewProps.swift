@@ -1,4 +1,5 @@
 import Foundation
+import UI
 
 struct MainViewProps {
 
@@ -18,9 +19,10 @@ struct MainViewProps {
     enum Item: Hashable {
         case shimmer(_ identifier: String = UUID().uuidString)
         case header(TemplateHeaderView.Props)
-        case account(TemplateView.Props)
-        case card(TemplateView.Props)
-        case deposit(TemplateView.Props)
+        case account(TemplateAccountView.Props)
+        case card(TemplateCardView.Props)
+        case deposit(TemplateDepositsView.Props)
+        case spacer(BaseTableSpacer.Props)
     }
 
     let sections: [Section]

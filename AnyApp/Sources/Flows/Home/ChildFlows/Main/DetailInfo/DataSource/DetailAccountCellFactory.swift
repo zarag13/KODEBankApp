@@ -1,7 +1,14 @@
+//
+//  DetailAccountCellFactory.swift
+//  AnyApp
+//
+//  Created by Kirill on 20.04.2024.
+//
+
 import UIKit
 import UI
 
-final class MainCellFactory {
+final class DetailAccountCellFactory {
 
     // MARK: - Private Properties
 
@@ -23,36 +30,36 @@ final class MainCellFactory {
     }
 
     // MARK: - Cells
-    func makeTemplateCardCell(
+    func makeHistoryAccountCell(
         for indexPath: IndexPath,
-        with props: TemplateCardView.Props
+        with props: HistoryAccountView.Props
     ) -> UITableViewCell {
         tableView.dequeueTemplateCell(
-            forView: TemplateCardView.self,
+            forView: HistoryAccountView.self,
             for: indexPath
         ) { view, _ in
             view.configure(with: props)
         }
     }
-
-    func makeTemplateAccountCell(
+    
+    func makeSettingsAccountCell(
         for indexPath: IndexPath,
-        with props: TemplateAccountView.Props
+        with props: SettingsAccountView.Props
     ) -> UITableViewCell {
         tableView.dequeueTemplateCell(
-            forView: TemplateAccountView.self,
+            forView: SettingsAccountView.self,
             for: indexPath
         ) { view, _ in
             view.configure(with: props)
         }
     }
-
-    func makeTemplateDepositeCell(
+    
+    func makeFavoritesAccountCell(
         for indexPath: IndexPath,
-        with props: TemplateDepositsView.Props
+        with props: FavoritesAccountView.Props
     ) -> UITableViewCell {
         tableView.dequeueTemplateCell(
-            forView: TemplateDepositsView.self,
+            forView: FavoritesAccountView.self,
             for: indexPath
         ) { view, _ in
             view.configure(with: props)
@@ -77,5 +84,41 @@ final class MainCellFactory {
     ) -> UITableViewCell {
         tableView.dequeueSpacer(props, for: indexPath)
             .backgroundColor(BackgroundStyle.backgroundPrimary.color)
+    }
+
+    func makeDetailCardHeaderView(
+        for indexPath: IndexPath,
+        with props: DetailCardHeaderView.Props
+    ) -> UITableViewCell {
+        tableView.dequeueTemplateCell(
+            forView: DetailCardHeaderView.self,
+            for: indexPath
+        ) { view, _ in
+            view.configure(with: props)
+        }
+    }
+
+    func makeActionsTabsView(
+        for indexPath: IndexPath,
+        with props: ActionsTabsView.Props
+    ) -> UITableViewCell {
+        tableView.dequeueTemplateCell(
+            forView: ActionsTabsView.self,
+            for: indexPath
+        ) { view, _ in
+            view.configure(with: props)
+        }
+    }
+    
+    func makeDetailAccountHeaderView(
+        for indexPath: IndexPath,
+        with props: DetailAccountHeaderView.Props
+    ) -> UITableViewCell {
+        tableView.dequeueTemplateCell(
+            forView: DetailAccountHeaderView.self,
+            for: indexPath
+        ) { view, _ in
+            view.configure(with: props)
+        }
     }
 }
