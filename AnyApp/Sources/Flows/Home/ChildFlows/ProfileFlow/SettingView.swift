@@ -25,7 +25,7 @@ final class SettingView: BackgroundPrimary {
         HStack(spacing: 16) {
             ImageView(image: setiingIcon)
                 .huggingPriority(.defaultHigh, axis: .horizontal)
-                .foregroundStyle(.contentTertiary)
+                .foregroundStyle(.textTertiary)
             Label(text: settingName)
                 .fontStyle(.body15r)
                 .foregroundStyle(.textPrimary)
@@ -33,7 +33,7 @@ final class SettingView: BackgroundPrimary {
             ImageView(image: Asset.Icon24px.chevronRight.image)
                 .huggingPriority(.defaultHigh, axis: .horizontal)
                 .isHidden(!isDetailed)
-                .foregroundStyle(.contentTertiary)
+                .foregroundStyle(.textTertiary)
         }
     }
 

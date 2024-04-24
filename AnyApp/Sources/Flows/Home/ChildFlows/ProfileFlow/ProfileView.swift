@@ -9,8 +9,18 @@ final class ProfileView: BackgroundPrimary {
         case isBeingDownloadData
         case hasBeenDownloadData
     }
-
-    var onLogout: VoidHandler?
+    
+    enum Event {
+        case onLogout
+        case onThemeApp
+        case onAboutApp
+        case supportService
+        case exit
+    }
+    
+    var event: ((Event) -> Void)?
+    
+    //var onLogout: VoidHandler?
     var state: StateView?
 
     let detailInfoView = DetailInfoView()
@@ -61,13 +71,13 @@ final class ProfileView: BackgroundPrimary {
         settingsStackView.action = { value in
             switch value {
             case .aboutApp:
-                print("tap aboutApp")
+                self.event?(.onAboutApp)
             case .themeApp:
-                print("tap themeApp")
+                self.event?(.onThemeApp)
             case .supportService:
-                print("tap supportService")
+                self.event?(.supportService)
             case .exit:
-                self.onLogout?()
+                self.event?(.exit)
             case .none:
                 print("tap none")
             }
