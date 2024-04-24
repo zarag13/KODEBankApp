@@ -11,24 +11,32 @@ import AppIndependent
 
 final class AboutAppView: BackgroundPrimary {
 
+    var navigationBar = MainNavigationBar()
+
     override func setup() {
         super.setup()
-        body().embed(in: self)
     }
 
-    func body() -> UIView {
+    func body(version: String) -> UIView {
         VStack {
-            MainNavigationBar()
+            navigationBar
                 .setuptile(title: "O приложения")
             ZStack(positioningMode: .center) {
                 VStack(alignment: .center, distribution: .fill, spacing: 16) {
                     ImageView(image: Asset.logoL.image)
-                    Label(text: "Версия 0.0.1 beta")
+                        .foregroundStyle(.contentAccentTertiary)
+                    Label(text: "Версия \(version) beta")
                         .foregroundStyle(.contentAccentSecondary)
                         .fontStyle(.caption11)
                 }
             }
         }
         .layoutMargins(.make(hInsets: 16))
+    }
+
+    @discardableResult
+    public func configure(version: String) -> Self {
+        body(version: version).embed(in: self)
+        return self
     }
 }
