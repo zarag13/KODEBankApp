@@ -14,8 +14,9 @@ final class MainNavigationBar: BackgroundPrimary {
 
     @Published private var title: String?
     private var cancellable = Set<AnyCancellable>()
-    private var leftImage: UIImage = Asset.Icon24px.back.image
+    private var leftImage = ImageView(image: Asset.Icon24px.back.image, foregroundStyle: .textPrimary)
     @Published private var rightImage: UIImage?
+    private var navigationController: UINavigationController?
 
     override func setup() {
         super.setup()
@@ -24,22 +25,23 @@ final class MainNavigationBar: BackgroundPrimary {
 
     func body() -> UIView {
         HStack(alignment: .fill, distribution: .equalSpacing) {
-            ImageView(image: leftImage)
-                .huggingPriority(.defaultLow, axis: .horizontal)
-                .onTap {
+            leftImage
+                .height(24)
+                .width(24)
+                .huggingPriority(.defaultHigh, axis: .horizontal)
+                .onTap { [weak self] in
                     print("back")
+                    self?.navigationController?.popViewController(animated: true)
                 }
-                .foregroundStyle(.textPrimary)
             createLable()
             createRightImage()
-                .huggingPriority(.defaultLow, axis: .horizontal)
         }
             .layoutMargins(.make(vInsets: 10))
     }
 
     private func createLable() -> Label {
         let label = Label(text: title)
-            .huggingPriority(.defaultHigh, axis: .horizontal)
+            .huggingPriority(.defaultLow, axis: .horizontal)
             .textAlignment(.center)
             .foregroundStyle(.textPrimary)
             .fontStyle(.subtitle17sb)
@@ -58,8 +60,8 @@ final class MainNavigationBar: BackgroundPrimary {
             .onTap {
                 print("back")
             }
-        $rightImage.sink { image in
-            imageView.image = image
+        $rightImage.sink { [weak imageView] image in
+            imageView?.image = image
         }
         .store(in: &cancellable)
         return imageView
@@ -73,6 +75,16 @@ final class MainNavigationBar: BackgroundPrimary {
     @discardableResult
     public func setupRightImage(image: UIImage) -> Self {
         self.rightImage = image
+        return self
+    }
+    @discardableResult
+    public func leftImageIsHidden() -> Self {
+        self.leftImage.alpha = 0
+        return self
+    }
+    @discardableResult
+    public func popController(navigation: UINavigationController?) -> Self {
+        navigationController = navigation
         return self
     }
 }

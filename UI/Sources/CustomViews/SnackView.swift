@@ -57,8 +57,8 @@ public final class SnackView: View {
 
     // TODO: fix typography, styles and layout
     private let titleLabel = Label()
-//        .fontStyle(.body2)
-//        .foregroundStyle(.contrast)
+        .fontStyle(.caption13)
+        .foregroundStyle(.button)
         .multiline()
 
     private lazy var contentView = body()
@@ -89,9 +89,9 @@ public final class SnackView: View {
         }
 
         titleLabel.text(props.message)
-        #warning("добавить в backgroundStyle красный цвет для алертов с ошибкой и использовать его тут")
+
         backgroundStyle(
-            props.style == .basic ? .backgroundPrimary : .none
+            props.style == .basic ? .backgroundPrimary : .indicatorContentError
 //                ? .layerContrast
 //                : .layerNegative
         )
@@ -115,7 +115,7 @@ public final class SnackView: View {
     // MARK: - Private Methods
     #warning("добавить кнопку закрытия - крестик")
     private func body() -> UIView {
-        BackgroundView(vPadding: 14, hPadding: 16) {
+        BackgroundView(vPadding: 17, hPadding: 16) {
             titleLabel
         }
     }
