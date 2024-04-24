@@ -18,7 +18,7 @@ final class AuthPhoneView: BackgroundPrimary {
 
     override func setup() {
         super.setup()
-        body2().embed(in: self)
+        body().embed(in: self)
         onTap { [weak self] in
             self?.endEditing(true)
         }
@@ -42,18 +42,12 @@ final class AuthPhoneView: BackgroundPrimary {
 
     private func body() -> UIView {
         VStack(spacing: 20) {
-            ImageView(image: Asset.logoS.image, foregroundStyle: .contentPrimary)
+            ImageView(image: Asset.logoS.image, foregroundStyle: .contentAccentTertiary)
             authPhoneTextField
+                .roundingFiftyPercent()
             FlexibleGroupedSpacer()
         }
         .linkGroupedSpacers()
         .layoutMargins(.make(vInsets: 16, hInsets: 16))
-    }
-    
-    
-    
-    private func body2() -> UIView {
-        let about = ThemeAppStackView()
-        return about
     }
 }

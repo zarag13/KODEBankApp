@@ -18,6 +18,7 @@ final class AuthPhoneTextField: BackgroundPrimary {
         case error
         case corrcet
     }
+
     // Published
     private var cancelable = Set<AnyCancellable>()
     @Published var isActivate: AuthTFActivityIndicatorState = .stop
@@ -32,15 +33,6 @@ final class AuthPhoneTextField: BackgroundPrimary {
         TextField(placeholder: "Телефон", configurator: { textField in
             textField.becomeFirstResponder()
             textField.textColor = ForegroundStyle.textPrimary.color
-            textField.textPublisher
-                .map { ($0.formatUserInput(pattern: "+7 (###) ### ## ##" )) }
-                .assign(to: \.text, on: textField)
-                .store(in: &cancelable)
-            textField.textPublisher
-                .sink { text in
-                    self.state.send(.corrcet)
-                    self.text = text
-                }.store(in: &cancelable)
         })
             .huggingPriority(.defaultLow, axis: .horizontal)
             .keyboardType(.numberPad)
@@ -52,6 +44,35 @@ final class AuthPhoneTextField: BackgroundPrimary {
     override func setup() {
         super.setup()
         body().embed(in: self)
+        setupBindings()
+    }
+
+    private func body() -> UIView {
+        BackgroundView(leftPadding: 24, right: 16, top: 14, bottom: 14) {
+            HStack(spacing: 16) {
+                leftIcon
+                    .huggingPriority(.defaultHigh, axis: .horizontal)
+                authTF
+                spinner
+                    .huggingPriority(.defaultHigh, axis: .horizontal)
+            }
+        }
+            .backgroundStyle(.contentPrimary)
+            .cornerRadius(26)
+    }
+    
+    private func setupBindings() {
+        //mask entered pgone
+        authTF.textPublisher
+            .map { ($0.formatUserInput(pattern: "+7 (###) ### ## ##" )) }
+            .assign(to: \.text, on: authTF)
+            .store(in: &cancelable)
+        authTF.textPublisher
+            .sink { [weak self] text in
+                self?.state.send(.corrcet)
+                self?.text = text
+            }.store(in: &cancelable)
+        //spiner state
         $isActivate.sink { [weak self] state in
             switch state {
             case .beginning:
@@ -61,37 +82,21 @@ final class AuthPhoneTextField: BackgroundPrimary {
                 self?.spinner.isHidden = true
                 self?.spinner.stop()
             }
-        }
-            .store(in: &cancelable)
-        #warning("Добавить нормальные цвета ошибки ввода и нормалоьного цвета")
-        state.sink { value in
-            self.isActivate = .stop
+        }.store(in: &cancelable)
+        //ui state all itens
+        state.sink { [weak self] value in
+            self?.isActivate = .stop
             switch value {
             case .error:
-                self.leftIcon
+                self?.leftIcon
                     .foregroundStyle(.indicatorContentError)
-                self.authTF.textColor = ForegroundStyle.indicatorContentError.color
+                self?.authTF.textColor = ForegroundStyle.indicatorContentError.color
             case .corrcet:
-                self.leftIcon
+                self?.leftIcon
                     .foregroundStyle(.indicatorContentSuccess)
-                self.authTF.textColor = ForegroundStyle.textPrimary.color
+                self?.authTF.textColor = ForegroundStyle.textPrimary.color
             }
         }
             .store(in: &cancelable)
-    }
-
-    private func body() -> UIView {
-        VStack {
-            HStack(spacing: 16) {
-                leftIcon
-                    .huggingPriority(.defaultHigh, axis: .horizontal)
-                authTF
-                spinner
-                    .huggingPriority(.defaultHigh, axis: .horizontal)
-            }
-            .layoutMargins(.init(top: 14, left: 24, bottom: 14, right: 16))
-        }
-            .backgroundColor(ForegroundStyle.contentPrimary.color)
-            .cornerRadius(26)
     }
 }

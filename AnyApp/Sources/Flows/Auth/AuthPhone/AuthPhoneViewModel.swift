@@ -4,7 +4,7 @@ import Combine
 final class AuthPhoneViewModel {
 
     enum Output {
-        case otp
+        case otp(ConfigModel)
         case incorrectNumber
     }
 
@@ -21,10 +21,10 @@ final class AuthPhoneViewModel {
     init(authRequestManager: AuthRequestManagerAbstract) {
         self.authRequestManager = authRequestManager
     }
-    
+
 #warning("донастроить кол-во кейсов с ошибками и т.д")
     func handle(_ input: Input) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
             switch input {
             case .phoneEntered(let phone):
                 let clearPhone = phone.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
@@ -44,7 +44,7 @@ final class AuthPhoneViewModel {
                     // TODO: handle error
                 },
                 receiveValue: { [weak self] response in
-                    self?.onOutput?(.otp)
+                    self?.onOutput?(.otp(.init(phone: phone, code: "123456", leghtCode: 6)))
                 }
             ).store(in: &cancellables)
     }

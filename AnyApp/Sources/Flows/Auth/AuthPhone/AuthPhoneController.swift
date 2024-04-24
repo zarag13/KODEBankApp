@@ -5,7 +5,7 @@ final class AuthPhoneController: TemplateViewController<AuthPhoneView> {
     typealias ViewModel = AuthPhoneViewModel
 
     enum Event {
-        case otp
+        case otp(ConfigModel)
     }
 
     var onEvent: ((Event) -> Void)?
@@ -30,15 +30,14 @@ final class AuthPhoneController: TemplateViewController<AuthPhoneView> {
 
         viewModel.onOutput = { [weak self] output in
             switch output {
-            case .otp:
+            case .otp(let config):
                 self?.rootView.onEvent?(.corect)
-                self?.onEvent?(.otp)
+                self?.onEvent?(.otp(config))
             case .incorrectNumber:
                 #warning("донастроить уведомление")
-                SnackCenter.shared.showSnack(withProps: .init(message: "123131", style: .error))
+                SnackCenter.shared.showSnack(withProps: .init(message: "Пожалуйста, убедитесь, что вы правильно ввели номер телефона", style: .error))
                 self?.rootView.onEvent?(.incorrect)
             }
         }
     }
 }
-
