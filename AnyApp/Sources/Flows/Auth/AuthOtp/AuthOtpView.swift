@@ -12,22 +12,37 @@ final class AuthOtpView: BackgroundPrimary {
     private let otp = OtpTextField()
     let navigationBar = MainNavigationBar()
     private let timerLable = TimerLabel()
+    private var cancelable = Set<AnyCancellable>()
 
     override func setup() {
         super.setup()
+        setupBindings()
+    }
+    
+    private func setupBindings() {
         otp.otpEvent = { [weak self] event in
             switch event {
             case .codeIsEntered(let code):
                 self?.onOtpFilled?(code)
+            case .inputTextStarted:
+                if self?.timerLable.state.value == .error {
+                    self?.timerLable.state.send(.process)
+                }
             }
         }
+
+        timerLable.state.sink { [weak self] state in
+            if state == .process {
+                self?.otp.handle(event: .correct)
+            }
+        }.store(in: &cancelable)
     }
 
     func handle(_ state: State) {
         switch state {
         case .error:
             timerLable.state.send(.error)
-            otp.state.send(.error)
+            otp.handle(event: .error)
         }
     }
 

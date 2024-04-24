@@ -49,6 +49,11 @@ final class TimerLabel: BackgroundPrimary {
                 self?.timer?.invalidate()
                 self?.createErrorBody(errorcount: self?.errorCount ?? 1).embed(in: self ?? UIView())
                 self?.errorCount -= 1
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    if self?.state.value == .error {
+                        self?.state.send(.process)
+                    }
+                }
             }
         }.store(in: &cancelable)
     }

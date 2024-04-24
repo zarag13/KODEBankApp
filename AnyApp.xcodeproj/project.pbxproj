@@ -307,6 +307,8 @@
 		EDFC45332BD7114B00034EAA /* ThemeAppViewSettingsContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC45322BD7114B00034EAA /* ThemeAppViewSettingsContent.swift */; };
 		EDFC45372BD7D38E00034EAA /* BackgroundPrimary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC45362BD7D38D00034EAA /* BackgroundPrimary+Extension.swift */; };
 		EDFC45392BD7F1CD00034EAA /* TimerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC45382BD7F1CD00034EAA /* TimerLabel.swift */; };
+		EDFC453C2BD935D800034EAA /* OtpTextField+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC453B2BD935D800034EAA /* OtpTextField+Delegate.swift */; };
+		EDFC453E2BD945A900034EAA /* StackLabelForOtpTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC453D2BD945A900034EAA /* StackLabelForOtpTextField.swift */; };
 		F03B4534227306693A056B00 /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FC79ABDC24AE8FF6272358 /* UIView+Shadow.swift */; };
 		F1253D9975074F1C6E2D6A8D /* LayoutTraits.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10C04246BA5B58A24008981 /* LayoutTraits.swift */; };
 		F17F601932767833FABA4AE4 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FFA65A320351C1ABDA6C3 /* Spinner.swift */; };
@@ -711,6 +713,8 @@
 		EDFC45322BD7114B00034EAA /* ThemeAppViewSettingsContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeAppViewSettingsContent.swift; sourceTree = "<group>"; };
 		EDFC45362BD7D38D00034EAA /* BackgroundPrimary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BackgroundPrimary+Extension.swift"; sourceTree = "<group>"; };
 		EDFC45382BD7F1CD00034EAA /* TimerLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerLabel.swift; sourceTree = "<group>"; };
+		EDFC453B2BD935D800034EAA /* OtpTextField+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OtpTextField+Delegate.swift"; sourceTree = "<group>"; };
+		EDFC453D2BD945A900034EAA /* StackLabelForOtpTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackLabelForOtpTextField.swift; sourceTree = "<group>"; };
 		EF02C2FFFC452FB4591B6F79 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		EF8ECA66D82C80697E2A9500 /* Transitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transitions.swift; sourceTree = "<group>"; };
 		F053C5B5A1B13BB48D713AE8 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -1646,7 +1650,7 @@
 		EDFC44782BCC1C8300034EAA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EDFC44792BCC1C9C00034EAA /* OtpTextField.swift */,
+				EDFC453A2BD9359F00034EAA /* OtpTextField */,
 				EDFC45382BD7F1CD00034EAA /* TimerLabel.swift */,
 			);
 			path = Views;
@@ -2023,6 +2027,16 @@
 				EDFC451E2BD65E9C00034EAA /* ConfigModel.swift */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		EDFC453A2BD9359F00034EAA /* OtpTextField */ = {
+			isa = PBXGroup;
+			children = (
+				EDFC453D2BD945A900034EAA /* StackLabelForOtpTextField.swift */,
+				EDFC44792BCC1C9C00034EAA /* OtpTextField.swift */,
+				EDFC453B2BD935D800034EAA /* OtpTextField+Delegate.swift */,
+			);
+			path = OtpTextField;
 			sourceTree = "<group>";
 		};
 		EFC26310015BB62C9189AF8E /* Other */ = {
@@ -2653,9 +2667,11 @@
 				8E2E9DA0BD3CD3BE938E4D49 /* Auth.swift in Sources */,
 				EDFC44E42BD282F300034EAA /* TemplateAccountView.swift in Sources */,
 				10E588202BC0575900D05347 /* AuthOtpController.swift in Sources */,
+				EDFC453E2BD945A900034EAA /* StackLabelForOtpTextField.swift in Sources */,
 				EDFC44A12BCD1DC700034EAA /* HomeFlowCoordinator.swift in Sources */,
 				EDFC451F2BD65E9C00034EAA /* ConfigModel.swift in Sources */,
 				EDFC44952BCD1DC700034EAA /* TemplateHeaderView.swift in Sources */,
+				EDFC453C2BD935D800034EAA /* OtpTextField+Delegate.swift in Sources */,
 				EDFC44C92BCD205E00034EAA /* SettingView.swift in Sources */,
 				EDFC44982BCD1DC700034EAA /* MainController.swift in Sources */,
 				EDFC451B2BD3CE2C00034EAA /* DetailCardViewModel.swift in Sources */,

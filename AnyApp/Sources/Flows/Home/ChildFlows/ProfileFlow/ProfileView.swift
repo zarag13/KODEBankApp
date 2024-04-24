@@ -9,7 +9,7 @@ final class ProfileView: BackgroundPrimary {
         case isBeingDownloadData
         case hasBeenDownloadData
     }
-    
+
     enum Event {
         case onLogout
         case onThemeApp
@@ -17,9 +17,9 @@ final class ProfileView: BackgroundPrimary {
         case supportService
         case exit
     }
-    
+
     var event: ((Event) -> Void)?
-    
+
     //var onLogout: VoidHandler?
     var state: StateView?
 

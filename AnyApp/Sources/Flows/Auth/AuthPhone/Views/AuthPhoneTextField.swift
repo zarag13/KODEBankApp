@@ -60,9 +60,9 @@ final class AuthPhoneTextField: BackgroundPrimary {
             .backgroundStyle(.contentPrimary)
             .cornerRadius(26)
     }
-    
+
     private func setupBindings() {
-        //mask entered pgone
+        // mask entered pgone
         authTF.textPublisher
             .map { ($0.formatUserInput(pattern: "+7 (###) ### ## ##" )) }
             .assign(to: \.text, on: authTF)
@@ -72,7 +72,7 @@ final class AuthPhoneTextField: BackgroundPrimary {
                 self?.state.send(.corrcet)
                 self?.text = text
             }.store(in: &cancelable)
-        //spiner state
+        // spiner state
         $isActivate.sink { [weak self] state in
             switch state {
             case .beginning:
@@ -83,7 +83,7 @@ final class AuthPhoneTextField: BackgroundPrimary {
                 self?.spinner.stop()
             }
         }.store(in: &cancelable)
-        //ui state all itens
+        // ui state all itens
         state.sink { [weak self] value in
             self?.isActivate = .stop
             switch value {
