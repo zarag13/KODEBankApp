@@ -39,8 +39,15 @@ final class SettingsStackView: BackgroundPrimary {
     private func setupBindings() {
         for view in settingsViews {
             view
-                .onTap {
-                    guard let state = view.state else { return }
+                .onTap { [weak view] in
+                    guard let state = view?.state else { return }
+                    UIView.animate(withDuration: 0.1) {
+                        view?.alpha = 0.2
+                    } completion: { _ in
+                        UIView.animate(withDuration: 0.1) {
+                            view?.alpha = 1
+                        }
+                    }
                     self.action?(state)
                 }
         }

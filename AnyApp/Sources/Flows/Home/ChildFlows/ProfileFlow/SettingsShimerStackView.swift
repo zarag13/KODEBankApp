@@ -19,7 +19,7 @@ final class SettingsShimerStackView: BackgroundPrimary {
 
     private func body() -> UIView {
         ScrollView(axis: .vertical, padding: 0) {
-            ForEach(collection: ModelSettingsView.createItems, alignment: .fill, distribution: .fillEqually, axis: .vertical) { value in
+            ForEach(collection: ModelSettingsView.createItems, alignment: .fill, distribution: .fillEqually, axis: .vertical) { _ in
                 SettingShimerView()
             }
         }

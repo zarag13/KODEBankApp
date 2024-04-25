@@ -44,7 +44,7 @@ final class AuthPhoneView: BackgroundPrimary {
         VStack(spacing: 20) {
             ImageView(image: Asset.logoS.image, foregroundStyle: .contentAccentTertiary)
             authPhoneTextField
-                .roundingFiftyPercent()
+                .roundingFiftyPercentFromHeight()
             FlexibleGroupedSpacer()
         }
         .linkGroupedSpacers()

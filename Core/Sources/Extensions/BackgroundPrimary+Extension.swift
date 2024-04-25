@@ -9,9 +9,13 @@ import UI
 
 extension BackgroundPrimary {
     @discardableResult
-    public func roundingFiftyPercent() -> Self {
+    public func roundingFiftyPercentFromWidth() -> Self {
         self.cornerRadius(self.frame.width / 2)
         return self
     }
+    @discardableResult
+    public func roundingFiftyPercentFromHeight() -> Self {
+        self.cornerRadius(self.frame.height / 2)
+        return self
+    }
 }
-

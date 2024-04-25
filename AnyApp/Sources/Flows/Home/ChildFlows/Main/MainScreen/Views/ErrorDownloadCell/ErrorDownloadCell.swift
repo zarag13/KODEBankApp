@@ -10,6 +10,8 @@ import UI
 import AppIndependent
 
 final class ErrorDownloadCell: BackgroundPrimary {
+    
+    private var errorLabel = Label(text: "Обновить", foregroundStyle: .contentAccentPrimary, fontStyle: .body15sb)
 
     // MARK: - Public methods
 
@@ -30,7 +32,19 @@ final class ErrorDownloadCell: BackgroundPrimary {
                 .linesCount(2)
             Spacer(.px16)
             //props.titleButton
-            Label(text: "Обновить", foregroundStyle: .contentAccentPrimary, fontStyle: .body15sb)
+            BackgroundView {
+                errorLabel
+            }
+            .onTap { [weak self] in
+                UIView.animate(withDuration: 0.1) {
+                    self?.errorLabel.alpha = 0.2
+                } completion: { _ in
+                    UIView.animate(withDuration: 0.1) {
+                        self?.errorLabel.alpha = 1
+                    }
+                }
+
+            }
         }
         .layoutMargins(.make(vInsets: 35.5, hInsets: 16))
     }

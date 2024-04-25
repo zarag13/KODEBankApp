@@ -20,12 +20,16 @@ final class ProfileController: TemplateViewController<ProfileView> {
 
     override func setup() {
         super.setup()
-        navigationController?.navigationBar.isHidden = true
         setupBindings()
         rootView.state?(.isBeingDownloadData)
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.rootView.state?(.hasBeenDownloadData)
         }
+        configureNavigationItem()
+    }
+    
+    private func configureNavigationItem() {
+        navigationController?.navigationBar.isHidden = true
     }
 
     private func setupBindings() {

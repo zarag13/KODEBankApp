@@ -22,6 +22,9 @@ final class AboutAppController: TemplateViewController<AboutAppView> {
     override func setup() {
         super.setup()
         setupBindings()
+    }
+    
+    private func configureNavigationItem() {
         rootView.navigationBar
             .popController(navigation: self.navigationController)
     }

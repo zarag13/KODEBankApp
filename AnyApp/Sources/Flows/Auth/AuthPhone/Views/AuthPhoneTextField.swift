@@ -8,6 +8,7 @@ import UIKit
 import UI
 import AppIndependent
 import Combine
+import Core
 
 final class AuthPhoneTextField: BackgroundPrimary {
     enum AuthTFActivityIndicatorState {

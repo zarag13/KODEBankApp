@@ -1,14 +1,14 @@
 //
 //  String+Extension.swift
-//  AnyApp
+//  Core
 //
-//  Created by Kirill on 16.04.2024.
+//  Created by Kirill on 25.04.2024.
 //
 
 import Foundation
 
 extension String {
-    func formatUserInput(pattern: String) -> String {
+    public func formatUserInput(pattern: String) -> String {
         var inputCollection = Array(self)
         var resultCollection = [Character]()
         for i in 0 ..< pattern.count {
