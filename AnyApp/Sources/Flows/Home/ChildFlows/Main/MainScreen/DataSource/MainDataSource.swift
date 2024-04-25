@@ -48,18 +48,22 @@ final class MainDataSource {
     // MARK: - Private methods
     private func setup() {
         tableView.contentInsets(.init(top: 16, left: 0, bottom: 92, right: 0))
-        tableView.registerTemplateCell(forView: TemplateShimmerView.self)
         tableView.registerTemplateCell(forView: TemplateCardView.self)
         tableView.registerTemplateCell(forView: TemplateAccountView.self)
         tableView.registerTemplateCell(forView: TemplateDepositsView.self)
         tableView.registerTemplateCell(forView: TemplateHeaderView.self)
         tableView.registerTemplateCell(forView: BaseTableSpacer.self)
+        //shimmer
+        tableView.registerTemplateCell(forView: TemplateShimmerView.self)
+        tableView.registerTemplateCell(forView: TemplateShimmerHeader.self)
+        //Error
+        tableView.registerTemplateCell(forView: ErrorDownloadCell.self)
     }
 
     private func configure() {
         dataSource = DiffableDataSource(tableView: tableView) { [unowned self] _, indexPath, item in
             switch item {
-            case .shimmer:
+            case .shimmerCell:
                 return cellFactory.makeShimmer(for: indexPath)
             case .header(let props):
                 return cellFactory.makeTemplateHeaderCell(for: indexPath, with: props)
@@ -71,6 +75,10 @@ final class MainDataSource {
                 return cellFactory.makeTemplateDepositeCell(for: indexPath, with: props)
             case .spacer(let props):
                 return cellFactory.makeSpacerSections(for: indexPath, with: props)
+            case .shimmerHeader:
+                return cellFactory.makeShimerHeader(for: indexPath)
+            case .error(let props):
+                return cellFactory.makeErrorDownloadCell(for: indexPath, with: props)
             }
         }
     }

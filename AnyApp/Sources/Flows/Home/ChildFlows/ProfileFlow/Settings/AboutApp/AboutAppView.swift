@@ -20,12 +20,12 @@ final class AboutAppView: BackgroundPrimary {
     func body(version: String) -> UIView {
         VStack {
             navigationBar
-                .setuptile(title: "O приложения")
+                .setuptile(title: Profile.aboutApp)
             ZStack(positioningMode: .center) {
                 VStack(alignment: .center, distribution: .fill, spacing: 16) {
                     ImageView(image: Asset.logoL.image)
                         .foregroundStyle(.contentAccentTertiary)
-                    Label(text: "Версия \(version) beta")
+                    Label(text: "\(Profile.version) \(version) beta")
                         .foregroundStyle(.contentAccentSecondary)
                         .fontStyle(.caption11)
                 }

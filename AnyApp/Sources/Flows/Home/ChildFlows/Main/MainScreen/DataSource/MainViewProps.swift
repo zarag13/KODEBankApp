@@ -17,12 +17,14 @@ struct MainViewProps {
     }
 
     enum Item: Hashable {
-        case shimmer(_ identifier: String = UUID().uuidString)
+        case shimmerCell(_ identifier: String = UUID().uuidString)
+        case shimmerHeader(_ identifier: String = UUID().uuidString)
         case header(TemplateHeaderView.Props)
         case account(TemplateAccountView.Props)
         case card(TemplateCardView.Props)
         case deposit(TemplateDepositsView.Props)
         case spacer(BaseTableSpacer.Props)
+        case error(ErrorDownloadCell.Props)
     }
 
     let sections: [Section]

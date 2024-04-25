@@ -29,5 +29,6 @@ final class ShimmerDetailInfoView: BackgroundPrimary {
                 .size(width: 122, height: 16)
                 .skeletonCornerRadius(8)
         }
+        .layoutMargins(.init(top: 52, left: 0, bottom: 50, right: 0))
     }
 }

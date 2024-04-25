@@ -28,7 +28,6 @@ extension OtpTextField: UITextFieldDelegate {
                 let index = newText.index(newText.startIndex, offsetBy: i)
                 currentLabel.text = String(newText[index])
                 if i == stackLabels.labels.count - 1 {
-                    hiddenTextField.resignFirstResponder()
                     otpEvent?(.codeIsEntered(hiddenTextField.text ?? ""))
                 }
             } else {

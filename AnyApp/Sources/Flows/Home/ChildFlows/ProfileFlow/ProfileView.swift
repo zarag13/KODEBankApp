@@ -20,7 +20,6 @@ final class ProfileView: BackgroundPrimary {
 
     var event: ((Event) -> Void)?
 
-    //var onLogout: VoidHandler?
     var state: StateView?
 
     let detailInfoView = DetailInfoView()
@@ -45,26 +44,17 @@ final class ProfileView: BackgroundPrimary {
 
     private func contentBody() -> UIView {
         VStack {
-            NavigationBar()
-                .height(52)
             detailInfoView
-            View()
-                .height(50)
             settingsStackView
-            FlexibleSpacer()
-        }.layoutMargins(.init(top: 0, left: 16, bottom: 24, right: 16))
+        }
+        .layoutMargins(.make(hInsets: 16))
     }
 
     private func shimmerBody() -> UIView {
         VStack {
-            NavigationBar()
-                .height(52)
             shimer2
-            View()
-                .height(50)
             shimer
-            FlexibleSpacer()
-        }.layoutMargins(.init(top: 0, left: 16, bottom: 24, right: 16))
+        }.layoutMargins(.make(hInsets: 16))
     }
 
     func setupBindings() {
@@ -78,8 +68,6 @@ final class ProfileView: BackgroundPrimary {
                 self.event?(.supportService)
             case .exit:
                 self.event?(.exit)
-            case .none:
-                print("tap none")
             }
         }
     }

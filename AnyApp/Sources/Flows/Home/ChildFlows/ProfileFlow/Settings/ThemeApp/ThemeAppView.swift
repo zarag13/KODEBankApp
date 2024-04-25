@@ -22,9 +22,8 @@ final class ThemeAppView: BackgroundPrimary {
 
     private func body() -> UIView {
         VStack {
-#warning("Здесь надо будет вынести MainNavigationBar и сделать эту view как отдельную- отвечает только за создание ячейки")
             navigationBar
-                .setuptile(title: "Тема приложения")
+                .setuptile(title: Profile.themeApp)
             themeAppStackView
         }
             .layoutMargins(.make(hInsets: 16))

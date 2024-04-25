@@ -24,7 +24,6 @@ final class MainFlowCoordinator: Coordinator {
     func mainController() -> UIViewController? {
         let controller = resolver ~> MainController.self
         innerRouter.setRootModule(controller)
-        controller.navigationController?.navigationBar.isHidden = true
         controller.openDetailController = { [weak self] event in
             switch event {
             case .detailCard:

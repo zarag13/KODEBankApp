@@ -14,14 +14,14 @@ final class TemplateAccountView: BackgroundPrimary {
 
     private var props: Props?
 
-    var rightImage = ImageView(image: Asset.Icon24px.chevronDown.image)
+    var rightImage = ImageView()
 
     enum State {
         case open
         case close
     }
 
-    var state2 = CurrentValueSubject<State, Never>(.close)
+    var state2 = CurrentValueSubject<State, Never>(.open)
     var cancelable = Set<AnyCancellable>()
 
     // MARK: - Public methods
@@ -30,9 +30,9 @@ final class TemplateAccountView: BackgroundPrimary {
         state2.sink { state in
             switch state {
             case .open:
-                self.rightImage.image = Asset.Icon24px.chevronDown.image
-            case .close:
                 self.rightImage.image = Asset.Icon24px.chevronUp.image
+            case .close:
+                self.rightImage.image = Asset.Icon24px.chevronDown.image
             }
         }.store(in: &cancelable)
     }

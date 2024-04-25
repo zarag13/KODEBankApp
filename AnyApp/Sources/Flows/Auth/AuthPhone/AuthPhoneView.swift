@@ -32,7 +32,7 @@ final class AuthPhoneView: BackgroundPrimary {
             }
         }
 
-        actionButton = ButtonPrimary(title: "Войти")
+        actionButton = ButtonPrimary(title: Entrance.enter)
             .onTap { [weak self] in
                 self?.authPhoneTextField.isActivate = .beginning
                 self?.onAuth?(self?.authPhoneTextField.text ?? "")

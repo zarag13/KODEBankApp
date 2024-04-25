@@ -236,6 +236,8 @@
 		EADA0964F845150616015862 /* AppIndependent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18515873DDF40EFF0276E16F /* AppIndependent.framework */; };
 		EB167D5AB2B101622DFAE4C1 /* UIView+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC700A574FEBDEF165DE358F /* UIView+Configuration.swift */; };
 		EBD2D2227EE0C1742CC0CE5C /* BaseImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7827B57C342857F5D18FD7 /* BaseImageView.swift */; };
+		ED2893FB2BD9C42600016DF6 /* Plurals.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = ED2893FA2BD9C42600016DF6 /* Plurals.stringsdict */; };
+		ED2893FE2BD9DE0900016DF6 /* ErrorDownloadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2893FD2BD9DE0900016DF6 /* ErrorDownloadCell.swift */; };
 		EDC60DEBCAD6179A2C1DE924 /* PersistentLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375875A8550AAAF3D551B7EC /* PersistentLayer.swift */; };
 		EDFC44772BCBE4BD00034EAA /* AuthPhoneTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44762BCBE4BD00034EAA /* AuthPhoneTextField.swift */; };
 		EDFC447A2BCC1C9C00034EAA /* OtpTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44792BCC1C9C00034EAA /* OtpTextField.swift */; };
@@ -272,7 +274,7 @@
 		EDFC44D02BCEC44E00034EAA /* SettingsShimerStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44CF2BCEC44E00034EAA /* SettingsShimerStackView.swift */; };
 		EDFC44D22BCEC46100034EAA /* SettingShimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44D12BCEC46100034EAA /* SettingShimerView.swift */; };
 		EDFC44D52BCECC6000034EAA /* ShimmerDetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44D42BCECC6000034EAA /* ShimmerDetailInfoView.swift */; };
-		EDFC44D82BCEDD6B00034EAA /* Event+typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44D72BCEDD6A00034EAA /* Event+typealias.swift */; };
+		EDFC44D82BCEDD6B00034EAA /* ModelSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44D72BCEDD6A00034EAA /* ModelSettingsView.swift */; };
 		EDFC44DD2BCEE14300034EAA /* AboutAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44DC2BCEE14300034EAA /* AboutAppView.swift */; };
 		EDFC44DF2BCEE14E00034EAA /* ThemeAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44DE2BCEE14E00034EAA /* ThemeAppView.swift */; };
 		EDFC44E22BCEE1F200034EAA /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44E12BCEE1F200034EAA /* NavigationView.swift */; };
@@ -304,11 +306,14 @@
 		EDFC452B2BD6770200034EAA /* ProfileFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC452A2BD6770200034EAA /* ProfileFlowCoordinator.swift */; };
 		EDFC452F2BD710AA00034EAA /* ThemeAppViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC452E2BD710AA00034EAA /* ThemeAppViewCell.swift */; };
 		EDFC45312BD710FE00034EAA /* ThemeAppStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC45302BD710FE00034EAA /* ThemeAppStackView.swift */; };
-		EDFC45332BD7114B00034EAA /* ThemeAppViewSettingsContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC45322BD7114B00034EAA /* ThemeAppViewSettingsContent.swift */; };
+		EDFC45332BD7114B00034EAA /* ThemeAppViewSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC45322BD7114B00034EAA /* ThemeAppViewSettings.swift */; };
 		EDFC45372BD7D38E00034EAA /* BackgroundPrimary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC45362BD7D38D00034EAA /* BackgroundPrimary+Extension.swift */; };
 		EDFC45392BD7F1CD00034EAA /* TimerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC45382BD7F1CD00034EAA /* TimerLabel.swift */; };
 		EDFC453C2BD935D800034EAA /* OtpTextField+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC453B2BD935D800034EAA /* OtpTextField+Delegate.swift */; };
 		EDFC453E2BD945A900034EAA /* StackLabelForOtpTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC453D2BD945A900034EAA /* StackLabelForOtpTextField.swift */; };
+		EDFC45452BD9AD7F00034EAA /* String+Extension2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC45442BD9AD7E00034EAA /* String+Extension2.swift */; };
+		EDFC45472BD9B61800034EAA /* TemplateShimmerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC45462BD9B61800034EAA /* TemplateShimmerHeader.swift */; };
+		EDFC45492BD9C20C00034EAA /* Plurals.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC45482BD9C20C00034EAA /* Plurals.swift */; };
 		F03B4534227306693A056B00 /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FC79ABDC24AE8FF6272358 /* UIView+Shadow.swift */; };
 		F1253D9975074F1C6E2D6A8D /* LayoutTraits.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10C04246BA5B58A24008981 /* LayoutTraits.swift */; };
 		F17F601932767833FABA4AE4 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FFA65A320351C1ABDA6C3 /* Spinner.swift */; };
@@ -641,6 +646,8 @@
 		E6606D769B1C913A0E32422D /* UI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E83746B095BE32D6D5B7669E /* UICollectionView+Scroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Scroll.swift"; sourceTree = "<group>"; };
 		EC42ECFE1FAE54552AEB43C1 /* ConstraintsAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsAccess.swift; sourceTree = "<group>"; };
+		ED2893FA2BD9C42600016DF6 /* Plurals.stringsdict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.stringsdict; path = Plurals.stringsdict; sourceTree = "<group>"; };
+		ED2893FD2BD9DE0900016DF6 /* ErrorDownloadCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDownloadCell.swift; sourceTree = "<group>"; };
 		ED41A51C20CE8AC50EC69605 /* UILabel+FadeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+FadeAnimation.swift"; sourceTree = "<group>"; };
 		ED81BEF1ADE3C7DAE5510321 /* UITextView+Attributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Attributes.swift"; sourceTree = "<group>"; };
 		EDFC44762BCBE4BD00034EAA /* AuthPhoneTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPhoneTextField.swift; sourceTree = "<group>"; };
@@ -678,7 +685,7 @@
 		EDFC44CF2BCEC44E00034EAA /* SettingsShimerStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsShimerStackView.swift; sourceTree = "<group>"; };
 		EDFC44D12BCEC46100034EAA /* SettingShimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingShimerView.swift; sourceTree = "<group>"; };
 		EDFC44D42BCECC6000034EAA /* ShimmerDetailInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerDetailInfoView.swift; sourceTree = "<group>"; };
-		EDFC44D72BCEDD6A00034EAA /* Event+typealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+typealias.swift"; sourceTree = "<group>"; };
+		EDFC44D72BCEDD6A00034EAA /* ModelSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSettingsView.swift; sourceTree = "<group>"; };
 		EDFC44DC2BCEE14300034EAA /* AboutAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppView.swift; sourceTree = "<group>"; };
 		EDFC44DE2BCEE14E00034EAA /* ThemeAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeAppView.swift; sourceTree = "<group>"; };
 		EDFC44E12BCEE1F200034EAA /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
@@ -710,11 +717,14 @@
 		EDFC452A2BD6770200034EAA /* ProfileFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFlowCoordinator.swift; sourceTree = "<group>"; };
 		EDFC452E2BD710AA00034EAA /* ThemeAppViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeAppViewCell.swift; sourceTree = "<group>"; };
 		EDFC45302BD710FE00034EAA /* ThemeAppStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeAppStackView.swift; sourceTree = "<group>"; };
-		EDFC45322BD7114B00034EAA /* ThemeAppViewSettingsContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeAppViewSettingsContent.swift; sourceTree = "<group>"; };
+		EDFC45322BD7114B00034EAA /* ThemeAppViewSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeAppViewSettings.swift; sourceTree = "<group>"; };
 		EDFC45362BD7D38D00034EAA /* BackgroundPrimary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BackgroundPrimary+Extension.swift"; sourceTree = "<group>"; };
 		EDFC45382BD7F1CD00034EAA /* TimerLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerLabel.swift; sourceTree = "<group>"; };
 		EDFC453B2BD935D800034EAA /* OtpTextField+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OtpTextField+Delegate.swift"; sourceTree = "<group>"; };
 		EDFC453D2BD945A900034EAA /* StackLabelForOtpTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackLabelForOtpTextField.swift; sourceTree = "<group>"; };
+		EDFC45442BD9AD7E00034EAA /* String+Extension2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension2.swift"; sourceTree = "<group>"; };
+		EDFC45462BD9B61800034EAA /* TemplateShimmerHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateShimmerHeader.swift; sourceTree = "<group>"; };
+		EDFC45482BD9C20C00034EAA /* Plurals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plurals.swift; sourceTree = "<group>"; };
 		EF02C2FFFC452FB4591B6F79 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		EF8ECA66D82C80697E2A9500 /* Transitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transitions.swift; sourceTree = "<group>"; };
 		F053C5B5A1B13BB48D713AE8 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -879,6 +889,7 @@
 		0F19B33E3DC4157110878547 /* Localizable */ = {
 			isa = PBXGroup;
 			children = (
+				ED2893FA2BD9C42600016DF6 /* Plurals.stringsdict */,
 				FAAE06E50C3235C765922E4A /* Auth.strings */,
 				76B3F194FCC9A30AE385E989 /* Common.strings */,
 				4BCC80208BF50F3A63FC46DC /* Profile.strings */,
@@ -925,6 +936,7 @@
 				10E588212BC0577A00D05347 /* AuthOtpView.swift */,
 				10E5881F2BC0575900D05347 /* AuthOtpController.swift */,
 				10E588232BC0577F00D05347 /* AuthOtpViewModel.swift */,
+				EDFC45442BD9AD7E00034EAA /* String+Extension2.swift */,
 			);
 			path = AuthOtp;
 			sourceTree = "<group>";
@@ -1421,6 +1433,7 @@
 				4CA13AEC2F4125E552677B22 /* Auth.swift */,
 				5C9FD28ED70C813452AE5758 /* Common.swift */,
 				D8F9AA09418AA9361D1366C8 /* Profile.swift */,
+				EDFC45482BD9C20C00034EAA /* Plurals.swift */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -1639,6 +1652,14 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		ED2893FC2BD9DDC000016DF6 /* ErrorDownloadCell */ = {
+			isa = PBXGroup;
+			children = (
+				ED2893FD2BD9DE0900016DF6 /* ErrorDownloadCell.swift */,
+			);
+			path = ErrorDownloadCell;
+			sourceTree = "<group>";
+		};
 		EDFC44752BCBE48300034EAA /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -1669,8 +1690,9 @@
 		EDFC44822BCD1DC700034EAA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				ED2893FC2BD9DDC000016DF6 /* ErrorDownloadCell */,
 				EDFC44EE2BD2E8FF00034EAA /* DepositsCell */,
-				EDFC44EB2BD2D94200034EAA /* ShimmerCell */,
+				EDFC44EB2BD2D94200034EAA /* ShimmerCells */,
 				EDFC44EA2BD2D93500034EAA /* HeaderCell */,
 				EDFC44E92BD2D8F100034EAA /* SuppotingsView */,
 				EDFC44E82BD2D8E100034EAA /* CardCell */,
@@ -1756,17 +1778,19 @@
 			path = Kit;
 			sourceTree = "<group>";
 		};
-		EDFC44C12BCD1FED00034EAA /* SupportingsViews */ = {
+		EDFC44C12BCD1FED00034EAA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EDFC44C22BCD1FFB00034EAA /* DetailInfoView */,
 				EDFC44C32BCD201400034EAA /* SettingsView */,
 			);
-			name = SupportingsViews;
+			name = Views;
 			sourceTree = "<group>";
 		};
 		EDFC44C22BCD1FFB00034EAA /* DetailInfoView */ = {
 			isa = PBXGroup;
 			children = (
+				EDFC44D42BCECC6000034EAA /* ShimmerDetailInfoView.swift */,
 				EDFC44C42BCD202C00034EAA /* DetailInfoView.swift */,
 			);
 			name = DetailInfoView;
@@ -1776,8 +1800,7 @@
 			isa = PBXGroup;
 			children = (
 				EDFC44D32BCECC2700034EAA /* Shimmer */,
-				EDFC44C82BCD205E00034EAA /* SettingView.swift */,
-				EDFC44C62BCD203800034EAA /* SettingsStackView.swift */,
+				EDFC453F2BD95DA200034EAA /* Content */,
 			);
 			name = SettingsView;
 			sourceTree = "<group>";
@@ -1801,12 +1824,12 @@
 			name = Shimmer;
 			sourceTree = "<group>";
 		};
-		EDFC44D62BCEDD5200034EAA /* SupprotingsFiles */ = {
+		EDFC44D62BCEDD5200034EAA /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				EDFC44D72BCEDD6A00034EAA /* Event+typealias.swift */,
+				EDFC44D72BCEDD6A00034EAA /* ModelSettingsView.swift */,
 			);
-			name = SupprotingsFiles;
+			name = Entity;
 			sourceTree = "<group>";
 		};
 		EDFC44D92BCEE0E000034EAA /* Settings */ = {
@@ -1880,12 +1903,13 @@
 			path = HeaderCell;
 			sourceTree = "<group>";
 		};
-		EDFC44EB2BD2D94200034EAA /* ShimmerCell */ = {
+		EDFC44EB2BD2D94200034EAA /* ShimmerCells */ = {
 			isa = PBXGroup;
 			children = (
 				EDFC44802BCD1DC700034EAA /* TemplateShimmerCell.swift */,
+				EDFC45462BD9B61800034EAA /* TemplateShimmerHeader.swift */,
 			);
-			path = ShimmerCell;
+			path = ShimmerCells;
 			sourceTree = "<group>";
 		};
 		EDFC44EE2BD2E8FF00034EAA /* DepositsCell */ = {
@@ -1993,10 +2017,8 @@
 		EDFC452C2BD6772700034EAA /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				EDFC44D62BCEDD5200034EAA /* SupprotingsFiles */,
-				EDFC44C12BCD1FED00034EAA /* SupportingsViews */,
-				EDFC44C22BCD1FFB00034EAA /* DetailInfoView */,
-				EDFC44D42BCECC6000034EAA /* ShimmerDetailInfoView.swift */,
+				EDFC44D62BCEDD5200034EAA /* Entity */,
+				EDFC44C12BCD1FED00034EAA /* Views */,
 				EDFC448B2BCD1DC700034EAA /* ProfileView.swift */,
 				EDFC448A2BCD1DC700034EAA /* ProfileController.swift */,
 				EDFC448C2BCD1DC700034EAA /* ProfileViewModel.swift */,
@@ -2016,7 +2038,7 @@
 		EDFC45342BD7115400034EAA /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				EDFC45322BD7114B00034EAA /* ThemeAppViewSettingsContent.swift */,
+				EDFC45322BD7114B00034EAA /* ThemeAppViewSettings.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -2037,6 +2059,15 @@
 				EDFC453B2BD935D800034EAA /* OtpTextField+Delegate.swift */,
 			);
 			path = OtpTextField;
+			sourceTree = "<group>";
+		};
+		EDFC453F2BD95DA200034EAA /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				EDFC44C82BCD205E00034EAA /* SettingView.swift */,
+				EDFC44C62BCD203800034EAA /* SettingsStackView.swift */,
+			);
+			name = Content;
 			sourceTree = "<group>";
 		};
 		EFC26310015BB62C9189AF8E /* Other */ = {
@@ -2334,6 +2365,7 @@
 			files = (
 				B7A604874601B02F4A34FF38 /* Assets.xcassets in Resources */,
 				3BEA43C3A99E0522B1981D09 /* Auth.strings in Resources */,
+				ED2893FB2BD9C42600016DF6 /* Plurals.stringsdict in Resources */,
 				F6AFF02E03BF5EF0E6273FF2 /* Common.strings in Resources */,
 				A532DEB9518D35F320A9E63E /* LaunchScreen.storyboard in Resources */,
 				6A514D89E385F10519D37B9C /* Profile.strings in Resources */,
@@ -2643,13 +2675,14 @@
 				EDFC44DD2BCEE14300034EAA /* AboutAppView.swift in Sources */,
 				EDFC44942BCD1DC700034EAA /* MainViewProps.swift in Sources */,
 				EDFC45392BD7F1CD00034EAA /* TimerLabel.swift in Sources */,
-				EDFC44D82BCEDD6B00034EAA /* Event+typealias.swift in Sources */,
+				EDFC44D82BCEDD6B00034EAA /* ModelSettingsView.swift in Sources */,
 				EDFC44C52BCD202C00034EAA /* DetailInfoView.swift in Sources */,
 				EDFC44FD2BD3358300034EAA /* DetailAccountDataSource.swift in Sources */,
 				EDFC44A92BCD1E7C00034EAA /* AppCoordinator.swift in Sources */,
 				EDFC44E22BCEE1F200034EAA /* NavigationView.swift in Sources */,
 				EDFC44CC2BCE8F9900034EAA /* String+Extension.swift in Sources */,
-				EDFC45332BD7114B00034EAA /* ThemeAppViewSettingsContent.swift in Sources */,
+				EDFC45332BD7114B00034EAA /* ThemeAppViewSettings.swift in Sources */,
+				EDFC45472BD9B61800034EAA /* TemplateShimmerHeader.swift in Sources */,
 				EDFC449D2BCD1DC700034EAA /* ProfileController.swift in Sources */,
 				EDFC45112BD3B19C00034EAA /* ActionsTabsView.swift in Sources */,
 				10E588222BC0577A00D05347 /* AuthOtpView.swift in Sources */,
@@ -2663,6 +2696,7 @@
 				3FBF1D8B7572FCB2720E545B /* Assets.swift in Sources */,
 				EDFC44932BCD1DC700034EAA /* MainDataSource.swift in Sources */,
 				EDFC449C2BCD1DC700034EAA /* MainFlowCoordinator.swift in Sources */,
+				ED2893FE2BD9DE0900016DF6 /* ErrorDownloadCell.swift in Sources */,
 				EDFC44AD2BCD1E7D00034EAA /* SceneDelegate.swift in Sources */,
 				8E2E9DA0BD3CD3BE938E4D49 /* Auth.swift in Sources */,
 				EDFC44E42BD282F300034EAA /* TemplateAccountView.swift in Sources */,
@@ -2695,6 +2729,7 @@
 				EDFC44DF2BCEE14E00034EAA /* ThemeAppView.swift in Sources */,
 				EDFC44772BCBE4BD00034EAA /* AuthPhoneTextField.swift in Sources */,
 				EDFC44CE2BCE8FC400034EAA /* UITextField+Extension.swift in Sources */,
+				EDFC45492BD9C20C00034EAA /* Plurals.swift in Sources */,
 				10E588072BC049C900D05347 /* AuthFlowAssembly.swift in Sources */,
 				EDFC450F2BD3374D00034EAA /* DetailAccountViewModel.swift in Sources */,
 				EDFC44D22BCEC46100034EAA /* SettingShimerView.swift in Sources */,
@@ -2705,6 +2740,7 @@
 				EDFC44A02BCD1DC700034EAA /* HomeFlowAssembly.swift in Sources */,
 				EDFC45212BD667F200034EAA /* AboutAppController.swift in Sources */,
 				EDFC451D2BD3CE4200034EAA /* DetailCardHeaderView.swift in Sources */,
+				EDFC45452BD9AD7F00034EAA /* String+Extension2.swift in Sources */,
 				EDFC45082BD336CD00034EAA /* FavoritesAccountView.swift in Sources */,
 				EDFC44F02BD2EE7300034EAA /* TemplateDepositsView.swift in Sources */,
 				EDFC45052BD336A400034EAA /* SettingsAccountView.swift in Sources */,

@@ -30,5 +30,6 @@ final class DetailInfoView: BackgroundPrimary {
                 .textAlignment(.center)
                 .foregroundStyle(.textSecondary)
         }
+        .layoutMargins(.init(top: 52, left: 0, bottom: 50, right: 0))
     }
 }

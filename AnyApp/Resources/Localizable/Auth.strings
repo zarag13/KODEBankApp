@@ -1,1 +1,13 @@
+// MARK: - Phone
+"phone" = "Телефон";
+"enter" = "Войти";
 
+// MARK: - Otp
+"authCodeSend" = "На ваш номер отправлено SMS с кодом подтверждения";
+"repeatAfter" = "Повторить через";
+"invalidCode" = "Неверный код. Осталось";
+"sendCodeAgain" = "Выслать код повторно";
+
+// MARK: - Errors
+"error.invalidPhoneMessage" = "Пожалуйста, убедитесь, что вы правильно ввели номер телефона";
+"error.notRegistredMessage" = "Такой номер не зарегистрирован или доступ ограничен";

@@ -21,12 +21,11 @@ final class TemplateHeaderView: BackgroundPrimary {
     // MARK: - Private methods
 
     private func body() -> UIView {
-        VStack {
+        BackgroundView(vPadding: 17, hPadding: 16) {
             titleLabel
                 .fontStyle(.body15sb)
                 .foregroundStyle(.textTertiary)
         }
-        .layoutMargins(.make(vInsets: 17, hInsets: 16))
     }
 }
 

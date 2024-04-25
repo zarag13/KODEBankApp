@@ -35,7 +35,7 @@ final class AuthPhoneController: TemplateViewController<AuthPhoneView> {
                 self?.onEvent?(.otp(config))
             case .incorrectNumber:
                 #warning("донастроить уведомление")
-                SnackCenter.shared.showSnack(withProps: .init(message: "Пожалуйста, убедитесь, что вы правильно ввели номер телефона", style: .error))
+                SnackCenter.shared.showSnack(withProps: .init(message: Entrance.Error.invalidPhoneMessage, style: .error))
                 self?.rootView.onEvent?(.incorrect)
             }
         }

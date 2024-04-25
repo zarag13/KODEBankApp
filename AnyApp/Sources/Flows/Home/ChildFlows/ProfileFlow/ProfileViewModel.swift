@@ -3,8 +3,6 @@ import Combine
 import UIKit
 
 final class ProfileViewModel {
-    
-
     enum Input {
         case logout
         case supportService

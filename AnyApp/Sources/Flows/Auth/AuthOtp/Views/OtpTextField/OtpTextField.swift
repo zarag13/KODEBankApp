@@ -87,9 +87,13 @@ final class OtpTextField: BackgroundPrimary {
     public func handle(event: StackLabelForOtpTextField.State) {
         switch event {
         case .error:
-            self.stackLabels.state.send(.error)
+            if self.stackLabels.state.value == .correct {
+                self.stackLabels.state.send(.error)
+            }
         case .correct:
-            self.stackLabels.state.send(.correct)
+            if self.stackLabels.state.value == .error {
+                self.stackLabels.state.send(.correct)
+            }
         }
     }
 }

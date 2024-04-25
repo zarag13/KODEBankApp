@@ -18,7 +18,7 @@ final class AuthOtpView: BackgroundPrimary {
         super.setup()
         setupBindings()
     }
-    
+
     private func setupBindings() {
         otp.otpEvent = { [weak self] event in
             switch event {
@@ -50,7 +50,7 @@ final class AuthOtpView: BackgroundPrimary {
         VStack {
             navigationBar
             VStack {
-                Label(text: "На ваш номер отправлено SMS с кодом подтверждения", foregroundStyle: .textPrimary, fontStyle: .body15r)
+                Label(text: Entrance.authCodeSend, foregroundStyle: .textPrimary, fontStyle: .body15r)
                     .linesCount(0)
                 Spacer(.px24)
                 otp

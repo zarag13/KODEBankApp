@@ -60,12 +60,9 @@ final class ThemeAppViewCell: BackgroundPrimary {
     }
 
     @discardableResult
-    public func configure(content: ThemeAppViewSettingsContent) -> Self {
-        switch content {
-        case .content(title: let title, event: let event):
-            self.event = event
-            body(title: title).embed(in: self)
-        }
+    public func configure(content: ThemeAppViewSettings) -> Self {
+        self.event = content.event
+        body(title: content.title).embed(in: self)
         return self
     }
 }

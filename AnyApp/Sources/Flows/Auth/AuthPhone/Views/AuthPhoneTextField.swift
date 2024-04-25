@@ -30,7 +30,7 @@ final class AuthPhoneTextField: BackgroundPrimary {
     private var leftIcon = ImageView(image: Asset.Icon24px.phone.image, foregroundStyle: .indicatorContentSuccess)
     private let spinner = MediumSpinner(style: .contentAccentPrimary)
     private lazy var authTF: TextField = {
-        TextField(placeholder: "Телефон", configurator: { textField in
+        TextField(placeholder: Entrance.phone, configurator: { textField in
             textField.becomeFirstResponder()
             textField.textColor = ForegroundStyle.textPrimary.color
         })

@@ -1,1 +1,12 @@
+"aboutApp" = "О приложении";
+"themeApp" = "Тема приложения";
+"supportService" = "Служба поддержки";
+"exit" = "Выход";
 
+// MARK: - ThemeApp
+"system" = "Как в системе";
+"dark" = "Темная";
+"light" = "Светлая";
+
+// MARK: - AboutApp
+"version" = "Версия";

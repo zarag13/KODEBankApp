@@ -27,6 +27,7 @@ final class DetailAccountController: TemplateViewController<DetailAccountView> {
     }
     
     private func configureNavigationItem() {
+        navigationController?.navigationBar.isHidden = true
         rootView.navigationBar.popController(navigation: self.navigationController)
     }
     

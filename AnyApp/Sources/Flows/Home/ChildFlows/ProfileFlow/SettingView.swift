@@ -11,7 +11,7 @@ import AppIndependent
 import Combine
 
 final class SettingView: BackgroundPrimary {
-    var state: SettingViewEvent = .none
+    var state: ModelSettingsView.Event?
 
     override func setup() {
         super.setup()
@@ -35,16 +35,14 @@ final class SettingView: BackgroundPrimary {
                 .isHidden(!isDetailed)
                 .foregroundStyle(.textTertiary)
         }
+        .layoutMargins(.make(vInsets: 16))
     }
 
-    public func configure2(settingsInfo: SettingsInfo) -> Self {
-        switch settingsInfo {
-        case .settingInfo(image: let image, title: let title, isDetailed: let isDetailed, state: let state):
-            self.setiingIcon = image
-            self.settingName = title
-            self.isDetailed = isDetailed
-            self.state = state
-        }
+    public func configure2(settingsInfo: ModelSettingsView) -> Self {
+        self.setiingIcon = settingsInfo.image
+        self.settingName = settingsInfo.title
+        self.isDetailed = settingsInfo.isDetailedImage
+        self.state = settingsInfo.state
         body().embed(in: self)
         return self
     }

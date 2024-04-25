@@ -47,7 +47,7 @@ final class StackLabelForOtpTextField: BackgroundPrimary {
         return stack
     }
 
-    public func configure(lenght: Int = 6)  -> Self{
+    public func configure(lenght: Int = 6) -> Self {
         body(leght: lenght).embed(in: self)
         return self
     }
@@ -74,7 +74,7 @@ final class StackLabelForOtpTextField: BackgroundPrimary {
         setupBindings(lineView: lineView, label: label)
         return label
     }
-    
+
     private func setupLineView(tag: Int) -> UIView {
         let lineView = BackgroundView()
         lineView.backgroundStyle(.indicatorContentSuccess)

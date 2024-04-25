@@ -10,15 +10,10 @@ import UIKit
 import AppIndependent
 
 final class SettingsStackView: BackgroundPrimary {
-    private var settingsInfo: [SettingsInfo] = [
-        .settingInfo(image: Asset.Icon24px.settings.image, title: "О приложении", isDetailed: true, state: .aboutApp),
-        .settingInfo(image: Asset.Icon24px.moonStars.image, title: "Тема приложения", isDetailed: true, state: .themeApp),
-        .settingInfo(image: Asset.Icon24px.phoneCall.image, title: "Служба поддержки", isDetailed: false, state: .supportService),
-        .settingInfo(image: Asset.Icon24px.accountOut.image, title: "Выход", isDetailed: false, state: .exit)
-    ]
+    typealias SettingViewAction = ((ModelSettingsView.Event) -> Void)
 
     var action: SettingViewAction?
-    var settingsViews: [SettingView] = []
+    private var settingsViews: [SettingView] = []
 
     override func setup() {
         super.setup()
@@ -28,25 +23,25 @@ final class SettingsStackView: BackgroundPrimary {
 
     private func body() -> UIView {
         ScrollView(axis: .vertical) {
-            ForEach(collection: settingsInfo, alignment: .fill, distribution: .fillEqually, spacing: 18, axis: .vertical) { value in
+            ForEach(collection: ModelSettingsView.createItems, alignment: .fill, distribution: .fillEqually, axis: .vertical) { value in
                 self.cresteSettingView()
                     .configure2(settingsInfo: value)
             }
         }
-            .layoutMargins(.make(vInsets: 18))
     }
 
-    func cresteSettingView() -> SettingView {
+    private func cresteSettingView() -> SettingView {
         let settingsView = SettingView()
         settingsViews.append(settingsView)
         return settingsView
     }
 
-    func setupBindings() {
+    private func setupBindings() {
         for view in settingsViews {
             view
                 .onTap {
-                    self.action?(view.state)
+                    guard let state = view.state else { return }
+                    self.action?(state)
                 }
         }
     }

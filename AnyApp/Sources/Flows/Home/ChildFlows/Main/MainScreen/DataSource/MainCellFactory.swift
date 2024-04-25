@@ -21,6 +21,12 @@ final class MainCellFactory {
             for: indexPath
         )
     }
+    func makeShimerHeader(for indexPath: IndexPath) -> UITableViewCell {
+        tableView.dequeueTemplateCell(
+            forView: TemplateShimmerHeader.self,
+            for: indexPath
+        )
+    }
 
     // MARK: - Cells
     func makeTemplateCardCell(
@@ -77,5 +83,17 @@ final class MainCellFactory {
     ) -> UITableViewCell {
         tableView.dequeueSpacer(props, for: indexPath)
             .backgroundColor(BackgroundStyle.backgroundPrimary.color)
+    }
+    
+    func makeErrorDownloadCell(
+        for indexPath: IndexPath,
+        with props: ErrorDownloadCell.Props
+    ) -> UITableViewCell {
+        tableView.dequeueTemplateCell(
+            forView: ErrorDownloadCell.self,
+            for: indexPath
+        ) { view, _ in
+            view.configure(with: props)
+        }
     }
 }

@@ -4,7 +4,7 @@ import UIKit
 final class MainController: TemplateViewController<MainView> {
 
     typealias ViewModel = MainViewModel
-    
+
     enum Event {
         case detailCard
         case detailAccount
@@ -26,8 +26,8 @@ final class MainController: TemplateViewController<MainView> {
     }
 
     private func configureNavigationItem() {
-//        navigationController?.navigationBar.prefersLargeTitles = true
-//        navigationItem.title = "Главная"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "Главная"
     }
 
     private func setupBindings() {
@@ -41,14 +41,8 @@ final class MainController: TemplateViewController<MainView> {
                 self?.rootView.closeNewItems(nweItems: items)
             case .open:
                 self?.openDetailController?(.detailAccount)
-//                let model = DetailAccountViewModel()
-//                let vc = DetailAccountController(viewModel: model)
-//                self?.present(vc, animated: true)
             case .openCard:
                 self?.openDetailController?(.detailCard)
-//                let model = DetailCardViewModel()
-//                let vc = DetailCardController(viewModel: model)
-//                self?.present(vc, animated: true)
             }
         }
 

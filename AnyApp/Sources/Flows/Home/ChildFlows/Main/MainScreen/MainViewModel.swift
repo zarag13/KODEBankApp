@@ -28,21 +28,23 @@ final class MainViewModel {
     }
 
     lazy var openItem: [Props.Item] = [
-        .card(.init(id: "2", title: "Карта зарплатная", description: "Физическая", rightImage: .init(cardNumber: "7789", backgroundCardImage: Asset.MiniBankCard.bankCard.image, iconBankImage: Asset.SmallIcon.masterCard.image), leftImage: Asset.Icon24px.input.image, state: .availabil,  onTap: { value in
+        .card(.init(id: "2", title: "Карта зарплатная", description: "Физическая", rightImage: .init(cardNumber: "7789", backgroundCardImage: Asset.MiniBankCard.bankCard.image, iconBankImage: Asset.SmallIcon.masterCard.image), leftImage: Asset.Icon24px.input.image, state: .availabil,  onTap: { _ in
             self.onOutput?(.openCard)
         })),
         .card(.init(id: "3", title: "Дополнительная карта", description: "Заблокирована", rightImage: .init(cardNumber: "8435", backgroundCardImage: Asset.MiniBankCard.bankCardDisable.image, iconBankImage: Asset.SmallIcon.visa.image), leftImage: Asset.Icon24px.input.image, state: .unavailabil))
     ]
-    
+
     private func loadData() {
         onOutput?(.content(.init(sections: [
             .accounts(
-                [.header(.init(title: "!Accounts"))] +
-                (1...3).map { _ in .shimmer() }
-            ),
+                [.spacer(.init(height: 16))] +
+                [.shimmerHeader()] +
+                (1...3).map { _ in .shimmerCell() }
+                ),
             .deposits(
-                [.header(.init(title: "!Deposits"))] +
-                (1...3).map { _ in .shimmer() }
+                [.spacer(.init(height: 16))] +
+                [.shimmerHeader()] +
+                (1...3).map { _ in .shimmerCell() }
             )
         ])))
 
@@ -67,15 +69,17 @@ final class MainViewModel {
                         }
                     }, openTap: {
                         self?.onOutput?(.open)
-                        
                     }))
-                ]),
+                ] +
+                          (self?.openItem ?? [])
+                ),
                 .deposits([
                     .spacer(.init(height: 16)),
                     .header(.init(title: "Вклады")),
-                    .deposit(.init(id: "1", title: "Мой вклад", description: "1 515 000,78 ₽", rightImage: Asset.Icon40px.rub.image, percentStake: "Ставка 7.65%", date: "до 31.08.2024")),
-                    .deposit(.init(id: "2", title: "Накопительный", description: "3 719,19 $", rightImage: Asset.Icon40px.icUsd.image, percentStake: "Ставка 11.05%", date: "до 31.08.2024")),
-                    .deposit(.init(id: "3", title: "EUR вклад", description: "1 513,62 €", rightImage: Asset.Icon40px.icEur.image, percentStake: "Ставка 8.65%", date: "до 31.08.2026"))
+                    .error(.init(id: "1", title: "", description: "", titleButton: ""))
+//                    .deposit(.init(id: "1", title: "Мой вклад", description: "1 515 000,78 ₽", rightImage: Asset.Icon40px.rub.image, percentStake: "Ставка 7.65%", date: "до 31.08.2024")),
+//                    .deposit(.init(id: "2", title: "Накопительный", description: "3 719,19 $", rightImage: Asset.Icon40px.icUsd.image, percentStake: "Ставка 11.05%", date: "до 31.08.2024")),
+//                    .deposit(.init(id: "3", title: "EUR вклад", description: "1 513,62 €", rightImage: Asset.Icon40px.icEur.image, percentStake: "Ставка 8.65%", date: "до 31.08.2026"))
                 ])
             ])))
         }

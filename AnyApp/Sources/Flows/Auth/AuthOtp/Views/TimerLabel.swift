@@ -19,6 +19,7 @@ final class TimerLabel: BackgroundPrimary {
     private var timer: Timer?
     private let timerLabelText = PassthroughSubject<String, Never>()
     let state = CurrentValueSubject<State, Never>(.process)
+    private var errorTimer: Timer?
     private var countTimerValue: TimeInterval = 180
     private var cancelable = Set<AnyCancellable>()
     private var errorCount = 5
@@ -29,6 +30,7 @@ final class TimerLabel: BackgroundPrimary {
             self?.subviews.forEach({ $0.removeFromSuperview() })
             switch state {
             case .process:
+                self?.errorTimer?.invalidate()
                 self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
                     let minutes = Int(self?.countTimerValue ?? 0) / 60 % 60
                     let seconds = Int(self?.countTimerValue ?? 0) % 60
@@ -49,11 +51,11 @@ final class TimerLabel: BackgroundPrimary {
                 self?.timer?.invalidate()
                 self?.createErrorBody(errorcount: self?.errorCount ?? 1).embed(in: self ?? UIView())
                 self?.errorCount -= 1
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                self?.errorTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false, block: { _ in
                     if self?.state.value == .error {
                         self?.state.send(.process)
                     }
-                }
+                })
             }
         }.store(in: &cancelable)
     }
@@ -61,7 +63,7 @@ final class TimerLabel: BackgroundPrimary {
     private func timerBody() -> UIView {
         let label = Label(foregroundStyle: .textSecondary, fontStyle: .caption13)
         timerLabelText.sink { value in
-            label.text = "Повторить через \(value)"
+            label.text = "\(Entrance.repeatAfter) \(value)"
         }.store(in: &cancelable)
         return BackgroundView(vPadding: 20) {
             label
@@ -71,7 +73,7 @@ final class TimerLabel: BackgroundPrimary {
         HStack(spacing: 16) {
             ImageView(image: Asset.Icon24px.repay.image, foregroundStyle: .contentAccentPrimary)
                 .huggingPriority(.defaultHigh, axis: .horizontal)
-            Label(text: "Выслать код повторно", foregroundStyle: .textPrimary, fontStyle: .caption13)
+            Label(text: Entrance.sendCodeAgain, foregroundStyle: .textPrimary, fontStyle: .caption13)
                 .huggingPriority(.defaultLow, axis: .horizontal)
         }
         .layoutMargins(.make(vInsets: 16))
@@ -81,7 +83,7 @@ final class TimerLabel: BackgroundPrimary {
     }
     private func createErrorBody(errorcount: Int) -> UIView {
         let label = Label(foregroundStyle: .indicatorContentError, fontStyle: .caption13)
-        label.text = "Неверный код. Осталось \(errorcount) попытки"
+        label.text = "\(Entrance.invalidCode) \(errorCount) \(Plurals.attempt(errorCount))"
         return BackgroundView(vPadding: 20) {
             label
         }

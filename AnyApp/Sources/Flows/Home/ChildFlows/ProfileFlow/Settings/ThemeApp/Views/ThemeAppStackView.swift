@@ -18,12 +18,6 @@ final class ThemeAppStackView: BackgroundPrimary {
     private var cancellable = Set<AnyCancellable>()
     private var currentIsSelectedView = PassthroughSubject<ThemeRaw, Never>()
 
-    private var content: [ThemeAppViewSettingsContent] = [
-        .content(title: "Как в системе", event: .auto),
-        .content(title: "Темная", event: .dark),
-        .content(title: "Светлая", event: .light)
-    ]
-
     override func setup() {
         super.setup()
         body().embed(in: self)
@@ -32,7 +26,7 @@ final class ThemeAppStackView: BackgroundPrimary {
 
     private func body() -> UIView {
         VStack {
-            ForEach(collection: content, alignment: .fill, distribution: .fill, spacing: 0, axis: .vertical) { value in
+            ForEach(collection: ThemeAppViewSettings.createItems, alignment: .fill, distribution: .fill, spacing: 0, axis: .vertical) { value in
                 self.setupThemeAppView(content: value)
             }
             FlexibleSpacer()
@@ -41,7 +35,7 @@ final class ThemeAppStackView: BackgroundPrimary {
 }
 
 private extension ThemeAppStackView {
-    private func setupThemeAppView(content: ThemeAppViewSettingsContent) -> ThemeAppViewCell {
+    private func setupThemeAppView(content: ThemeAppViewSettings) -> ThemeAppViewCell {
         let themeAppView = ThemeAppViewCell()
             .configure(content: content)
 
@@ -59,7 +53,7 @@ private extension ThemeAppStackView {
             }
         }.store(in: &cancellable)
 
-        if self.content.last == content {
+        if ThemeAppViewSettings.createItems.last == content {
             themeAppView
                 .separatorIsHidden(true)
         }

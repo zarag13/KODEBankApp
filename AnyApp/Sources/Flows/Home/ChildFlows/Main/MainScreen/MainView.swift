@@ -9,7 +9,6 @@ final class MainView: BackgroundPrimary {
     private let tableView = BaseTableView()
     private let button = ButtonPrimary(title: "Открыть новый счет или продукт")
     private lazy var dataSource = MainDataSource(tableView: tableView)
-    let navigationBar = MainNavigationBar()
 
     override func setup() {
         super.setup()
@@ -18,12 +17,7 @@ final class MainView: BackgroundPrimary {
     }
 
     private func body() -> UIView {
-        VStack {
-            navigationBar
-                .setuptile(title: "Главная")
-                .leftImageIsHidden()
-            tableView
-        }
+        tableView
     }
 
     private func setupButton() {
