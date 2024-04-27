@@ -1,11 +1,13 @@
 import Services
 import Combine
+import UI
 
 final class AuthPhoneViewModel {
 
     enum Output {
-        case otp(ConfigModel)
+        case otp(ConfigAuthOtpModel)
         case incorrectNumber
+        //case error(ErrorView.Props)
     }
 
     enum Input {
@@ -24,27 +26,31 @@ final class AuthPhoneViewModel {
 
 #warning("донастроить кол-во кейсов с ошибками и т.д")
     func handle(_ input: Input) {
-        DispatchQueue.main.asyncAfter(deadline: .now()) {
-            switch input {
-            case .phoneEntered(let phone):
-                let clearPhone = phone.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
-                if clearPhone.count == 11 {
-                    self.login(phone: clearPhone)
-                } else {
-                    self.onOutput?(.incorrectNumber)
-                }
+        switch input {
+        case .phoneEntered(let phone):
+            let clearPhone = phone.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+            if clearPhone.count == 11 {
+                self.login(phone: clearPhone)
+                //self.onOutput?(.error(.init(title: "123", message: "1231", image: Asset.logoM.image, buttonTitle: "dasas")))
+            } else {
+                self.onOutput?(.incorrectNumber)
             }
         }
     }
 
     private func login(phone: String) {
-        authRequestManager.authLogin(phone: "")
+        authRequestManager.authLogin(phone: phone)
             .sink(
-                receiveCompletion: { _ in
-                    // TODO: handle error
+                receiveCompletion: { error in
+                    guard case let .failure(error) = error else { return }
                 },
                 receiveValue: { [weak self] response in
-                    self?.onOutput?(.otp(.init(phone: phone, code: "123456", leghtCode: 6)))
+                    let otpModel = ConfigAuthOtpModel(
+                        phone: phone,
+                        code: response.otpCode,
+                        leghtCode: response.otpLen,
+                        codeId: response.otpId)
+                    self?.onOutput?(.otp(otpModel))
                 }
             ).store(in: &cancellables)
     }

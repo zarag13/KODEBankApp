@@ -16,11 +16,12 @@ final class TemplateCardView: BackgroundPrimary {
     // MARK: - Public methods
     override public func setup() {
         super.setup()
+        self.backgroundStyle(.backgroundSecondary)
     }
 
     // MARK: - Private methods
     private func body(with props: Props) -> UIView {
-        HStack(alignment: .center, distribution: .fill, spacing: 16) {
+        let stack = HStack(alignment: .center, distribution: .fill, spacing: 24) {
             ImageView(image: props.leftImage)
                 .huggingPriority(.defaultHigh, axis: .horizontal)
                 .foregroundStyle(.textTertiary)
@@ -37,8 +38,16 @@ final class TemplateCardView: BackgroundPrimary {
         .onTap { [weak self] in
             self?.props?.onTap?(props.id)
         }
+        let separator = setupSeparatorCell(id: props.id)
+        stack.addSubview(separator)
+        separator.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.left.equalToSuperview().offset(72)
+            make.right.equalToSuperview().inset(16)
+        }
+        return stack
     }
-    
+
     private func setupDescription(props: Props) -> Label {
         let label = Label(text: props.description, fontStyle: .caption13)
         switch props.state {
@@ -49,20 +58,30 @@ final class TemplateCardView: BackgroundPrimary {
         }
        return label
     }
+    
+    private func setupSeparatorCell(id: String) -> UIView {
+        guard let number = Int(id) else { return UIView() }
+        let separator = BackgroundView()
+            .height(1)
+            .backgroundStyle(.contentSecondary)
+            .isHidden(false)
+        if number % 2 != 0 {
+            separator
+                .isHidden(true)
+        }
+        return separator
+    }
 }
 
 // MARK: - Configurable
 extension TemplateCardView: ConfigurableView {
-
     typealias Model = Props
 
     struct Props: Hashable {
-        
         enum State {
             case unavailabil
             case availabil
         }
-        
         let id: String
         let title: String
         let description: String
@@ -90,6 +109,5 @@ extension TemplateCardView: ConfigurableView {
         self.props = model
         subviews.forEach { $0.removeFromSuperview() }
         body(with: model).embed(in: self)
-            .backgroundColor(BackgroundStyle.backgroundSecondary.color)
     }
 }

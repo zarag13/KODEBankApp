@@ -18,6 +18,7 @@ final class DetailAccountHeaderView: BackgroundPrimary {
     }
     private func body(with props: Props) -> UIView {
         VStack(alignment: .center, distribution: .fill) {
+            Spacer(.px16)
             ImageView(image: props.topImage)
                 .height(52)
                 .width(52)
@@ -38,8 +39,9 @@ final class DetailAccountHeaderView: BackgroundPrimary {
                 .fontStyle(.largeTitle)
                 .textAlignment(.center)
                 .foregroundStyle(.textPrimary)
+            Spacer(.px16)
         }
-        .layoutMargins(.make(vInsets: 16))
+        //.layoutMargins(.make(vInsets: 16))
     }
 }
 

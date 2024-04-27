@@ -241,6 +241,10 @@
 		ED2894012BDA5E0200016DF6 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2894002BDA5E0200016DF6 /* String+Extension.swift */; };
 		ED2894022BDA5E5E00016DF6 /* BackgroundPrimary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC45362BD7D38D00034EAA /* BackgroundPrimary+Extension.swift */; };
 		ED2894032BDA5E6200016DF6 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44CD2BCE8FC400034EAA /* UITextField+Extension.swift */; };
+		ED2894062BDC11FC00016DF6 /* CorePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2894052BDC11FC00016DF6 /* CorePath.swift */; };
+		ED2894082BDC120C00016DF6 /* ProfileRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2894072BDC120C00016DF6 /* ProfileRequestManager.swift */; };
+		ED28940B2BDC127800016DF6 /* ProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28940A2BDC127800016DF6 /* ProfileResponse.swift */; };
+		ED2894112BDC528E00016DF6 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28940F2BDC528E00016DF6 /* ErrorView.swift */; };
 		EDC60DEBCAD6179A2C1DE924 /* PersistentLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375875A8550AAAF3D551B7EC /* PersistentLayer.swift */; };
 		EDFC44772BCBE4BD00034EAA /* AuthPhoneTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44762BCBE4BD00034EAA /* AuthPhoneTextField.swift */; };
 		EDFC447A2BCC1C9C00034EAA /* OtpTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44792BCC1C9C00034EAA /* OtpTextField.swift */; };
@@ -648,6 +652,10 @@
 		ED2893FA2BD9C42600016DF6 /* Plurals.stringsdict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.stringsdict; path = Plurals.stringsdict; sourceTree = "<group>"; };
 		ED2893FD2BD9DE0900016DF6 /* ErrorDownloadCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDownloadCell.swift; sourceTree = "<group>"; };
 		ED2894002BDA5E0200016DF6 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		ED2894052BDC11FC00016DF6 /* CorePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorePath.swift; sourceTree = "<group>"; };
+		ED2894072BDC120C00016DF6 /* ProfileRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRequestManager.swift; sourceTree = "<group>"; };
+		ED28940A2BDC127800016DF6 /* ProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponse.swift; sourceTree = "<group>"; };
+		ED28940F2BDC528E00016DF6 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		ED41A51C20CE8AC50EC69605 /* UILabel+FadeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+FadeAnimation.swift"; sourceTree = "<group>"; };
 		ED81BEF1ADE3C7DAE5510321 /* UITextView+Attributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Attributes.swift"; sourceTree = "<group>"; };
 		EDFC44762BCBE4BD00034EAA /* AuthPhoneTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPhoneTextField.swift; sourceTree = "<group>"; };
@@ -917,7 +925,6 @@
 		10E5880E2BC04F0700D05347 /* AuthPhone */ = {
 			isa = PBXGroup;
 			children = (
-				EDFC45352BD7CAFB00034EAA /* Entity */,
 				EDFC44752BCBE48300034EAA /* Views */,
 				10E588132BC04FED00D05347 /* AuthPhoneView.swift */,
 				10E588112BC04F4D00D05347 /* AuthPhoneController.swift */,
@@ -929,6 +936,7 @@
 		10E588102BC04F4300D05347 /* AuthOtp */ = {
 			isa = PBXGroup;
 			children = (
+				EDFC45352BD7CAFB00034EAA /* Entity */,
 				EDFC44782BCC1C8300034EAA /* Views */,
 				10E588212BC0577A00D05347 /* AuthOtpView.swift */,
 				10E5881F2BC0575900D05347 /* AuthOtpController.swift */,
@@ -1110,6 +1118,7 @@
 		398A5BE9F3DC222AB457C80F /* View Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				ED28940E2BDC473700016DF6 /* NewExtension */,
 				0FEC5C4FAE466E7327D0D622 /* Others */,
 				82D0F0A0E150636B7491A238 /* UIButton */,
 				A5612678A746B2BBFD5F3DE8 /* UICollectionView */,
@@ -1467,6 +1476,7 @@
 		A3F1472BA626CF322D61167C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				ED2894102BDC528E00016DF6 /* Views */,
 				EDFC44BC2BCD1F3100034EAA /* Kit */,
 				36E7DEED57C6FE9ECB795CBF /* Animations */,
 				2BF0CCE88843E3CDA57AB672 /* Controllers */,
@@ -1563,6 +1573,7 @@
 		CF1D04A1E444FC5788CA8CED /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				ED2894042BDC11E200016DF6 /* Core */,
 				10E588172BC051AE00D05347 /* Auth */,
 				459162307E49D3747055AA1E /* Base */,
 				34DB077AE5ED5DEFF28C6D5B /* Error */,
@@ -1660,11 +1671,44 @@
 		ED2893FF2BDA5DBB00016DF6 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				EDFC44CD2BCE8FC400034EAA /* UITextField+Extension.swift */,
-				EDFC45362BD7D38D00034EAA /* BackgroundPrimary+Extension.swift */,
 				ED2894002BDA5E0200016DF6 /* String+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		ED2894042BDC11E200016DF6 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				ED2894092BDC125A00016DF6 /* Responses */,
+				ED2894052BDC11FC00016DF6 /* CorePath.swift */,
+				ED2894072BDC120C00016DF6 /* ProfileRequestManager.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		ED2894092BDC125A00016DF6 /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				ED28940A2BDC127800016DF6 /* ProfileResponse.swift */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
+		ED28940E2BDC473700016DF6 /* NewExtension */ = {
+			isa = PBXGroup;
+			children = (
+				EDFC44CD2BCE8FC400034EAA /* UITextField+Extension.swift */,
+				EDFC45362BD7D38D00034EAA /* BackgroundPrimary+Extension.swift */,
+			);
+			path = NewExtension;
+			sourceTree = "<group>";
+		};
+		ED2894102BDC528E00016DF6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ED28940F2BDC528E00016DF6 /* ErrorView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		EDFC44752BCBE48300034EAA /* Views */ = {
@@ -1697,11 +1741,10 @@
 		EDFC44822BCD1DC700034EAA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EDFC44EB2BD2D94200034EAA /* ShimmerCells */,
 				ED2893FC2BD9DDC000016DF6 /* ErrorDownloadCell */,
 				EDFC44EE2BD2E8FF00034EAA /* DepositsCell */,
-				EDFC44EB2BD2D94200034EAA /* ShimmerCells */,
 				EDFC44EA2BD2D93500034EAA /* HeaderCell */,
-				EDFC44E92BD2D8F100034EAA /* SuppotingsView */,
 				EDFC44E82BD2D8E100034EAA /* CardCell */,
 				EDFC44E72BD2D8D600034EAA /* AccountCell */,
 			);
@@ -1879,6 +1922,7 @@
 		EDFC44E82BD2D8E100034EAA /* CardCell */ = {
 			isa = PBXGroup;
 			children = (
+				EDFC44E92BD2D8F100034EAA /* SuppotingsView */,
 				EDFC44E52BD2831200034EAA /* TemplateCardView.swift */,
 			);
 			path = CardCell;
@@ -2778,9 +2822,11 @@
 				D1A435669CA188A48D5CB2DE /* Environment+DeviceInfo.swift in Sources */,
 				BB586DA9AA445E2ED372314A /* Environment.swift in Sources */,
 				10E5881C2BC051F100D05347 /* AuthLoginResponse.swift in Sources */,
+				ED2894062BDC11FC00016DF6 /* CorePath.swift in Sources */,
 				579765C25C52D0E67640EC8C /* ErrorHandler.swift in Sources */,
 				6B25C9A9C064A482215CEFBA /* ErrorParser.swift in Sources */,
 				0BE2E904E4175A95F9EAB2AA /* HeaderKey.swift in Sources */,
+				ED2894082BDC120C00016DF6 /* ProfileRequestManager.swift in Sources */,
 				175638E10814EC02A9474E93 /* HttpMethod.swift in Sources */,
 				97CD0768BB80EF63BF274747 /* KeychainStorageService.swift in Sources */,
 				99CBBE1A460C4BF184333C71 /* NetworkLayer.swift in Sources */,
@@ -2789,6 +2835,7 @@
 				EDC60DEBCAD6179A2C1DE924 /* PersistentLayer.swift in Sources */,
 				38962B6A30222DEDBE26A6C3 /* PersistentLayerProperty.swift in Sources */,
 				10E5881E2BC0520D00D05347 /* AuthOtpConfirmResponse.swift in Sources */,
+				ED28940B2BDC127800016DF6 /* ProfileResponse.swift in Sources */,
 				2A8C20B541E6312E52CF0EC3 /* PushNotificationService.swift in Sources */,
 				1DD8FAF3095C136D6EA304FB /* QuickAccess.swift in Sources */,
 				2D2904046A7203699AB3465E /* RequestInterceptor.swift in Sources */,
@@ -2837,6 +2884,7 @@
 				1B096D0574867A98065C0D0C /* BaseScrollView.swift in Sources */,
 				8E8A56CBCEAF896F0DEE61E7 /* BaseSeparator.swift in Sources */,
 				56291189044802D31F2A1F87 /* BaseSpacer.swift in Sources */,
+				ED2894112BDC528E00016DF6 /* ErrorView.swift in Sources */,
 				EDFC44BF2BCD1F3100034EAA /* Theme.swift in Sources */,
 				AE2E4F8276E606C14E6C9F77 /* BaseSpinner.swift in Sources */,
 				1FEEDD4FDD3F4628378ADDC4 /* BaseStackView.swift in Sources */,

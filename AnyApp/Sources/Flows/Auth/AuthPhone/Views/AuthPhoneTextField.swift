@@ -22,8 +22,8 @@ final class AuthPhoneTextField: BackgroundPrimary {
 
     // Published
     private var cancelable = Set<AnyCancellable>()
-    @Published var isActivate: AuthTFActivityIndicatorState = .stop
-    var state = CurrentValueSubject<AuthTFState, Never>(.corrcet)
+    private var isActivate = CurrentValueSubject<AuthTFActivityIndicatorState, Never>(.stop)
+    private var state = CurrentValueSubject<AuthTFState, Never>(.corrcet)
 
     public var text: String = ""
 
@@ -65,7 +65,7 @@ final class AuthPhoneTextField: BackgroundPrimary {
     private func setupBindings() {
         // mask entered pgone
         authTF.textPublisher
-            .map { ($0.formatUserInput(pattern: "+7 (###) ### ## ##" )) }
+            .map { ($0.maskPhoneNumber(pattern: "+7 (###) ### ## ##")) }
             .assign(to: \.text, on: authTF)
             .store(in: &cancelable)
         authTF.textPublisher
@@ -74,7 +74,7 @@ final class AuthPhoneTextField: BackgroundPrimary {
                 self?.text = text
             }.store(in: &cancelable)
         // spiner state
-        $isActivate.sink { [weak self] state in
+        isActivate.sink { [weak self] state in
             switch state {
             case .beginning:
                 self?.spinner.isHidden = false
@@ -86,7 +86,7 @@ final class AuthPhoneTextField: BackgroundPrimary {
         }.store(in: &cancelable)
         // ui state all itens
         state.sink { [weak self] value in
-            self?.isActivate = .stop
+            self?.isActivate.send(.stop)
             switch value {
             case .error:
                 self?.leftIcon
@@ -99,5 +99,12 @@ final class AuthPhoneTextField: BackgroundPrimary {
             }
         }
             .store(in: &cancelable)
+    }
+    
+    public func startAnimation() {
+        self.isActivate.send(.beginning)
+    }
+    public func state(_ state: AuthTFState) {
+        self.state.send(state)
     }
 }

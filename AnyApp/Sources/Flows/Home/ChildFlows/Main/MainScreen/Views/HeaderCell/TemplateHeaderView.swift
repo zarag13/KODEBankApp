@@ -15,7 +15,6 @@ final class TemplateHeaderView: BackgroundPrimary {
     override public func setup() {
         super.setup()
         body().embed(in: self)
-            .backgroundColor(BackgroundStyle.backgroundSecondary.color)
     }
 
     // MARK: - Private methods
@@ -26,6 +25,7 @@ final class TemplateHeaderView: BackgroundPrimary {
                 .fontStyle(.body15sb)
                 .foregroundStyle(.textTertiary)
         }
+        .backgroundStyle(.backgroundSecondary)
     }
 }
 

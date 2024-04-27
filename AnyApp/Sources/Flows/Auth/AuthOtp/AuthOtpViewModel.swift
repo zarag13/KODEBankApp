@@ -4,12 +4,14 @@ import Combine
 final class AuthOtpViewModel {
 
     enum Input {
+        case didLoad
         case otpEntered(String)
     }
 
     enum Output {
         case userLoggedIn
         case codeError
+        case otpLenght(Int)
     }
 
     var onOutput: ((Output) -> Void)?
@@ -19,12 +21,12 @@ final class AuthOtpViewModel {
 
     private var cancellables = Set<AnyCancellable>()
 
-    let configModel: ConfigModel
+    let configModel: ConfigAuthOtpModel
 
     init(
         authRequestManager: AuthRequestManagerAbstract,
         appSession: AppSession,
-        configModel: ConfigModel
+        configModel: ConfigAuthOtpModel
     ) {
         self.authRequestManager = authRequestManager
         self.appSession = appSession
@@ -41,6 +43,8 @@ final class AuthOtpViewModel {
                 self.onOutput?(.codeError)
                 print("код неверный")
             }
+        case .didLoad:
+            onOutput?(.otpLenght(configModel.leghtCode))
         }
     }
 

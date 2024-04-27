@@ -24,6 +24,7 @@ final class ActionsTabsView: BackgroundPrimary {
 
     override func setup() {
         super.setup()
+        self.backgroundStyle(.backgroundSecondary)
         body().embed(in: self)
             .backgroundColor(BackgroundStyle.backgroundSecondary.color)
         state.sink { state in
@@ -31,10 +32,15 @@ final class ActionsTabsView: BackgroundPrimary {
         }.store(in: &cancellable)
     }
     private func body() -> UIView {
-        ForEach(collection: State.allCases, alignment: .fill, distribution: .fillEqually, spacing: 40, axis: .horizontal) { state in
-            self.createAction(event: state)
+        VStack {
+            Spacer(.px16)
+            ForEach(collection: State.allCases, alignment: .fill, distribution: .fillEqually, spacing: 40, axis: .horizontal) { state in
+                self.createAction(event: state)
+            }
+            Spacer(.px16)
         }
-        .layoutMargins(.make(vInsets: 16, hInsets: 36))
+        .layoutMargins(.make(hInsets: 36))
+        //vInsets: 16,
     }
 
     func createAction(event: State) -> UIView {
@@ -101,7 +107,7 @@ extension ActionsTabsView: ConfigurableView {
         self.props = model
         subviews.forEach { $0.removeFromSuperview() }
         body().embed(in: self)
-            .backgroundColor(BackgroundStyle.backgroundSecondary.color)
+            .backgroundColor(.clear)
         print("111111111111111111 \(state.value)")
     }
 }

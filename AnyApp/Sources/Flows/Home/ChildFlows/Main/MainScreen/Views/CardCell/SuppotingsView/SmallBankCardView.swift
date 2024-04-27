@@ -10,9 +10,8 @@ import UI
 import AppIndependent
 
 final class SmallBankCardView: BackgroundPrimary {
-
     private var props: Props?
-    
+
     let cardNumberLabel = Label()
 
     // MARK: - Public methods
@@ -22,35 +21,30 @@ final class SmallBankCardView: BackgroundPrimary {
 
     // MARK: - Private methods
     private func body(with props: Props) -> UIView {
-        ZStack(positioningMode: .fill) {
-            VStack {
-                ImageView(image: props.backgroundCardImage)
-                    .huggingPriority(.defaultHigh, axis: .horizontal)
-            }
-            VStack(alignment: .trailing, distribution: .fill, spacing: 1) {
-                cardNumberLabel
-                    .text(props.cardNumber)
-                    .fontStyle(.caption11)
-                ImageView(image: props.iconBankImage)
-            }
-            .layoutMargins(.init(top: 2, left: 0, bottom: 1, right: 4))
+        let imageView = ImageView(image: props.backgroundCardImage)
+                        .huggingPriority(.defaultHigh, axis: .horizontal)
+        let content = VStack(alignment: .trailing, distribution: .fill, spacing: 1) {
+            cardNumberLabel
+                .text(props.cardNumber)
+                .fontStyle(.caption11)
+            ImageView(image: props.iconBankImage)
         }
+        .layoutMargins(.init(top: 2, left: 0, bottom: 1, right: 4))
+        
+        content.embed(in: imageView)
+        return imageView
     }
 }
 
 // MARK: - Configurable
 extension SmallBankCardView: ConfigurableView {
-    
-
     typealias Model = Props
 
     struct Props: Hashable {
-        
         enum State {
             case unavailabil
             case availabil
         }
-        
         let cardNumber: String
         let backgroundCardImage: UIImage
         let iconBankImage: UIImage
@@ -75,4 +69,3 @@ extension SmallBankCardView: ConfigurableView {
         body(with: model).embed(in: self)
     }
 }
-

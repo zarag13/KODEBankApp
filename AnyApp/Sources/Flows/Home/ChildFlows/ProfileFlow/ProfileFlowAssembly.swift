@@ -33,7 +33,9 @@ final class ProfileFlowAssembly: Assembly, Identifiable {
         }
 
         container.register(ProfileController.self) { resolver in
-            let viewModel = ProfileViewModel(appSession: resolver ~> AppSession.self)
+            let viewModel = ProfileViewModel(
+                appSession: resolver ~> AppSession.self,
+                authRequestManager: (resolver ~> NetworkFactory.self).makeProfileRequestManager())
             return ProfileController(viewModel: viewModel)
         }
 

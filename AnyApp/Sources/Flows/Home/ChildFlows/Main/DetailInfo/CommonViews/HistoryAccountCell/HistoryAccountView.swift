@@ -16,6 +16,7 @@ final class HistoryAccountView: BackgroundPrimary {
     // MARK: - Public methods
     override public func setup() {
         super.setup()
+        self.backgroundStyle(.backgroundPrimary)
     }
 
     // MARK: - Private methods
@@ -130,6 +131,5 @@ extension HistoryAccountView: ConfigurableView {
         self.props = model
         subviews.forEach { $0.removeFromSuperview() }
         body(with: model).embed(in: self)
-            .backgroundColor(BackgroundStyle.backgroundSecondary.color)
     }
 }

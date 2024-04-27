@@ -5,7 +5,7 @@ final class AuthPhoneController: TemplateViewController<AuthPhoneView> {
     typealias ViewModel = AuthPhoneViewModel
 
     enum Event {
-        case otp(ConfigModel)
+        case otp(ConfigAuthOtpModel)
     }
 
     var onEvent: ((Event) -> Void)?
@@ -20,23 +20,29 @@ final class AuthPhoneController: TemplateViewController<AuthPhoneView> {
     override func setup() {
         super.setup()
         setupBindings()
+        configureNavigationItem()
+    }
+
+    private func configureNavigationItem() {
         navigationController?.navigationBar.isHidden = true
     }
 
     private func setupBindings() {
-        rootView.onAuth = { [weak self] phone in
-            self?.viewModel.handle(.phoneEntered(phone))
+        rootView.onEvent = { [weak self] phone in
+            switch phone {
+            case .onLogin(let phone):
+                self?.viewModel.handle(.phoneEntered(phone))
+            }
         }
 
         viewModel.onOutput = { [weak self] output in
             switch output {
             case .otp(let config):
-                self?.rootView.onEvent?(.corect)
                 self?.onEvent?(.otp(config))
             case .incorrectNumber:
                 #warning("донастроить уведомление")
                 SnackCenter.shared.showSnack(withProps: .init(message: Entrance.Error.invalidPhoneMessage, style: .error))
-                self?.rootView.onEvent?(.incorrect)
+                self?.rootView.handle(.incorrectNumber)
             }
         }
     }

@@ -13,12 +13,16 @@ enum AuthPath: String, Path, CaseIterable {
         }
     }
 
+    private var version: String {
+        "151956/api/"
+    }
+
     public var endpoint: String {
         switch self {
         case .login:
-            return "auth/login"
+            return "\(version)auth/login"
         case .confirm:
-            return "auth/confirm"
+            return "\(version)auth/confirm"
         }
     }
 

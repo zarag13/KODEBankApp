@@ -4,38 +4,30 @@ import AppIndependent
 import Combine
 
 final class AuthPhoneView: BackgroundPrimary {
-    enum Event {
-        case corect
-        case incorrect
+    enum Output {
+        case onLogin(String)
     }
+    enum Input {
+        case incorrectNumber
+    }
+
     // Actions
-    var onEvent: ((Event) -> Void)?
-    var onAuth: StringHandler?
-    // Published
-    private var cancelable = Set<AnyCancellable>()
+    var onEvent: ((Output) -> Void)?
     // UI
     private let authPhoneTextField = AuthPhoneTextField()
-
+    
     override func setup() {
         super.setup()
         body().embed(in: self)
-        onTap { [weak self] in
-            self?.endEditing(true)
-        }
-
-        onEvent = { event in
-            switch event {
-            case .corect:
-                self.authPhoneTextField.state.send(.corrcet)
-            case .incorrect:
-                self.authPhoneTextField.state.send(.error)
-            }
-        }
+//        onTap { [weak self] in
+//            self?.endEditing(true)
+//        }
 
         actionButton = ButtonPrimary(title: Entrance.enter)
             .onTap { [weak self] in
-                self?.authPhoneTextField.isActivate = .beginning
-                self?.onAuth?(self?.authPhoneTextField.text ?? "")
+                self?.actionButton?.userInteraction(enabled: false)
+                self?.authPhoneTextField.startAnimation()
+                self?.onEvent?(.onLogin(self?.authPhoneTextField.text ?? ""))
             }
         moveActionButtonWithKeyboard = true
     }
@@ -49,5 +41,13 @@ final class AuthPhoneView: BackgroundPrimary {
         }
         .linkGroupedSpacers()
         .layoutMargins(.make(vInsets: 16, hInsets: 16))
+    }
+
+    public func handle(_ event: Input) {
+        self.actionButton?.userInteraction(enabled: true)
+        switch event {
+        case .incorrectNumber:
+            self.authPhoneTextField.state(.error)
+        }
     }
 }

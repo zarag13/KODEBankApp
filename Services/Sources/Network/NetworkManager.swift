@@ -50,7 +50,6 @@ public class NetworkRequestManager {
         }
 
         Logger().info("Request \(url)")
-
         let request = sessionManager
             .request(
                 url,
@@ -233,7 +232,6 @@ public class NetworkRequestManager {
         }
 
         Logger().info("Download \(url)")
-
         let request = sessionManager
             .request(url,
                      method: path.httpMethod,

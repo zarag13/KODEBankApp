@@ -8,7 +8,7 @@
 import Foundation
 
 extension String {
-    public func formatUserInput(pattern: String) -> String {
+    public func maskPhoneNumber(pattern: String) -> String {
         var inputCollection = Array(self)
         var resultCollection = [Character]()
         for i in 0 ..< pattern.count {

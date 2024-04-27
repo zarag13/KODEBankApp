@@ -6,35 +6,29 @@ public enum BackgroundStyle {
     case backgroundPrimary
     case backgroundSecondary
     case contentPrimary
-    
     case indicatorContentError
     case indicatorContentDone
     case indicatorContentSuccess
-    
     case backgroundBottomMenu
     case overlay
     case calendarPeriod
+    case contentSecondary
 }
 
 // Defines textColor and tintColor
 public enum ForegroundStyle {
     case none
-
     case contentPrimary
     case textPrimary
-
     case button
-    
     case indicatorContentError
     case indicatorContentDone
     case indicatorContentSuccess
-    
     case contentAccentPrimary
     case contentTertiary
     case contentAccentSecondary
     case contentSecondary
     case contentAccentTertiary
-    
     case textTertiary
     case textSecondary
 }
@@ -96,6 +90,8 @@ public extension BackgroundStyle {
             Palette.ErrorColor.indicatorContentDone
         case .indicatorContentSuccess:
             Palette.ErrorColor.indicatorContentSuccess
+        case .contentSecondary:
+            Palette.Content.secondary
         }
     }
 }

@@ -16,6 +16,7 @@ final class FavoritesAccountView: BackgroundPrimary {
     // MARK: - Public methods
     override public func setup() {
         super.setup()
+        self.backgroundStyle(.backgroundSecondary)
     }
 
     // MARK: - Private methods
@@ -72,6 +73,5 @@ extension FavoritesAccountView: ConfigurableView {
         self.props = model
         subviews.forEach { $0.removeFromSuperview() }
         body(with: model).embed(in: self)
-            .backgroundColor(BackgroundStyle.backgroundSecondary.color)
     }
 }

@@ -21,8 +21,11 @@ final class AuthOtpController: TemplateViewController<AuthOtpView> {
     override func setup() {
         super.setup()
         setupBindings()
-        rootView
-            .configure(leght: viewModel.configModel.leghtCode)
+        configureNavigationItem()
+        viewModel.handle(.didLoad)
+    }
+    
+    private func configureNavigationItem() {
         rootView.navigationBar.popController(navigation: self.navigationController)
     }
 
@@ -37,6 +40,8 @@ final class AuthOtpController: TemplateViewController<AuthOtpView> {
                 self?.onEvent?(.userLoggedIn)
             case .codeError:
                 self?.rootView.handle(.error)
+            case .otpLenght(let lenght):
+                self?.rootView.configuration(otpLenght: lenght)
             }
         }
     }

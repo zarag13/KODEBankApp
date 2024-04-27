@@ -27,6 +27,7 @@ final class DetailAccountView: BackgroundPrimary {
             BackgroundView(hPadding: 16) {
                 navigationBar
                     .setuptile(title: "Cчета")
+                    .backgroundStyle(.backgroundSecondary)
             }
             tableView
         }

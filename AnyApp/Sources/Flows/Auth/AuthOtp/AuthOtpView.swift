@@ -65,7 +65,7 @@ final class AuthOtpView: BackgroundPrimary {
         }.layoutMargins(.make(vInsets: 16, hInsets: 16))
     }
 
-    public func configure(leght: Int) {
-        body(leght: leght).embed(in: self)
+    public func configuration(otpLenght: Int) {
+        body(leght: otpLenght).embed(in: self)
     }
 }

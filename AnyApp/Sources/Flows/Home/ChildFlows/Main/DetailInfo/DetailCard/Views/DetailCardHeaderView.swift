@@ -15,52 +15,67 @@ final class DetailCardHeaderView: BackgroundPrimary {
 
     override func setup() {
         super.setup()
+        self.backgroundStyle(.backgroundSecondary)
     }
+
     private func body(with props: Props) -> UIView {
-        ZStack(positioningMode: .fill) {
-            VStack {
-                ImageView(image: props.styleCard)
+        VStack() {
+            crateCards(with: props)
+            Spacer(.px32)
+        }
+    }
+
+    private func crateCards(with props: Props) -> UIView {
+        let imageView = VStack(alignment: .center, distribution: .fill) {
+            Spacer(.px16)
+            ImageView(image: props.styleCard)
                 .clipsToBounds(true)
                 .contentMode(.scaleAspectFit)
-                .cornerRadius(20)
-            }
-            .layoutMargins(.init(top: 16, left: 20, bottom: 0, right: 20))
-                .shadowColor(.black)
-                .shadowOffset(.init(width: 10, height: 10))
-                .shadowRadius(46)
-                .shadowOpacity(0.4)
-            VStack(spacing: 24) {
-                HStack(spacing: 16) {
-                    ImageView(image: props.companyCard)
-                        .width(32)
-                        .huggingPriority(.defaultHigh, axis: .horizontal)
-                    Label(text: props.title)
-                        .textAlignment(.left)
-                        .fontStyle(.body15r)
-                        .foregroundStyle(.textPrimary)
-                        .huggingPriority(.defaultLow, axis: .horizontal)
-                    ImageView(image: props.rightImage)
-                        .huggingPriority(.defaultHigh, axis: .horizontal)
-                        .foregroundStyle(.contentAccentTertiary)
-                }
-                HStack {
-                    Label(text: props.sumMoney)
-                        .fontStyle(.subtitle17sb)
-                        .foregroundStyle(.textPrimary)
-                }
-                HStack {
-                    Label(text: props.numberCard)
-                        .fontStyle(.caption13)
-                        .foregroundStyle(.textSecondary)
-                        .huggingPriority(.defaultLow, axis: .horizontal)
-                    Label(text: props.dateCard)
-                        .fontStyle(.caption13)
-                        .foregroundStyle(.textSecondary)
-                        .huggingPriority(.defaultHigh, axis: .horizontal)
-                }
-            }
-            .layoutMargins(.make(vInsets: 32, hInsets: 48))
+                .cornerRadius(8)
         }
+            .layoutMargins(.make(hInsets: 20))
+            .shadowColor(.black)
+            .shadowOffset(.init(width: 10, height: 10))
+            .shadowRadius(36)
+            .shadowOpacity(0.4)
+
+        let content = VStack {
+            Spacer(.px32)
+            HStack(spacing: 16) {
+                ImageView(image: props.companyCard)
+                    .width(32)
+                    .huggingPriority(.defaultHigh, axis: .horizontal)
+                Label(text: props.title)
+                    .textAlignment(.left)
+                    .fontStyle(.body15r)
+                    .foregroundStyle(.textPrimary)
+                    .huggingPriority(.defaultLow, axis: .horizontal)
+                ImageView(image: props.rightImage)
+                    .huggingPriority(.defaultHigh, axis: .horizontal)
+                    .foregroundStyle(.contentAccentTertiary)
+            }
+            Spacer(.px24)
+            Label(text: props.sumMoney)
+                .fontStyle(.subtitle17sb)
+                .foregroundStyle(.textPrimary)
+            Spacer(.px24)
+            HStack {
+                Label(text: props.numberCard)
+                    .fontStyle(.caption13)
+                    .foregroundStyle(.textSecondary)
+                    .huggingPriority(.defaultLow, axis: .horizontal)
+                Label(text: props.dateCard)
+                    .fontStyle(.caption13)
+                    .foregroundStyle(.textSecondary)
+                    .huggingPriority(.defaultHigh, axis: .horizontal)
+            }
+            Spacer(.px32)
+        }
+            //.layoutMargins(.make(vInsets: 16, hInsets: 24))
+            .layoutMargins(.make(hInsets: 48))
+            .backgroundColor(.clear)
+        content.embed(in: imageView)
+        return imageView
     }
 }
 
@@ -100,6 +115,5 @@ extension DetailCardHeaderView: ConfigurableView {
         self.props = model
         subviews.forEach { $0.removeFromSuperview() }
         body(with: model).embed(in: self)
-            .backgroundColor(BackgroundStyle.backgroundSecondary.color)
     }
 }

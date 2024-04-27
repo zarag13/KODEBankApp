@@ -18,7 +18,8 @@ final class NetworkLayer: Network {
     var environment: Environment
 
     init(session: SessionAbstract,
-         environment: Environment) {
+         environment: Environment
+    ) {
         self.session = session
         self.environment = environment
         setupPathfinder()
@@ -93,8 +94,18 @@ extension NetworkLayer {
                 currentStoplightQueryParams: [:]
             )
         }
+        let mainSpecs = CorePath.allCases.map {
+            UrlSpec(
+                id: $0.id,
+                pathTemplate: $0.endpoint,
+                httpMethod: $0.method.pathfinderHttpMethod,
+                tag: $0.tag,
+                name: $0.name,
+                currentStoplightQueryParams: [:]
+            )
+        }
 
-        let allSpecs = authSpecs
+        let allSpecs = authSpecs + mainSpecs
 
         let initialEnvironmentIndex = loadEnvironment()?.rawValue ?? defaultEnvironment().rawValue
         let config = PFConfig(

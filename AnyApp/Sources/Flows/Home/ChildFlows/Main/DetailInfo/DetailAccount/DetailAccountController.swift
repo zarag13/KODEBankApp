@@ -9,28 +9,28 @@ import UI
 import UIKit
 
 final class DetailAccountController: TemplateViewController<DetailAccountView> {
-    
+
     typealias ViewModel = DetailAccountViewModel
-    
+
     private var viewModel: ViewModel!
-    
+
     convenience init(viewModel: ViewModel) {
         self.init()
         self.viewModel = viewModel
     }
-    
+
     override func setup() {
         super.setup()
         setupBindings()
         configureNavigationItem()
         viewModel.handle(.loadData)
     }
-    
+
     private func configureNavigationItem() {
         navigationController?.navigationBar.isHidden = true
         rootView.navigationBar.popController(navigation: self.navigationController)
     }
-    
+
     private func setupBindings() {
         viewModel.onOutput = { [weak self] output in
             switch output {
@@ -40,7 +40,6 @@ final class DetailAccountController: TemplateViewController<DetailAccountView> {
                 self?.rootView.addNewItems(with: props)
             }
         }
-        
         rootView.onNewProduct = { [weak self] in
             SnackCenter.shared.showSnack(withProps: .init(message: "!New Product"))
         }

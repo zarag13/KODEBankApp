@@ -14,12 +14,12 @@ struct ModelSettingsView {
         case supportService
         case exit
     }
-    
+
     let image: UIImage
     let title: String
     let isDetailedImage: Bool
     let state: Event
-    
+
     static var createItems: [ModelSettingsView] {
         return [
             .init(image: Asset.Icon24px.settings.image, title: Profile.aboutApp, isDetailedImage: true, state: .aboutApp),

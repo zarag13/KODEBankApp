@@ -1,49 +1,34 @@
 import UI
 import UIKit
 import AppIndependent
+import Combine
 
 final class ProfileView: BackgroundPrimary {
     typealias StateView = ((State) -> Void)
+    typealias SettingViewAction = ((ModelSettingsView.Event) -> Void)
 
     enum State {
         case isBeingDownloadData
-        case hasBeenDownloadData
+        case hasBeenDownloadData(DetailInfoView.Props)
     }
 
-    enum Event {
-        case onLogout
-        case onThemeApp
-        case onAboutApp
-        case supportService
-        case exit
-    }
+    private var cancelable = Set<AnyCancellable>()
+    private var state = CurrentValueSubject<State, Never>(.isBeingDownloadData)
 
-    var event: ((Event) -> Void)?
+    private let detailInfoView = DetailInfoView()
+    private let settingsStackView = SettingsStackView()
+    private let shimerSettings = SettingsShimerStackView()
+    private let shimerDetail = ShimmerDetailInfoView()
 
-    var state: StateView?
-
-    let detailInfoView = DetailInfoView()
-    let settingsStackView = SettingsStackView()
-    let shimer = SettingsShimerStackView()
-    let shimer2 = ShimmerDetailInfoView()
+    public var event: SettingViewAction?
 
     override func setup() {
         super.setup()
-        state = { [weak self] state in
-            guard let strSelf = self else { return }
-            switch state {
-            case .isBeingDownloadData:
-                strSelf.shimmerBody().embed(in: strSelf)
-            case .hasBeenDownloadData:
-                strSelf.shimmerBody().removeFromSuperview()
-                strSelf.contentBody().embed(in: strSelf)
-            }
-        }
         setupBindings()
     }
 
     private func contentBody() -> UIView {
-        VStack {
+        return VStack {
             detailInfoView
             settingsStackView
         }
@@ -52,23 +37,29 @@ final class ProfileView: BackgroundPrimary {
 
     private func shimmerBody() -> UIView {
         VStack {
-            shimer2
-            shimer
+            shimerDetail
+            shimerSettings
         }.layoutMargins(.make(hInsets: 16))
     }
 
-    func setupBindings() {
-        settingsStackView.action = { value in
-            switch value {
-            case .aboutApp:
-                self.event?(.onAboutApp)
-            case .themeApp:
-                self.event?(.onThemeApp)
-            case .supportService:
-                self.event?(.supportService)
-            case .exit:
-                self.event?(.exit)
-            }
+    private func setupBindings() {
+        settingsStackView.action = { [weak self] event in
+            self?.event?(event)
         }
+        
+        state.sink { [weak self] state in
+            switch state {
+            case .isBeingDownloadData:
+                self?.shimmerBody().embed(in: self ?? UIView())
+            case .hasBeenDownloadData(let props):
+                self?.shimmerBody().removeFromSuperview()
+                self?.detailInfoView.configured(with: props)
+                self?.contentBody().embed(in: self ?? UIView())
+            }
+        }.store(in: &cancelable)
+    }
+
+    public func handle(_ state: State) {
+        self.state.send(state)
     }
 }

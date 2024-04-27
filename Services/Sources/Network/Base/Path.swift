@@ -44,7 +44,6 @@ extension AuthPath {
         switch self {
         case .login:
             return "Post Login"
-
         case .confirm:
             return "Post Confirm"
         }

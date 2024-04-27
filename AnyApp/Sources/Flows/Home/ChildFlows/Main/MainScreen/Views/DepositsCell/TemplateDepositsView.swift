@@ -16,6 +16,7 @@ final class TemplateDepositsView: BackgroundPrimary {
     // MARK: - Public methods
     override public func setup() {
         super.setup()
+        self.backgroundStyle(.backgroundSecondary)
     }
 
     // MARK: - Private methods
@@ -52,7 +53,6 @@ extension TemplateDepositsView: ConfigurableView {
     typealias Model = Props
 
     struct Props: Hashable {
-        
         let id: String
         let title: String
         let description: String
@@ -79,6 +79,5 @@ extension TemplateDepositsView: ConfigurableView {
         self.props = model
         subviews.forEach { $0.removeFromSuperview() }
         body(with: model).embed(in: self)
-            .backgroundColor(BackgroundStyle.backgroundSecondary.color)
     }
 }

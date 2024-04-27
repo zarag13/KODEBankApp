@@ -21,13 +21,10 @@ final class ProfileController: TemplateViewController<ProfileView> {
     override func setup() {
         super.setup()
         setupBindings()
-        rootView.state?(.isBeingDownloadData)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.rootView.state?(.hasBeenDownloadData)
-        }
         configureNavigationItem()
+        viewModel.handle(.loadView)
     }
-    
+
     private func configureNavigationItem() {
         navigationController?.navigationBar.isHidden = true
     }
@@ -35,17 +32,35 @@ final class ProfileController: TemplateViewController<ProfileView> {
     private func setupBindings() {
         rootView.event = { [weak self] event in
             switch event {
-            case .onLogout:
-                break
-            case .onThemeApp:
-                self?.openSettingsController?(.themeApp)
-            case .onAboutApp:
+            case .aboutApp:
                 self?.openSettingsController?(.aboutApp)
+            case .themeApp:
+                self?.openSettingsController?(.themeApp)
             case .supportService:
                 self?.viewModel.handle(.supportService)
             case .exit:
-                self?.viewModel.handle(.logout)
+                self?.createLogautAlertController()
             }
         }
+
+        viewModel?.onOutput = { event in
+            switch event {
+            case .detailProfileData(let props):
+                self.rootView.handle(.hasBeenDownloadData(props))
+            }
+        }
+    }
+
+    private func createLogautAlertController() {
+        let alert = UIAlertController(title: "Вы точно хотите выйти?", message: nil, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Отмена", style: .default) { _ in
+            alert.dismiss(animated: true)
+        }
+        let doneAction = UIAlertAction(title: "Выйти", style: .default) { _ in
+            self.viewModel.handle(.logout)
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(doneAction)
+        self.present(alert, animated: true)
     }
 }

@@ -38,7 +38,7 @@ final class AuthFlowCoordinator: Coordinator {
         router.setRootModule(controller)
     }
 
-    private func showOtp(config: ConfigModel) {
+    private func showOtp(config: ConfigAuthOtpModel) {
         let controller = resolver ~> (AuthOtpController.self, config)
 
         controller.onEvent = { [weak self] event in

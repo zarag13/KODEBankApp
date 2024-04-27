@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct ConfigModel {
+struct ConfigAuthOtpModel {
     let phone: String
     let code: String
     let leghtCode: Int
+    let codeId: String
 }

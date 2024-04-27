@@ -10,30 +10,33 @@ import UI
 import AppIndependent
 
 final class ErrorDownloadCell: BackgroundPrimary {
-    
     private var errorLabel = Label(text: "Обновить", foregroundStyle: .contentAccentPrimary, fontStyle: .body15sb)
 
     // MARK: - Public methods
 
     override public func setup() {
         super.setup()
+        self.backgroundStyle(.backgroundPrimary)
     }
 
     // MARK: - Private methods
 
     private func body(with props: Props) -> UIView {
         VStack(alignment: .center, distribution: .fill) {
+            Spacer(.px36)
             //props.title
             Label(text: "Упс, что-то пошло не так", foregroundStyle: .textPrimary, fontStyle: .subtitle17sb)
+                .textAlignment(.center)
             Spacer(.px6)
             //props.description
             Label(text: "Не удалось загрузить \nчасть контента", foregroundStyle: .textSecondary, fontStyle: .body15r)
                 .textAlignment(.center)
-                .linesCount(2)
+                .multiline()
             Spacer(.px16)
             //props.titleButton
-            BackgroundView {
+            BackgroundView(vPadding: 1, hPadding: 1) {
                 errorLabel
+                    .textAlignment(.center)
             }
             .onTap { [weak self] in
                 UIView.animate(withDuration: 0.1) {
@@ -43,20 +46,18 @@ final class ErrorDownloadCell: BackgroundPrimary {
                         self?.errorLabel.alpha = 1
                     }
                 }
-
             }
+            Spacer(.px36)
         }
-        .layoutMargins(.make(vInsets: 35.5, hInsets: 16))
+        .layoutMargins(.make( hInsets: 16))
     }
 }
 
 // MARK: - Configurable
 extension ErrorDownloadCell: ConfigurableView {
-
     typealias Model = Props
 
     struct Props: Hashable {
-        
         let id: String
         let title: String
         let description: String
@@ -78,6 +79,5 @@ extension ErrorDownloadCell: ConfigurableView {
     public func configure(with model: Props) {
         subviews.forEach { $0.removeFromSuperview() }
         body(with: model).embed(in: self)
-            .backgroundColor(BackgroundStyle.backgroundSecondary.color)
     }
 }

@@ -11,30 +11,19 @@ import AppIndependent
 import Combine
 
 final class TemplateAccountView: BackgroundPrimary {
-
-    private var props: Props?
-
-    var rightImage = ImageView()
-
     enum State {
         case open
         case close
     }
 
-    var state2 = CurrentValueSubject<State, Never>(.open)
-    var cancelable = Set<AnyCancellable>()
+    private var props: Props?
+    private var state = CurrentValueSubject<State, Never>(.open)
+    private var cancelable = Set<AnyCancellable>()
 
     // MARK: - Public methods
     override public func setup() {
         super.setup()
-        state2.sink { state in
-            switch state {
-            case .open:
-                self.rightImage.image = Asset.Icon24px.chevronUp.image
-            case .close:
-                self.rightImage.image = Asset.Icon24px.chevronDown.image
-            }
-        }.store(in: &cancelable)
+        self.backgroundStyle(.backgroundSecondary)
     }
 
     // MARK: - Private methods
@@ -47,26 +36,10 @@ final class TemplateAccountView: BackgroundPrimary {
                 Label(text: props.description, foregroundStyle: .contentAccentPrimary, fontStyle: .body15r)
             }
                 .huggingPriority(.defaultLow, axis: .horizontal)
-            VStack(alignment: .center, distribution: .fill) {
-                VStack {
-                    rightImage
-                        .foregroundStyle(.contentTertiary)
-                        .onTap {
-                            [weak self] in
-                               switch self?.state2.value {
-                               case .open:
-                                   self?.state2.send(.close)
-                                   self?.props?.onTap?(props, .close)
-                               case .close:
-                                   self?.state2.send(.open)
-                                   self?.props?.onTap?(props, .open)
-                               case .none: break
-                               }
-                        }
-                }
-                .layoutMargins(.make(vInsets: 2))
+            BackgroundView(vPadding: 2) {
+                configureRightImage(props: props)
             }
-            .backgroundColor(ForegroundStyle.contentSecondary.color)
+            .backgroundStyle(.contentSecondary)
                 .width(40)
                 .huggingPriority(.defaultHigh, axis: .horizontal)
                 .cornerRadius(3)
@@ -75,6 +48,32 @@ final class TemplateAccountView: BackgroundPrimary {
         .onTap { [weak self] in
             self?.props?.openTap?()
         }
+    }
+
+    private func configureRightImage(props: Props) -> ImageView {
+        let rightImage = ImageView()
+            .foregroundStyle(.contentTertiary)
+            .onTap {
+                [weak self] in
+                   switch self?.state.value {
+                   case .open:
+                       self?.state.send(.close)
+                       self?.props?.onTap?(props, .close)
+                   case .close:
+                       self?.state.send(.open)
+                       self?.props?.onTap?(props, .open)
+                   case .none: break
+                   }
+            }
+        state.sink { [weak rightImage] state in
+            switch state {
+            case .open:
+                rightImage?.image = Asset.Icon24px.chevronUp.image
+            case .close:
+                rightImage?.image = Asset.Icon24px.chevronDown.image
+            }
+        }.store(in: &cancelable)
+        return rightImage
     }
 }
 
@@ -88,8 +87,7 @@ extension TemplateAccountView: ConfigurableView {
         let title: String
         let description: String
         let leftImage: UIImage
-
-        //var onTap: StringHandler?
+        
         var onTap: ((Props, State) -> Void)?
         var openTap: (() -> Void)?
 
@@ -109,6 +107,5 @@ extension TemplateAccountView: ConfigurableView {
         self.props = model
         subviews.forEach { $0.removeFromSuperview() }
         body(with: model).embed(in: self)
-            .backgroundColor(BackgroundStyle.backgroundSecondary.color)
     }
 }
