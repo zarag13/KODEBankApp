@@ -5,12 +5,13 @@ public final class ErrorView: BackgroundPrimary {
 
     // MARK: - Private Properties
 
-    private let titleLabel = Label(foregroundStyle: .textPrimary, fontStyle: .title)
+    private let titleLabel = Label(foregroundStyle: .textPrimary, fontStyle: .subtitle17sb)
         .textAlignment(.center)
-    private let messageLabel = Label(foregroundStyle: .textPrimary)
+    private let messageLabel = Label(foregroundStyle: .textPrimary, fontStyle: .body15r)
         .textAlignment(.center)
         .multiline()
-    private let imageView = UIImageView()
+    private let imageView = ImageView()
+        .contentMode(.scaleAspectFit)
     private var retryButton = ButtonPrimary()
 
     private var props: Props?
@@ -19,23 +20,42 @@ public final class ErrorView: BackgroundPrimary {
 
     private func body(with props: Props) -> UIView {
         VStack {
+            navigatiomBar()
             FlexibleGroupedSpacer()
             imageView
-            Spacer(.px20)
+                .image(props.image)
+            Spacer(.px32)
             titleLabel
                 .text(props.title)
-            Spacer(.px2)
+            Spacer(.px16)
             messageLabel
                 .text(props.message)
             FlexibleGroupedSpacer()
             retryButton
                 .title(props.buttonTitle)
                 .onTap { [weak self] in
+                    self?.retryButton.startLoading()
                     self?.props?.onTap?()
                 }
         }
         .linkGroupedSpacers()
-        .layoutMargins(.make(vInsets: 32, hInsets: 24))
+        .layoutMargins(.init(top: 0, left: 16, bottom: 32, right: 16))
+    }
+
+    private func navigatiomBar() -> UIView {
+        HStack {
+            ImageView(image: UIImage(named: "Icon24px/close"), foregroundStyle: .textPrimary)
+                .huggingPriority(.defaultHigh, axis: .horizontal)
+                .onTap { [weak self] in
+                    self?.removeFromSuperview()
+                }
+            FlexibleSpacer()
+        }
+        .layoutMargins(.make(vInsets: 10))
+    }
+
+    public func stopAnimation() {
+        self.retryButton.stopLoading()
     }
 }
 

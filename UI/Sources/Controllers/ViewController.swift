@@ -3,42 +3,6 @@ import Combine
 import AppIndependent
 
 // swiftlint:disable:next final_class
-//open class ViewController: BaseController, Themeable {
-//
-//    private(set) var backgroundStyle: BackgroundStyle?
-//
-//    override open func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        if self is NavigationBarAlwaysVisible {
-//            navigationController?.setNavigationBarHidden(false, animated: animated)
-//        }
-//        if self is NavigationBarAlwaysHidden {
-//            navigationController?.setNavigationBarHidden(true, animated: animated)
-//        }
-//    }
-//
-//    override open func setup() {
-//        super.setup()
-//        subscribeOnThemeChanges()
-//    }
-//
-//    open func updateAppearance() {
-//        if let backgroundStyle {
-//            view.backgroundColor(backgroundStyle.color)
-//        }
-//    }
-//
-//    open func backgroundStyle(_ style: BackgroundStyle) {
-//        self.backgroundStyle = style
-//        updateAppearance()
-//    }
-//
-//    open func navigationBarStyle(_ style: NavigationBar.Style) {
-//        (navigationController?.navigationBar as? NavigationBar)?.style(style)
-//    }
-//}
-
-// swiftlint:disable:next final_class
 open class ViewController: BaseController, Themeable {
 
     public enum AdditionalState {
@@ -50,7 +14,7 @@ open class ViewController: BaseController, Themeable {
     private(set) var backgroundStyle: BackgroundStyle?
 
     private let loadingView = UIView()
-    private let errorView = ErrorView()
+    private var errorView: ErrorView?
 
     override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -84,7 +48,9 @@ open class ViewController: BaseController, Themeable {
 
     public func setAdditionState(_ state: AdditionalState) {
         loadingView.removeFromSuperview()
-        errorView.removeFromSuperview()
+        errorView?.removeFromSuperview()
+        errorView = nil
+        errorView = ErrorView()
 
         switch state {
         case .none:
@@ -93,12 +59,17 @@ open class ViewController: BaseController, Themeable {
             // TODO: Impl
             break
         case .error(let props):
-            view.embed(subview: errorView)
-            errorView.configure(with: props)
+            self.errorView?
+                .configured(with: props)
+            self.errorView?.embed(in: view)
         }
     }
 
     public func removeAdditionalState() {
         setAdditionState(.none)
+    }
+
+    public func stopErrorAnimation() {
+        errorView?.stopAnimation()
     }
 }

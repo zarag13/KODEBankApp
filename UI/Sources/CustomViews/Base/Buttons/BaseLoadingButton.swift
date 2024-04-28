@@ -61,12 +61,11 @@ open class BaseLoadingButton: BaseAccessoryButton {
             isEnabled = wasEnabledBeforeLoading
             self.wasEnabledBeforeLoading = nil
         }
-
         isLoading = false
-
         DispatchQueue.main.async { [weak loaderView] in
             (loaderView as? StartStoppable)?.stop()
         }
+        loaderView?.removeFromSuperview()
     }
 
     // MARK: - Methods to implement

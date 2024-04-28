@@ -1,8 +1,11 @@
 import Services
+import UIKit
+import Foundation
 import Combine
 import UI
+import Core
 
-final class AuthPhoneViewModel {
+final class AuthPhoneViewModel: ErrorUIHandler {
     enum Output {
         case otp(ConfigAuthOtpModel)
         case incorrectNumber
@@ -27,21 +30,17 @@ final class AuthPhoneViewModel {
     private func login(phone: String) {
         authRequestManager.authLogin(phone: phone)
             .sink(
-                receiveCompletion: { error in
+                receiveCompletion: { [weak self] error in
                     guard case let .failure(error) = error else { return }
-                    switch error.appError.kind {
-                    case .network:
-                        print("network")
-                    case .timeout:
-                        print("нет интернета ошибка тут-")
-                    case .serverSendWrongData:
-                        print("serverSendWrongData")
-                    case .server(_):
-                        print("server")
-                    case .internal:
-                        print("internal")
+                    guard let errorProps = self?.errorHandle(error, onTap: {
+                        if error.appError.kind == .timeout {
+                            self?.checkInternet()
+                        }
+                        self?.login(phone: phone)
+                    }) else { return }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        self?.onOutput?(.error(errorProps))
                     }
-                    print(error.appError.localizedDescription)
                 },
                 receiveValue: { [weak self] response in
                     let otpModel = ConfigAuthOtpModel(
@@ -55,14 +54,12 @@ final class AuthPhoneViewModel {
     }
 
     // MARK: - Public Methods
-#warning("донастроить кол-во кейсов с ошибками и т.д")
     func handle(_ input: Input) {
         switch input {
         case .phoneEntered(let phone):
             let clearPhone = phone.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
             if clearPhone.count == 11 {
                 self.login(phone: clearPhone)
-                self.onOutput?(.error(.init(title: "123", message: "1231", image: Asset.logoM.image, buttonTitle: "dasas")))
             } else {
                 self.onOutput?(.incorrectNumber)
             }
@@ -70,4 +67,39 @@ final class AuthPhoneViewModel {
     }
 }
 
+import Network
+// swiftlint:disable:next final_class
+class ErrorUIHandler {
+    
+    private var monitor: NWPathMonitor?
 
+    func errorHandle(_ error: ErrorWithContext, onTap: @escaping (() -> Void)) -> ErrorView.Props {
+        switch error.appError.kind {
+        case .timeout:
+            return .init(title: Common.attention, message: Common.Error.noInternet, image: Asset.BigIlustration.notWifi.image, buttonTitle: Common.repeat, onTap: onTap)
+        case .serverSendWrongData:
+            return .init(title: Common.attention, message: Common.Error.serverNotFound, image: Asset.BigIlustration.notData.image, buttonTitle: Common.repeat, onTap: onTap)
+        default:
+            return .init(title: Common.attention, message: Common.Error.engineringWorks, image: Asset.BigIlustration.notData.image, buttonTitle: Common.repeat, onTap: onTap)
+        }
+    }
+
+    func checkInternet() {
+        monitor = NWPathMonitor()
+        self.monitor?.pathUpdateHandler = { pathUpdateHandler in
+            if pathUpdateHandler.status == .satisfied {
+                print("Internet connection is on.")
+            } else {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    if UIApplication.shared.canOpenURL(url) {
+                      print("Can open real Divace")
+                    }
+                }
+            }
+            self.monitor?.cancel()
+            self.monitor = nil
+            print("123")
+        }
+        self.monitor?.start(queue: .main)
+    }
+}

@@ -41,33 +41,18 @@ final class AuthPhoneController: TemplateViewController<AuthPhoneView> {
         viewModel.onOutput = { [weak self] output in
             switch output {
             case .otp(let config):
+                self?.removeAdditionalState()
                 self?.rootView.handle(.correct)
                 self?.onEvent?(.otp(config))
             case .incorrectNumber:
-                #warning("донастроить уведомление")
+                self?.removeAdditionalState()
                 SnackCenter.shared.showSnack(withProps: .init(message: Entrance.Error.invalidPhoneMessage, style: .error))
                 self?.rootView.handle(.incorrectNumber)
-            case .error(let props): break
+            case .error(let props):
+                self?.stopErrorAnimation()
+                self?.rootView.handle(.correct)
+                self?.setAdditionState(.error(props))
             }
         }
     }
 }
-
-//self?.setAdditionState(.error(props))
-
-//public struct ErrorUIHandler {
-//    static func handle(_ error: ErrorWithContext, onTap: @escaping VoidHandler) -> ErrorView.Props {
-//        switch error.appError.kind {
-//        case .network:
-//            ErrorView.Props(
-//                title: <#T##String#>,
-//                message: <#T##String#>,
-//                image: <#T##UIImage#>,
-//                buttonTitle: <#T##String#>,
-//                onTap: onTap
-//            )
-//        default:
-//            break
-//        }
-//    }
-//}

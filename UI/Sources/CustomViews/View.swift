@@ -47,7 +47,7 @@ open class View: BaseView, KeyboardChangeListener, Themeable {
 
     open func keyboardChanged(_ props: KeyboardChangeProps) {
         guard moveActionButtonWithKeyboard else { return }
-        actionButtonBottomConstraint?.constant = -props.targetHeight - 12
+        actionButtonBottomConstraint?.constant = -props.targetHeight - 24
         props.animateLayoutIfNeeded(view: self)
     }
 
@@ -109,7 +109,7 @@ open class View: BaseView, KeyboardChangeListener, Themeable {
         guard let actionButton = actionButton else { return }
         addSubview(actionButton)
         actionButton.pinHorizontalEdges(to: self, inset: 16)
-        actionButton.bottomAnchor.constraint(lessThanOrEqualTo: safeAreaLayoutGuide.bottomAnchor, constant: -12).isActive = true
+        actionButton.bottomAnchor.constraint(lessThanOrEqualTo: safeAreaLayoutGuide.bottomAnchor, constant: -24).isActive = true
         let actionButtonBottomConstraint = actionButton.bottomAnchor.constraint(equalTo: bottomAnchor)
         actionButtonBottomConstraint.priority = .defaultLow
         self.actionButtonBottomConstraint = actionButtonBottomConstraint
