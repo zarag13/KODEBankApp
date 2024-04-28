@@ -1,5 +1,5 @@
 //
-//  ConfigModel.swift
+//  ConfigAuthOtpModel.swift
 //  AnyApp
 //
 //  Created by Kirill on 22.04.2024.

@@ -1,7 +1,8 @@
 import UI
 import UIKit
+import AppIndependent
 
-final class MainController: TemplateViewController<MainView> {
+final class MainController: TemplateViewController<MainView>, NavigationBarAlwaysVisible {
 
     typealias ViewModel = MainViewModel
 

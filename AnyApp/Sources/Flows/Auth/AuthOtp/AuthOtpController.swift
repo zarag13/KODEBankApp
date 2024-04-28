@@ -24,14 +24,21 @@ final class AuthOtpController: TemplateViewController<AuthOtpView> {
         configureNavigationItem()
         viewModel.handle(.didLoad)
     }
-    
+
     private func configureNavigationItem() {
         rootView.navigationBar.popController(navigation: self.navigationController)
     }
 
     private func setupBindings() {
-        rootView.onOtpFilled = { [weak self] code in
-            self?.viewModel.handle(.otpEntered(code))
+        self.rootView.onEvent = { [weak self] event in
+            switch event {
+            case .onOtpField(let code):
+                self?.viewModel.handle(.otpEntered(code))
+            case .onAttemptsFailed:
+                self?.createAttemptsFailedAlert()
+            case .refresh:
+                self?.viewModel.handle(.refreshCode)
+            }
         }
 
         viewModel.onOutput = { [weak self] output in
@@ -42,7 +49,21 @@ final class AuthOtpController: TemplateViewController<AuthOtpView> {
                 self?.rootView.handle(.error)
             case .otpLenght(let lenght):
                 self?.rootView.configuration(otpLenght: lenght)
+            case .updateCode(let lenght):
+                self?.rootView.updateConfiguration(otpLenght: lenght)
             }
         }
+    }
+
+    private func createAttemptsFailedAlert() {
+        let alert = UIAlertController(
+            title: "Вы ввели неверно код 5 раз",
+            message: "Данная сессия авторизации будет сброшена!",
+            preferredStyle: .alert)
+        let action = UIAlertAction(title: "Выход", style: .default) { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        alert.addAction(action)
+        self.present(alert, animated: true)
     }
 }

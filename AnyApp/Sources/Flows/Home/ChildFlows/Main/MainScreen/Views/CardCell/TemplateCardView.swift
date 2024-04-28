@@ -58,7 +58,7 @@ final class TemplateCardView: BackgroundPrimary {
         }
        return label
     }
-    
+
     private func setupSeparatorCell(id: String) -> UIView {
         guard let number = Int(id) else { return UIView() }
         let separator = BackgroundView()

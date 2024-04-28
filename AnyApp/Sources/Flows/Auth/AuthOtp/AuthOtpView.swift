@@ -4,46 +4,28 @@ import AppIndependent
 import Combine
 
 final class AuthOtpView: BackgroundPrimary {
+    typealias EventHandler = ((Event) -> Void)
     enum State {
         case error
     }
-    var onOtpFilled: StringHandler?
+    enum Event {
+        case onOtpField(String)
+        case onAttemptsFailed
+        case refresh
+    }
 
+    // MARK: - Private Properties
     private let otp = OtpTextField()
-    let navigationBar = MainNavigationBar()
     private let timerLable = TimerLabel()
-    private var cancelable = Set<AnyCancellable>()
 
+    // MARK: - Public Properties
+    public var onEvent: EventHandler?
+    let navigationBar = MainNavigationBar()
+
+    // MARK: - Private Methods
     override func setup() {
         super.setup()
         setupBindings()
-    }
-
-    private func setupBindings() {
-        otp.otpEvent = { [weak self] event in
-            switch event {
-            case .codeIsEntered(let code):
-                self?.onOtpFilled?(code)
-            case .inputTextStarted:
-                if self?.timerLable.state.value == .error {
-                    self?.timerLable.state.send(.process)
-                }
-            }
-        }
-
-        timerLable.state.sink { [weak self] state in
-            if state == .process {
-                self?.otp.handle(event: .correct)
-            }
-        }.store(in: &cancelable)
-    }
-
-    func handle(_ state: State) {
-        switch state {
-        case .error:
-            timerLable.state.send(.error)
-            otp.handle(event: .error)
-        }
     }
 
     private func body(leght: Int) -> UIView {
@@ -65,7 +47,48 @@ final class AuthOtpView: BackgroundPrimary {
         }.layoutMargins(.make(vInsets: 16, hInsets: 16))
     }
 
+    private func setupBindings() {
+        otp.otpEvent = { [weak self] event in
+            switch event {
+            case .codeIsEntered(let code):
+                self?.onEvent?(.onOtpField(code))
+            case .inputTextStarted:
+                self?.timerLable.handle(.process)
+            }
+        }
+
+        timerLable.onEvent = { [weak self] event in
+            switch event {
+            case .attemptsFailed:
+                self?.onEvent?(.onAttemptsFailed)
+            case .process:
+                self?.otp.handle(event: .correct)
+            case .refresh:
+                self?.otp.handleState(.disabled)
+                self?.onEvent?(.refresh)
+            }
+        }
+    }
+
+    // MARK: - Public Methods
+    func handle(_ state: State) {
+        switch state {
+        case .error:
+            timerLable.handle(.error)
+            otp.handle(event: .error)
+        }
+    }
+
     public func configuration(otpLenght: Int) {
+        subviews.forEach { $0.removeFromSuperview() }
         body(leght: otpLenght).embed(in: self)
+    }
+
+    public func updateConfiguration(otpLenght: Int) {
+        self.subviews.forEach { $0.removeFromSuperview() }
+        self.otp.handleState(.enabled)
+        body(leght: 5).embed(in: self)
+        print(otp.stackLabels.labels.count)
+        timerLable.handle(.process)
     }
 }

@@ -245,6 +245,7 @@
 		ED2894082BDC120C00016DF6 /* ProfileRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2894072BDC120C00016DF6 /* ProfileRequestManager.swift */; };
 		ED28940B2BDC127800016DF6 /* ProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28940A2BDC127800016DF6 /* ProfileResponse.swift */; };
 		ED2894112BDC528E00016DF6 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28940F2BDC528E00016DF6 /* ErrorView.swift */; };
+		ED2894142BDDAF1C00016DF6 /* SpinnerForAuthPhoneTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2894132BDDAF1C00016DF6 /* SpinnerForAuthPhoneTF.swift */; };
 		EDC60DEBCAD6179A2C1DE924 /* PersistentLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375875A8550AAAF3D551B7EC /* PersistentLayer.swift */; };
 		EDFC44772BCBE4BD00034EAA /* AuthPhoneTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44762BCBE4BD00034EAA /* AuthPhoneTextField.swift */; };
 		EDFC447A2BCC1C9C00034EAA /* OtpTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44792BCC1C9C00034EAA /* OtpTextField.swift */; };
@@ -302,7 +303,7 @@
 		EDFC45192BD3CE1B00034EAA /* DetailCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC45182BD3CE1B00034EAA /* DetailCardController.swift */; };
 		EDFC451B2BD3CE2C00034EAA /* DetailCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC451A2BD3CE2C00034EAA /* DetailCardViewModel.swift */; };
 		EDFC451D2BD3CE4200034EAA /* DetailCardHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC451C2BD3CE4200034EAA /* DetailCardHeaderView.swift */; };
-		EDFC451F2BD65E9C00034EAA /* ConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC451E2BD65E9C00034EAA /* ConfigModel.swift */; };
+		EDFC451F2BD65E9C00034EAA /* ConfigAuthOtpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC451E2BD65E9C00034EAA /* ConfigAuthOtpModel.swift */; };
 		EDFC45212BD667F200034EAA /* AboutAppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC45202BD667F200034EAA /* AboutAppController.swift */; };
 		EDFC45232BD6680200034EAA /* AboutAppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC45222BD6680200034EAA /* AboutAppViewModel.swift */; };
 		EDFC45252BD6681500034EAA /* ThemeAppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC45242BD6681500034EAA /* ThemeAppController.swift */; };
@@ -656,6 +657,7 @@
 		ED2894072BDC120C00016DF6 /* ProfileRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRequestManager.swift; sourceTree = "<group>"; };
 		ED28940A2BDC127800016DF6 /* ProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponse.swift; sourceTree = "<group>"; };
 		ED28940F2BDC528E00016DF6 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		ED2894132BDDAF1C00016DF6 /* SpinnerForAuthPhoneTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerForAuthPhoneTF.swift; sourceTree = "<group>"; };
 		ED41A51C20CE8AC50EC69605 /* UILabel+FadeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+FadeAnimation.swift"; sourceTree = "<group>"; };
 		ED81BEF1ADE3C7DAE5510321 /* UITextView+Attributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Attributes.swift"; sourceTree = "<group>"; };
 		EDFC44762BCBE4BD00034EAA /* AuthPhoneTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPhoneTextField.swift; sourceTree = "<group>"; };
@@ -715,7 +717,7 @@
 		EDFC45182BD3CE1B00034EAA /* DetailCardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCardController.swift; sourceTree = "<group>"; };
 		EDFC451A2BD3CE2C00034EAA /* DetailCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCardViewModel.swift; sourceTree = "<group>"; };
 		EDFC451C2BD3CE4200034EAA /* DetailCardHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCardHeaderView.swift; sourceTree = "<group>"; };
-		EDFC451E2BD65E9C00034EAA /* ConfigModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigModel.swift; sourceTree = "<group>"; };
+		EDFC451E2BD65E9C00034EAA /* ConfigAuthOtpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigAuthOtpModel.swift; sourceTree = "<group>"; };
 		EDFC45202BD667F200034EAA /* AboutAppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppController.swift; sourceTree = "<group>"; };
 		EDFC45222BD6680200034EAA /* AboutAppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppViewModel.swift; sourceTree = "<group>"; };
 		EDFC45242BD6681500034EAA /* ThemeAppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeAppController.swift; sourceTree = "<group>"; };
@@ -1621,8 +1623,8 @@
 		E22C02841FBAAA5F57A15741 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				10E588102BC04F4300D05347 /* AuthOtp */,
 				10E5880E2BC04F0700D05347 /* AuthPhone */,
+				10E588102BC04F4300D05347 /* AuthOtp */,
 				BF88B739CBFC56E6E1404F0A /* AuthFlowCoordinator.swift */,
 				10E588062BC049C900D05347 /* AuthFlowAssembly.swift */,
 			);
@@ -1714,6 +1716,7 @@
 		EDFC44752BCBE48300034EAA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				ED2894132BDDAF1C00016DF6 /* SpinnerForAuthPhoneTF.swift */,
 				EDFC44762BCBE4BD00034EAA /* AuthPhoneTextField.swift */,
 			);
 			path = Views;
@@ -2087,7 +2090,7 @@
 		EDFC45352BD7CAFB00034EAA /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				EDFC451E2BD65E9C00034EAA /* ConfigModel.swift */,
+				EDFC451E2BD65E9C00034EAA /* ConfigAuthOtpModel.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -2743,7 +2746,7 @@
 				10E588202BC0575900D05347 /* AuthOtpController.swift in Sources */,
 				EDFC453E2BD945A900034EAA /* StackLabelForOtpTextField.swift in Sources */,
 				EDFC44A12BCD1DC700034EAA /* HomeFlowCoordinator.swift in Sources */,
-				EDFC451F2BD65E9C00034EAA /* ConfigModel.swift in Sources */,
+				EDFC451F2BD65E9C00034EAA /* ConfigAuthOtpModel.swift in Sources */,
 				EDFC44952BCD1DC700034EAA /* TemplateHeaderView.swift in Sources */,
 				EDFC453C2BD935D800034EAA /* OtpTextField+Delegate.swift in Sources */,
 				EDFC44C92BCD205E00034EAA /* SettingView.swift in Sources */,
@@ -2775,6 +2778,7 @@
 				10E588162BC0512600D05347 /* AuthPhoneViewModel.swift in Sources */,
 				4CBA1DF480311E3BEBDF46D9 /* Profile.swift in Sources */,
 				EDFC45292BD676F400034EAA /* ProfileFlowAssembly.swift in Sources */,
+				ED2894142BDDAF1C00016DF6 /* SpinnerForAuthPhoneTF.swift in Sources */,
 				EDFC44A02BCD1DC700034EAA /* HomeFlowAssembly.swift in Sources */,
 				EDFC45212BD667F200034EAA /* AboutAppController.swift in Sources */,
 				EDFC451D2BD3CE4200034EAA /* DetailCardHeaderView.swift in Sources */,

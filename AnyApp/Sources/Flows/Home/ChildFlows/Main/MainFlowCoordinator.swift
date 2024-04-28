@@ -20,7 +20,7 @@ final class MainFlowCoordinator: Coordinator {
     required init(router: any RouterAbstract) {
         fatalError("init(router:) has not been implemented")
     }
-    
+
     func mainController() -> UIViewController? {
         let controller = resolver ~> MainController.self
         innerRouter.setRootModule(controller)
@@ -34,7 +34,7 @@ final class MainFlowCoordinator: Coordinator {
         }
         return innerRouter.rootController
     }
-    
+
     private func detailCardController() {
         let controller = resolver ~> DetailCardController.self
         controller.hidesBottomBarWhenPushed = true

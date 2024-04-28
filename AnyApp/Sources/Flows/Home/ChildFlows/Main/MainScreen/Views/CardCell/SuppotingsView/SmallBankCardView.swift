@@ -30,7 +30,7 @@ final class SmallBankCardView: BackgroundPrimary {
             ImageView(image: props.iconBankImage)
         }
         .layoutMargins(.init(top: 2, left: 0, bottom: 1, right: 4))
-        
+
         content.embed(in: imageView)
         return imageView
     }

@@ -74,7 +74,7 @@ final class NetworkLayer: Network {
         let configuration = URLSessionConfiguration.default
         configuration.httpShouldSetCookies = false
         configuration.timeoutIntervalForRequest = 60
-        configuration.waitsForConnectivity = true
+        configuration.waitsForConnectivity = false
         configuration.requestCachePolicy = .reloadIgnoringCacheData
         return configuration
     }()

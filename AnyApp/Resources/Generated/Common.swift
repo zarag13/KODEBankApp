@@ -16,6 +16,8 @@ public enum Common {
   public static let allow = Common.tr("Common", "allow", fallback: "Разрешить")
   /// Применить
   public static let apply = Common.tr("Common", "apply", fallback: "Применить")
+  /// Внимание
+  public static let attention = Common.tr("Common", "attention", fallback: "Внимание")
   /// Отменить
   public static let cancel = Common.tr("Common", "cancel", fallback: "Отменить")
   /// Изменить
@@ -40,6 +42,8 @@ public enum Common {
   public static let refresh = Common.tr("Common", "refresh", fallback: "Обновить")
   /// Повторить
   public static let `repeat` = Common.tr("Common", "repeat", fallback: "Повторить")
+  /// Требуется обновление
+  public static let requiredUpdate = Common.tr("Common", "requiredUpdate", fallback: "Требуется обновление")
   /// Пропустить
   public static let skip = Common.tr("Common", "skip", fallback: "Пропустить")
   /// Куда
@@ -57,6 +61,8 @@ public enum Common {
     public static let defaultTitle = Common.tr("Common", "error.defaultTitle", fallback: "Ошибка")
     /// Заполните поле
     public static let emptyField = Common.tr("Common", "error.emptyField", fallback: "Заполните поле")
+    /// На сервере проводятся технические работы. Приложение будет доступно после 15:00 МСК
+    public static let engineringWorks = Common.tr("Common", "error.engineringWorks", fallback: "На сервере проводятся технические работы. Приложение будет доступно после 15:00 МСК")
     /// Неверный формат
     public static let invalidFieldInput = Common.tr("Common", "error.invalidFieldInput", fallback: "Неверный формат")
     /// Ошибка загрузки данных
@@ -67,8 +73,14 @@ public enum Common {
     public static let noConnectionMessage = Common.tr("Common", "error.noConnectionMessage", fallback: "Проверьте подключение к интернету")
     /// Нет соединения
     public static let noConnectionTitle = Common.tr("Common", "error.noConnectionTitle", fallback: "Нет соединения")
+    /// Вероятно, соединение с Интернетом прервано
+    public static let noInternet = Common.tr("Common", "error.noInternet", fallback: "Вероятно, соединение с Интернетом прервано")
     /// Повторите попытку или вернитесь позднее
     public static let repeatMessage = Common.tr("Common", "error.repeatMessage", fallback: "Повторите попытку или вернитесь позднее")
+    /// Сервер временно недоступен. Пожалуйста, повторите попытку позднее
+    public static let serverNotFound = Common.tr("Common", "error.serverNotFound", fallback: "Сервер временно недоступен. Пожалуйста, повторите попытку позднее")
+    /// Для дальнейшего использования приложения требуется установка обновлений
+    public static let updateRequired = Common.tr("Common", "error.updateRequired", fallback: "Для дальнейшего использования приложения требуется установка обновлений")
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

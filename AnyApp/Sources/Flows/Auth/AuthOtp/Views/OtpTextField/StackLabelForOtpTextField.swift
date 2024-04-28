@@ -11,23 +11,23 @@ import AppIndependent
 import Combine
 
 final class StackLabelForOtpTextField: BackgroundPrimary {
-
     enum State {
         case error
         case correct
     }
 
+    // MARK: - Private Properties
     private var cancelable = [AnyCancellable]()
-    var curentSelectedLabel = PassthroughSubject<Int, Never>()
-    var state = CurrentValueSubject<State, Never>(.correct)
+    private var curentSelectedLabel = PassthroughSubject<Int, Never>()
+    private var state = CurrentValueSubject<State, Never>(.correct)
 
-    var labels = [Label]()
+    // MARK: - Public Properties
+    public var labels = [Label]()
 
-    private func body(leght: Int) -> HStack {
-        var stack = HStack()
-
+    // MARK: - Private Methods
+    private func body(leght: Int) -> UIView {
         if leght % 2 == 0 {
-            stack = HStack(alignment: .center, distribution: .fill, spacing: 6) {
+            return HStack(alignment: .center, distribution: .fill, spacing: 6) {
                 ForEach(collection: 1...(leght / 2), distribution: .fillEqually, spacing: 6, axis: .horizontal) { value in
                     self.setupLabel(tagForLineView: value)
                 }
@@ -37,19 +37,10 @@ final class StackLabelForOtpTextField: BackgroundPrimary {
                 }
             }
         } else {
-            stack = HStack(alignment: .fill, distribution: .fill, spacing: 6) {
-                ForEach(collection: 1...leght, distribution: .fillEqually, spacing: 6, axis: .horizontal) { value in
-                    self.setupLabel(tagForLineView: value)
-                }
-                FlexibleSpacer()
+            return ForEach(collection: 1...leght, distribution: .fillEqually, spacing: 6, axis: .horizontal) { value in
+                self.setupLabel(tagForLineView: value)
             }
         }
-        return stack
-    }
-
-    public func configure(lenght: Int = 6) -> Self {
-        body(leght: lenght).embed(in: self)
-        return self
     }
 
     private func setupLabel(tagForLineView: Int) -> Label {
@@ -113,5 +104,21 @@ final class StackLabelForOtpTextField: BackgroundPrimary {
             }
         }
         .width(10)
+    }
+
+    // MARK: - Public Methods
+    public func configure(lenght: Int = 6) -> Self {
+        self.subviews.forEach { $0.removeFromSuperview() }
+        self.labels = []
+        body(leght: lenght).embed(in: self)
+        return self
+    }
+
+    public func handle(_ state: State) {
+        self.state.send(state)
+    }
+
+    public func handleSelectedLable(_ curent: Int) {
+        self.curentSelectedLabel.send(curent)
     }
 }

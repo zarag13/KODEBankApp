@@ -45,8 +45,8 @@ final class MainNavigationBar: BackgroundPrimary {
             .textAlignment(.center)
             .foregroundStyle(.textPrimary)
             .fontStyle(.subtitle17sb)
-        $title.sink { value in
-            label.text = value
+        $title.sink { [weak label] value in
+            label?.text = value
         }
             .store(in: &cancellable)
         return label

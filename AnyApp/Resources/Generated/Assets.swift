@@ -25,6 +25,16 @@ public enum Asset {
   public enum BigBankCard {
     public static let debit = ImageAsset(name: "BigBankCard/Debit")
   }
+  public enum BigIlustration {
+    public static let faceId = ImageAsset(name: "BigIlustration/faceId")
+    public static let handshake = ImageAsset(name: "BigIlustration/handshake")
+    public static let notData = ImageAsset(name: "BigIlustration/notData")
+    public static let notServer = ImageAsset(name: "BigIlustration/notServer")
+    public static let notWifi = ImageAsset(name: "BigIlustration/notWifi")
+    public static let pinCode = ImageAsset(name: "BigIlustration/pinCode")
+    public static let touchId = ImageAsset(name: "BigIlustration/touchId")
+    public static let update = ImageAsset(name: "BigIlustration/update")
+  }
   public static let bitmap = ImageAsset(name: "Bitmap")
   public enum Icon24px {
     public static let gibdd = ImageAsset(name: "Icon24px/GIBDD")

@@ -43,8 +43,9 @@ final class ProfileFlowAssembly: Assembly, Identifiable {
             let viewModel = ThemeAppViewModel()
             return ThemeAppController(viewModel: viewModel)
         }
+
         container.register(AboutAppController.self) { resolver in
-            let viewModel = AboutAppViewModel(lastVersion: GlobalConstant.appVersion ?? "1.1")
+            let viewModel = AboutAppViewModel(lastVersion: GlobalConstant.appVersion ?? "1.0")
             return AboutAppController(viewModel: viewModel)
         }
     }

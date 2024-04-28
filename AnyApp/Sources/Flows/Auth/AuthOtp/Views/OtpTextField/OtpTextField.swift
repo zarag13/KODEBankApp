@@ -11,16 +11,18 @@ import AppIndependent
 import Combine
 
 final class OtpTextField: BackgroundPrimary {
-
     enum Event {
         case codeIsEntered(String)
         case inputTextStarted
     }
+    enum State {
+        case disabled
+        case enabled
+    }
 
-    var otpEvent: ((Event) -> Void)?
+    // MARK: - Private Properties
     private var cancelable = Set<AnyCancellable>()
-
-    lazy var hiddenTextField: TextField = {
+    private lazy var hiddenTextField: TextField = {
         TextField(configurator: { tf in
             tf.textContentType = .oneTimeCode
             tf.delegate = self
@@ -31,22 +33,25 @@ final class OtpTextField: BackgroundPrimary {
         .backgroundColor(.clear)
         .keyboardType(.numberPad)
     }()
+
+    // MARK: - Public Properties
+    var otpEvent: ((Event) -> Void)?
     var stackLabels = StackLabelForOtpTextField()
 
+    // MARK: - Private Metods
     override func setup() {
         super.setup()
-        setupBindings()
     }
 
     private func body(leght: Int) -> UIView {
-        let finalConfigureTextField = BackgroundPrimary()
+        let finalConfigureTextField = BackgroundView()
         stackLabels
             .configure(lenght: leght)
             .onTap { [weak self] in
                 guard let textField = self?.hiddenTextField else { return }
                 self?.activateKeyBoard(textField)
             }
-        finalConfigureTextField.addSubview(hiddenTextField)
+        stackLabels.insertSubview(hiddenTextField, at: 0)
         finalConfigureTextField.addSubview(stackLabels)
         hiddenTextField.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -63,37 +68,40 @@ final class OtpTextField: BackgroundPrimary {
         return finalConfigureTextField
     }
 
-    public func configure(leght: Int) -> Self {
-        body(leght: leght).embed(in: self)
-        return self
-    }
-
-    private func setupBindings() {
-        stackLabels.state.sink { [weak self] state in
-            if state == .correct {
-                self?.otpEvent?(.inputTextStarted)
-            }
-        }.store(in: &cancelable)
-    }
-
     private func activateKeyBoard(_ textField: UITextField) {
         textField.becomeFirstResponder()
         let currentIndex = stackLabels.labels.firstIndex { label in
             label.text?.isEmpty == true
         }
-        stackLabels.curentSelectedLabel.send((currentIndex ?? stackLabels.labels.count - 1) + 1)
+        stackLabels.handleSelectedLable((currentIndex ?? stackLabels.labels.count - 1) + 1)
+    }
+
+    // MARK: - Public Metods
+    public func configure(leght: Int) -> Self {
+        self.subviews.forEach { $0.removeFromSuperview() }
+        body(leght: leght).embed(in: self)
+        return self
     }
 
     public func handle(event: StackLabelForOtpTextField.State) {
         switch event {
         case .error:
-            if self.stackLabels.state.value == .correct {
-                self.stackLabels.state.send(.error)
-            }
+            self.stackLabels.handle(.error)
         case .correct:
-            if self.stackLabels.state.value == .error {
-                self.stackLabels.state.send(.correct)
-            }
+            self.stackLabels.handle(.correct)
+            self.stackLabels.labels.forEach { ($0.text = "") }
+            self.hiddenTextField.text = nil
+            self.hiddenTextField.becomeFirstResponder()
+            self.stackLabels.handleSelectedLable(1)
+        }
+    }
+
+    public func handleState(_ state: State) {
+        switch state {
+        case .disabled:
+            self.hiddenTextField.userInteraction(enabled: false)
+        case .enabled:
+            self.hiddenTextField.userInteraction(enabled: true)
         }
     }
 }

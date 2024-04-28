@@ -6,12 +6,14 @@ final class AuthOtpViewModel {
     enum Input {
         case didLoad
         case otpEntered(String)
+        case refreshCode
     }
 
     enum Output {
         case userLoggedIn
         case codeError
         case otpLenght(Int)
+        case updateCode(Int)
     }
 
     var onOutput: ((Output) -> Void)?
@@ -21,7 +23,7 @@ final class AuthOtpViewModel {
 
     private var cancellables = Set<AnyCancellable>()
 
-    let configModel: ConfigAuthOtpModel
+    var configModel: ConfigAuthOtpModel
 
     init(
         authRequestManager: AuthRequestManagerAbstract,
@@ -45,6 +47,8 @@ final class AuthOtpViewModel {
             }
         case .didLoad:
             onOutput?(.otpLenght(configModel.leghtCode))
+        case .refreshCode:
+            refreshCode(phone: configModel.phone)
         }
     }
 
@@ -59,6 +63,38 @@ final class AuthOtpViewModel {
                         refreshToken: ""
                     ))
                     self?.onOutput?(.userLoggedIn)
+                }
+            ).store(in: &cancellables)
+    }
+
+    private func refreshCode(phone: String) {
+        authRequestManager.authLogin(phone: phone)
+            .sink(
+                receiveCompletion: { error in
+                    guard case let .failure(error) = error else { return }
+                    switch error.appError.kind {
+                    case .network:
+                        print("network")
+                    case .timeout:
+                        print("нет интернета ошибка тут-")
+                    case .serverSendWrongData:
+                        print("serverSendWrongData")
+                    case .server(_):
+                        print("server")
+                    case .internal:
+                        print("internal")
+                    }
+                    print(error.appError.localizedDescription)
+                },
+                receiveValue: { [weak self] response in
+                    let otpModel = ConfigAuthOtpModel(
+                        phone: phone,
+                        code: response.otpCode,
+                        leghtCode: response.otpLen,
+                        codeId: response.otpId)
+                    self?.configModel = otpModel
+                        self?.onOutput?(.updateCode(otpModel.leghtCode))
+                    print("download new code")
                 }
             ).store(in: &cancellables)
     }

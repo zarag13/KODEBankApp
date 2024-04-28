@@ -9,19 +9,19 @@ final class AuthPhoneView: BackgroundPrimary {
     }
     enum Input {
         case incorrectNumber
+        case correct
     }
 
-    // Actions
-    var onEvent: ((Output) -> Void)?
-    // UI
+    // MARK: - Private Properties
     private let authPhoneTextField = AuthPhoneTextField()
-    
+
+    // MARK: - Public Properties
+    public var onEvent: ((Output) -> Void)?
+
+    // MARK: - Private Methods
     override func setup() {
         super.setup()
         body().embed(in: self)
-//        onTap { [weak self] in
-//            self?.endEditing(true)
-//        }
 
         actionButton = ButtonPrimary(title: Entrance.enter)
             .onTap { [weak self] in
@@ -43,11 +43,14 @@ final class AuthPhoneView: BackgroundPrimary {
         .layoutMargins(.make(vInsets: 16, hInsets: 16))
     }
 
+    // MARK: - Public Methods
     public func handle(_ event: Input) {
         self.actionButton?.userInteraction(enabled: true)
         switch event {
         case .incorrectNumber:
             self.authPhoneTextField.state(.error)
+        case .correct:
+            self.authPhoneTextField.state(.corrcet)
         }
     }
 }

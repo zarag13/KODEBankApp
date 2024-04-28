@@ -14,7 +14,7 @@ final class ThemeAppViewCell: BackgroundPrimary {
 
     public var event: ThemeRaw?
 
-    private let separator = View()
+    private let separator = BackgroundView()
 
     private var cancellable = Set<AnyCancellable>()
     var isSelected = PassthroughSubject <Bool, Never>()
@@ -35,7 +35,7 @@ final class ThemeAppViewCell: BackgroundPrimary {
             }
             .layoutMargins(.make(vInsets: 16))
             separator
-                .backgroundColor(ForegroundStyle.contentSecondary.color)
+                .backgroundStyle(.contentSecondary)
             separator.height(1)
         }
     }
