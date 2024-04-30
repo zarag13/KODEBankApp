@@ -1,4 +1,5 @@
 import UIKit
+import AppIndependent
 
 public final class SnackView: View {
 
@@ -23,10 +24,16 @@ public final class SnackView: View {
 
         public let message: String
         public let style: SnackStyle
+        public var onTap: VoidHandler?
 
-        public init(message: String, style: SnackStyle = .basic) {
+        public init(
+            message: String,
+            style: SnackStyle = .basic,
+            onTap: VoidHandler? = nil
+        ) {
             self.message = message
             self.style = style
+            self.onTap = onTap
         }
 
         public static func == (lhs: Props, rhs: Props) -> Bool {
@@ -113,10 +120,19 @@ public final class SnackView: View {
     }
 
     // MARK: - Private Methods
-    #warning("добавить кнопку закрытия - крестик")
     private func body() -> UIView {
         BackgroundView(vPadding: 17, hPadding: 16) {
-            titleLabel
+            HStack(alignment: .center, distribution: .fill, spacing: 16) {
+                titleLabel
+                    .huggingPriority(.defaultHigh, axis: .horizontal)
+                ImageView(image: UIImage(named: "Icon24px/close"), foregroundStyle: .contentAccentTertiary)
+                    .height(16)
+                    .width(16)
+                    .huggingPriority(.defaultLow, axis: .horizontal)
+                    .onTap { [weak self] in
+                        self?.dismiss()
+                    }
+            }
         }
     }
 
@@ -152,6 +168,7 @@ public final class SnackView: View {
     @objc private func dismiss() {
         fadeOut { [weak self] in
             self?.onDismiss?()
+            self?.props.onTap?()
             self?.removeFromSuperview()
         }
     }

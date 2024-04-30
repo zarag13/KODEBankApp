@@ -42,8 +42,11 @@ final class AuthPhoneController: TemplateViewController<AuthPhoneView>, Navigati
                 self?.onEvent?(.otp(config))
             case .incorrectNumber:
                 self?.removeAdditionalState()
-                SnackCenter.shared.showSnack(withProps: .init(message: Entrance.Error.invalidPhoneMessage, style: .error))
+                SnackCenter.shared.showSnack(withProps: .init(message: Entrance.Error.invalidPhoneMessage, style: .error, onTap: { [weak self] in
+                    self?.rootView.handle(.correct)
+                }))
                 self?.rootView.handle(.incorrectNumber)
+                self?.rootView.handle(.openKeyboard)
             case .error(let props):
                 self?.stopErrorAnimation()
                 self?.rootView.handle(.correct)
@@ -51,6 +54,8 @@ final class AuthPhoneController: TemplateViewController<AuthPhoneView>, Navigati
             case .noInternet(let alert):
                 self?.stopErrorAnimation()
                 self?.present(alert, animated: true)
+            case .closeErrorView:
+                self?.rootView.handle(.openKeyboard)
             }
         }
     }

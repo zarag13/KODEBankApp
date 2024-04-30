@@ -34,10 +34,10 @@ final class SettingView: BackgroundPrimary {
                         .isHidden(!props.isDetailedImage)
                         .foregroundStyle(.textTertiary)
                 }
-                .onTap {
-                    props.onTap?(props.event)
-                }
             Spacer(.px16)
+        }
+        .onTap {
+            props.onTap?(props.event)
         }
         .layoutMargins(.make(hInsets: 16))
     }
@@ -51,10 +51,10 @@ extension SettingView: ConfigurableView {
         case supportService
         case exit
     }
-    
+
     public typealias EventHandler = ((Event) -> Void)
     public typealias Model = Props
-    
+
     public struct Props: Hashable {
         public let id: Int
         public let title: String
@@ -80,7 +80,7 @@ extension SettingView: ConfigurableView {
         public static func == (lhs: SettingView.Props, rhs: SettingView.Props) -> Bool {
             lhs.hashValue == rhs.hashValue
         }
-        
+
         public func hash(into hasher: inout Hasher) {
             hasher.combine(id)
             hasher.combine(title)
@@ -89,7 +89,7 @@ extension SettingView: ConfigurableView {
             hasher.combine(isDetailedImage)
         }
     }
-    
+
     public func configure(with model: Model) {
         subviews.forEach { $0.removeFromSuperview() }
         self.props = model

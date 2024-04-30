@@ -26,10 +26,8 @@ extension String {
     }
 
     public func maskEnterPhoneNumber(pattern: String) -> String {
-        var inputCollection = Array(self)
-        if ((inputCollection.first?.isNumber) != nil) && inputCollection.first != "+" {
-            inputCollection = ["+", "7"]
-        }
+        var startString = self.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+        var inputCollection = Array(startString)
         var resultCollection = [Character]()
         for i in 0 ..< pattern.count {
             let patternCharIndex = String.Index(utf16Offset: i, in: pattern)

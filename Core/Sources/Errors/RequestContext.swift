@@ -13,5 +13,7 @@ public enum RequestContext {
     }
     public enum CoreRequest {
         case profile
+        case accountList
+        case depositList
     }
 }

@@ -21,7 +21,7 @@ final class ProfileViewModel: NetworkErrorHandler {
 
     // MARK: - Privaet Properties
     private let appSession: AppSession
-    private let authRequestManager: ProfiletManagerAbstract
+    private let coreRequestManager: CoreManagerAbstract
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Public Properties
@@ -29,10 +29,10 @@ final class ProfileViewModel: NetworkErrorHandler {
 
     init(
         appSession: AppSession,
-        authRequestManager: ProfiletManagerAbstract
+        authRequestManager: CoreManagerAbstract
     ) {
         self.appSession = appSession
-        self.authRequestManager = authRequestManager
+        self.coreRequestManager = authRequestManager
     }
 
     private func callSupportService() {
@@ -72,7 +72,7 @@ final class ProfileViewModel: NetworkErrorHandler {
     }
 
     private func getDataProfile() {
-        authRequestManager.profileData().sink { [weak self] error in
+        coreRequestManager.profileData().sink { [weak self] error in
             guard case let .failure(error) = error else { return }
             guard let errorProps = self?.errorHandle(error, onTap: {
                 if error.appError.kind == .timeout {

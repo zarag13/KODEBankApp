@@ -23,13 +23,13 @@ final class AuthPhoneTextField: BackgroundPrimary {
     // MARK: - Private Properties
     private var cancelable = Set<AnyCancellable>()
     private var isActivate = CurrentValueSubject<AuthTFActivityIndicatorState, Never>(.stop)
-    private var state = CurrentValueSubject<AuthTFState, Never>(.corrcet)
+    var state = CurrentValueSubject<AuthTFState, Never>(.corrcet)
     private var leftIcon = ImageView(image: Asset.Icon24px.phone.image, foregroundStyle: .indicatorContentSuccess)
     private let spinner = SpinnerForAuthPhoneTF()
     private lazy var authTF: TextField = {
         TextField(placeholder: Entrance.phone, configurator: { textField in
             textField.textColor = ForegroundStyle.textPrimary.color
-            textField.becomeFirstResponder()
+            textField.delegate = self
         })
             .huggingPriority(.defaultLow, axis: .horizontal)
             .keyboardType(.numberPad)
@@ -63,22 +63,6 @@ final class AuthPhoneTextField: BackgroundPrimary {
     }
 
     private func setupBindings() {
-        authTF.textPublisher
-            .map {
-                if $0.count < 7 {
-                    $0.maskEnterPhoneNumber(pattern: "+7 ### ### ## ##")
-                } else {
-                    ($0.maskEnterPhoneNumber(pattern: "+7 (###) ### ## ##"))
-                }
-            }
-            .assign(to: \.text, on: authTF)
-            .store(in: &cancelable)
-        authTF.textPublisher
-            .sink { [weak self] text in
-                self?.state.send(.corrcet)
-                self?.text = text
-            }.store(in: &cancelable)
-
         isActivate.sink { [weak self] state in
             switch state {
             case .beginning:
@@ -108,9 +92,14 @@ final class AuthPhoneTextField: BackgroundPrimary {
     // MARK: - Public Methods
     public func startAnimation() {
         self.isActivate.send(.beginning)
+        self.authTF.resignFirstResponder()
     }
 
     public func state(_ state: AuthTFState) {
         self.state.send(state)
+    }
+    
+    public func openKeyboard() {
+        self.authTF.becomeFirstResponder()
     }
 }

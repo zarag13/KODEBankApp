@@ -9,6 +9,7 @@ final class AuthPhoneViewModel: NetworkErrorHandler {
         case incorrectNumber
         case error(ErrorView.Props)
         case noInternet(UIAlertController)
+        case closeErrorView
     }
     enum Input {
         case phoneEntered(String)
@@ -41,8 +42,9 @@ final class AuthPhoneViewModel: NetworkErrorHandler {
                         } else {
                             self?.login(phone: phone)
                         }
+                    }, closeTap: {
+                        self?.onOutput?(.closeErrorView)
                     }) else { return }
-                    
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         self?.onOutput?(.error(errorProps))
                     }
@@ -63,6 +65,7 @@ final class AuthPhoneViewModel: NetworkErrorHandler {
         switch input {
         case .phoneEntered(let phone):
             let clearPhone = phone.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+            print(clearPhone)
             if clearPhone.count == 11 {
                 self.login(phone: clearPhone)
             } else {

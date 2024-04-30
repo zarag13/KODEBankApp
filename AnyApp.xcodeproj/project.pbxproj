@@ -242,7 +242,7 @@
 		ED2894022BDA5E5E00016DF6 /* BackgroundPrimary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC45362BD7D38D00034EAA /* BackgroundPrimary+Extension.swift */; };
 		ED2894032BDA5E6200016DF6 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44CD2BCE8FC400034EAA /* UITextField+Extension.swift */; };
 		ED2894062BDC11FC00016DF6 /* CorePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2894052BDC11FC00016DF6 /* CorePath.swift */; };
-		ED2894082BDC120C00016DF6 /* ProfileRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2894072BDC120C00016DF6 /* ProfileRequestManager.swift */; };
+		ED2894082BDC120C00016DF6 /* CoreRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2894072BDC120C00016DF6 /* CoreRequestManager.swift */; };
 		ED28940B2BDC127800016DF6 /* ProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28940A2BDC127800016DF6 /* ProfileResponse.swift */; };
 		ED2894112BDC528E00016DF6 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28940F2BDC528E00016DF6 /* ErrorView.swift */; };
 		ED2894142BDDAF1C00016DF6 /* SpinnerForAuthPhoneTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2894132BDDAF1C00016DF6 /* SpinnerForAuthPhoneTF.swift */; };
@@ -252,6 +252,9 @@
 		ED5AB11B2BE04B2E0015059A /* ProfileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5AB11A2BE04B2E0015059A /* ProfileDataSource.swift */; };
 		ED5AB11D2BE04B450015059A /* ProfileViewProps.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5AB11C2BE04B450015059A /* ProfileViewProps.swift */; };
 		ED5AB11F2BE066840015059A /* RefreshControll.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5AB11E2BE066840015059A /* RefreshControll.swift */; };
+		ED5AB1212BE10C330015059A /* AccountListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5AB1202BE10C330015059A /* AccountListResponse.swift */; };
+		ED5AB1232BE10C410015059A /* DepositListReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5AB1222BE10C410015059A /* DepositListReponse.swift */; };
+		ED5AB1262BE161200015059A /* AuthPhoneTextField+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5AB1252BE161200015059A /* AuthPhoneTextField+Delegate.swift */; };
 		EDC60DEBCAD6179A2C1DE924 /* PersistentLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375875A8550AAAF3D551B7EC /* PersistentLayer.swift */; };
 		EDFC44772BCBE4BD00034EAA /* AuthPhoneTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44762BCBE4BD00034EAA /* AuthPhoneTextField.swift */; };
 		EDFC447A2BCC1C9C00034EAA /* OtpTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44792BCC1C9C00034EAA /* OtpTextField.swift */; };
@@ -655,7 +658,7 @@
 		ED2893FD2BD9DE0900016DF6 /* ErrorDownloadCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDownloadCell.swift; sourceTree = "<group>"; };
 		ED2894002BDA5E0200016DF6 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		ED2894052BDC11FC00016DF6 /* CorePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorePath.swift; sourceTree = "<group>"; };
-		ED2894072BDC120C00016DF6 /* ProfileRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRequestManager.swift; sourceTree = "<group>"; };
+		ED2894072BDC120C00016DF6 /* CoreRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreRequestManager.swift; sourceTree = "<group>"; };
 		ED28940A2BDC127800016DF6 /* ProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponse.swift; sourceTree = "<group>"; };
 		ED28940F2BDC528E00016DF6 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		ED2894132BDDAF1C00016DF6 /* SpinnerForAuthPhoneTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerForAuthPhoneTF.swift; sourceTree = "<group>"; };
@@ -666,6 +669,9 @@
 		ED5AB11A2BE04B2E0015059A /* ProfileDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataSource.swift; sourceTree = "<group>"; };
 		ED5AB11C2BE04B450015059A /* ProfileViewProps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewProps.swift; sourceTree = "<group>"; };
 		ED5AB11E2BE066840015059A /* RefreshControll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshControll.swift; sourceTree = "<group>"; };
+		ED5AB1202BE10C330015059A /* AccountListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountListResponse.swift; sourceTree = "<group>"; };
+		ED5AB1222BE10C410015059A /* DepositListReponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositListReponse.swift; sourceTree = "<group>"; };
+		ED5AB1252BE161200015059A /* AuthPhoneTextField+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthPhoneTextField+Delegate.swift"; sourceTree = "<group>"; };
 		ED81BEF1ADE3C7DAE5510321 /* UITextView+Attributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Attributes.swift"; sourceTree = "<group>"; };
 		EDFC44762BCBE4BD00034EAA /* AuthPhoneTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPhoneTextField.swift; sourceTree = "<group>"; };
 		EDFC44792BCC1C9C00034EAA /* OtpTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpTextField.swift; sourceTree = "<group>"; };
@@ -1686,7 +1692,7 @@
 			children = (
 				ED2894092BDC125A00016DF6 /* Responses */,
 				ED2894052BDC11FC00016DF6 /* CorePath.swift */,
-				ED2894072BDC120C00016DF6 /* ProfileRequestManager.swift */,
+				ED2894072BDC120C00016DF6 /* CoreRequestManager.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1695,6 +1701,8 @@
 			isa = PBXGroup;
 			children = (
 				ED28940A2BDC127800016DF6 /* ProfileResponse.swift */,
+				ED5AB1202BE10C330015059A /* AccountListResponse.swift */,
+				ED5AB1222BE10C410015059A /* DepositListReponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -1734,11 +1742,20 @@
 			path = DataSource;
 			sourceTree = "<group>";
 		};
+		ED5AB1242BE160F20015059A /* AuthPhoneTextField */ = {
+			isa = PBXGroup;
+			children = (
+				EDFC44762BCBE4BD00034EAA /* AuthPhoneTextField.swift */,
+				ED5AB1252BE161200015059A /* AuthPhoneTextField+Delegate.swift */,
+			);
+			path = AuthPhoneTextField;
+			sourceTree = "<group>";
+		};
 		EDFC44752BCBE48300034EAA /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				ED2894132BDDAF1C00016DF6 /* SpinnerForAuthPhoneTF.swift */,
-				EDFC44762BCBE4BD00034EAA /* AuthPhoneTextField.swift */,
+				ED5AB1242BE160F20015059A /* AuthPhoneTextField */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2758,6 +2775,7 @@
 				4CBA1DF480311E3BEBDF46D9 /* Profile.swift in Sources */,
 				EDFC45292BD676F400034EAA /* ProfileFlowAssembly.swift in Sources */,
 				ED2894142BDDAF1C00016DF6 /* SpinnerForAuthPhoneTF.swift in Sources */,
+				ED5AB1262BE161200015059A /* AuthPhoneTextField+Delegate.swift in Sources */,
 				EDFC44A02BCD1DC700034EAA /* HomeFlowAssembly.swift in Sources */,
 				EDFC45212BD667F200034EAA /* AboutAppController.swift in Sources */,
 				EDFC451D2BD3CE4200034EAA /* DetailCardHeaderView.swift in Sources */,
@@ -2804,12 +2822,14 @@
 				8B13B5A9ED8D47B9D4B4EA5E /* AuthPath.swift in Sources */,
 				D1A435669CA188A48D5CB2DE /* Environment+DeviceInfo.swift in Sources */,
 				BB586DA9AA445E2ED372314A /* Environment.swift in Sources */,
+				ED5AB1232BE10C410015059A /* DepositListReponse.swift in Sources */,
+				ED5AB1212BE10C330015059A /* AccountListResponse.swift in Sources */,
 				10E5881C2BC051F100D05347 /* AuthLoginResponse.swift in Sources */,
 				ED2894062BDC11FC00016DF6 /* CorePath.swift in Sources */,
 				579765C25C52D0E67640EC8C /* ErrorHandler.swift in Sources */,
 				6B25C9A9C064A482215CEFBA /* ErrorParser.swift in Sources */,
 				0BE2E904E4175A95F9EAB2AA /* HeaderKey.swift in Sources */,
-				ED2894082BDC120C00016DF6 /* ProfileRequestManager.swift in Sources */,
+				ED2894082BDC120C00016DF6 /* CoreRequestManager.swift in Sources */,
 				175638E10814EC02A9474E93 /* HttpMethod.swift in Sources */,
 				97CD0768BB80EF63BF274747 /* KeychainStorageService.swift in Sources */,
 				99CBBE1A460C4BF184333C71 /* NetworkLayer.swift in Sources */,

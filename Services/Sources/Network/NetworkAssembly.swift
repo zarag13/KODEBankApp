@@ -16,8 +16,8 @@ public final class NetworkFactory {
         )
     }
 
-    public func makeProfileRequestManager() -> ProfiletManagerAbstract {
-        ProfileRequestManager(
+    public func makeCoreRequestManager() -> CoreManagerAbstract {
+        CoreRequestManager(
             errorParser: network.errorParser,
             sessionManager: network.sessionManager,
             environment: network.environment,

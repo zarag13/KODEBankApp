@@ -84,7 +84,7 @@ final class MainCellFactory {
         tableView.dequeueSpacer(props, for: indexPath)
             .backgroundColor(BackgroundStyle.backgroundPrimary.color)
     }
-    
+
     func makeErrorDownloadCell(
         for indexPath: IndexPath,
         with props: ErrorDownloadCell.Props

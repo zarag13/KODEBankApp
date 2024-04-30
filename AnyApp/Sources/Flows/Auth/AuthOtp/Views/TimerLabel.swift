@@ -63,12 +63,12 @@ final class TimerLabel: BackgroundPrimary {
                 self?.refreshBody().embed(in: self ?? UIView())
             case .error:
                 self?.timer?.invalidate()
+                self?.errorCount -= 1
                 self?.createErrorBody(errorcount: self?.errorCount ?? 1).embed(in: self ?? UIView())
                 guard self?.errorCount != 0 else {
                     self?.onEvent?(.attemptsFailed)
                     return
                 }
-                self?.errorCount -= 1
                 self?.errorTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { _ in
                     if self?.countTimerValue ?? 0 > 2 {
                         self?.countTimerValue -= 2

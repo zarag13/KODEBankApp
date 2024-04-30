@@ -9,11 +9,17 @@ import Core
 
 enum CorePath: String, Path, CaseIterable {
     case profile
+    case accocuntList
+    case depositList
 
     var id: String {
         switch self {
         case .profile:
             return "profile"
+        case .accocuntList:
+            return "accocuntList"
+        case .depositList:
+            return "depositList"
         }
     }
 
@@ -25,6 +31,10 @@ enum CorePath: String, Path, CaseIterable {
         switch self {
         case .profile:
             return "\(version)core/profile"
+        case .accocuntList:
+            return "\(version)core/account/list"
+        case .depositList:
+            return "\(version)core/deposit/list"
         }
     }
 
@@ -34,6 +44,10 @@ enum CorePath: String, Path, CaseIterable {
         switch self {
         case .profile:
             return .core(.profile)
+        case .accocuntList:
+            return .core(.accountList)
+        case .depositList:
+            return .core(.depositList)
         }
     }
 }
@@ -45,6 +59,10 @@ extension CorePath {
         switch self {
         case .profile:
             return "Receive Profile Data"
+        case .accocuntList:
+            return "Receive Account List"
+        case .depositList:
+            return "Receive Deposit List"
         }
     }
 

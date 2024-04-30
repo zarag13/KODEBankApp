@@ -10,6 +10,7 @@ final class AuthPhoneView: BackgroundPrimary {
     enum Input {
         case incorrectNumber
         case correct
+        case openKeyboard
     }
 
     // MARK: - Private Properties
@@ -51,6 +52,8 @@ final class AuthPhoneView: BackgroundPrimary {
             self.authPhoneTextField.state(.error)
         case .correct:
             self.authPhoneTextField.state(.corrcet)
+        case .openKeyboard:
+            self.authPhoneTextField.openKeyboard()
         }
     }
 }

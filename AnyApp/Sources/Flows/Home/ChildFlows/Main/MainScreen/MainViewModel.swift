@@ -19,6 +19,13 @@ final class MainViewModel {
     }
 
     var onOutput: ((Output) -> Void)?
+    
+    private let coreRequestManager: CoreManagerAbstract
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(authRequestManager: CoreManagerAbstract) {
+        self.coreRequestManager = authRequestManager
+    }
 
     func handle(_ input: Input) {
         switch input {
@@ -35,6 +42,17 @@ final class MainViewModel {
     ]
 
     private func loadData() {
+        self.coreRequestManager.accountListData().sink { error in
+            //
+        } receiveValue: { response in
+            for account in response.accounts {
+                print("111111111111111 - \(account.status)")
+                print("111111111111111 - \(account.cards.first?.cardType)")
+            }
+        }
+        .store(in: &cancellables)
+
+        
         onOutput?(.content(.init(sections: [
             .accounts(
                 [.spacer(.init(height: 16))] +
