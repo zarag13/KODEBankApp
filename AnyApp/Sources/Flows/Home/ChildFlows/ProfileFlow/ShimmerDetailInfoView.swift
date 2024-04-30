@@ -11,12 +11,15 @@ import AppIndependent
 import Combine
 
 final class ShimmerDetailInfoView: BackgroundPrimary {
+    // MARK: - Private Methods
     override func setup() {
         super.setup()
         body().embed(in: self)
     }
     private func body() -> UIView {
         VStack(alignment: .center, distribution: .fill) {
+            View()
+                .height(52)
             Shimmer()
                 .size(width: 88, height: 88)
                 .skeletonCornerRadius(44)
@@ -28,7 +31,8 @@ final class ShimmerDetailInfoView: BackgroundPrimary {
             Shimmer()
                 .size(width: 122, height: 16)
                 .skeletonCornerRadius(8)
+            View()
+                .height(50)
         }
-        .layoutMargins(.init(top: 52, left: 0, bottom: 50, right: 0))
     }
 }

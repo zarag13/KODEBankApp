@@ -7,7 +7,8 @@ final class MainView: BackgroundPrimary {
     var onNewProduct: VoidHandler?
 
     private let tableView = BaseTableView()
-    private let button = ButtonPrimary(title: "Открыть новый счет или продукт")
+    //private let button = ButtonPrimary(title: "Открыть новый счет или продукт")
+    let button = ButtonPrimary(title: "Открыть новый счет или продукт")
     private lazy var dataSource = MainDataSource(tableView: tableView)
 
     override func setup() {
@@ -26,9 +27,9 @@ final class MainView: BackgroundPrimary {
             $0.leading.trailing.equalToSuperview().inset(16)
             $0.bottom.equalTo(safeAreaLayoutGuide).inset(24)
         }
-        button.onTap { [weak self] in
-            self?.onNewProduct?()
-        }
+//        button.onTap { [weak self] in
+//            self?.onNewProduct?()
+//        }
     }
 }
 

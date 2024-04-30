@@ -1,7 +1,8 @@
 import UI
 import UIKit
+import AppIndependent
 
-final class AuthPhoneController: TemplateViewController<AuthPhoneView> {
+final class AuthPhoneController: TemplateViewController<AuthPhoneView>, NavigationBarAlwaysHidden {
     typealias ViewModel = AuthPhoneViewModel
 
     enum Event {
@@ -23,11 +24,6 @@ final class AuthPhoneController: TemplateViewController<AuthPhoneView> {
     override func setup() {
         super.setup()
         setupBindings()
-        configureNavigationItem()
-    }
-
-    private func configureNavigationItem() {
-        navigationController?.navigationBar.isHidden = true
     }
 
     private func setupBindings() {
@@ -52,6 +48,9 @@ final class AuthPhoneController: TemplateViewController<AuthPhoneView> {
                 self?.stopErrorAnimation()
                 self?.rootView.handle(.correct)
                 self?.setAdditionState(.error(props))
+            case .noInternet(let alert):
+                self?.stopErrorAnimation()
+                self?.present(alert, animated: true)
             }
         }
     }

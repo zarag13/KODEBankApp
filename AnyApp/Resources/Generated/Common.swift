@@ -44,6 +44,8 @@ public enum Common {
   public static let `repeat` = Common.tr("Common", "repeat", fallback: "Повторить")
   /// Требуется обновление
   public static let requiredUpdate = Common.tr("Common", "requiredUpdate", fallback: "Требуется обновление")
+  /// Настройки
+  public static let settings = Common.tr("Common", "settings", fallback: "Настройки")
   /// Пропустить
   public static let skip = Common.tr("Common", "skip", fallback: "Пропустить")
   /// Куда
@@ -79,6 +81,8 @@ public enum Common {
     public static let repeatMessage = Common.tr("Common", "error.repeatMessage", fallback: "Повторите попытку или вернитесь позднее")
     /// Сервер временно недоступен. Пожалуйста, повторите попытку позднее
     public static let serverNotFound = Common.tr("Common", "error.serverNotFound", fallback: "Сервер временно недоступен. Пожалуйста, повторите попытку позднее")
+    /// Включить интернет
+    public static let turnInternet = Common.tr("Common", "error.turnInternet", fallback: "Включить интернет")
     /// Для дальнейшего использования приложения требуется установка обновлений
     public static let updateRequired = Common.tr("Common", "error.updateRequired", fallback: "Для дальнейшего использования приложения требуется установка обновлений")
   }

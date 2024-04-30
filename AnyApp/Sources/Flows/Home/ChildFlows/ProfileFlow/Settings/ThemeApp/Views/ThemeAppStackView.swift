@@ -11,53 +11,43 @@ import AppIndependent
 import Combine
 
 final class ThemeAppStackView: BackgroundPrimary {
-
-    typealias Event = ((ThemeRaw) -> Void)
-    var onEvent: Event?
-
+    // MARK: - Private Properties
+    private var themeCells = [ThemeAppViewCell]()
     private var cancellable = Set<AnyCancellable>()
-    private var currentIsSelectedView = PassthroughSubject<ThemeRaw, Never>()
+    private var curentTheme = CurrentValueSubject<ThemeRaw, Never>(AppearanceManager.shared.themeRaw)
 
-    override func setup() {
-        super.setup()
-        body().embed(in: self)
-        currentIsSelectedView.send(AppearanceManager.shared.themeRaw)
-    }
-
-    private func body() -> UIView {
-        VStack {
-            ForEach(collection: ThemeAppViewSettings.createItems, alignment: .fill, distribution: .fill, spacing: 0, axis: .vertical) { value in
-                self.setupThemeAppView(content: value)
-            }
-            FlexibleSpacer()
+    // MARK: - Private Methods
+    private func body(with props: [ThemeAppViewCell.Props]) -> UIView {
+        ForEach(collection: props, alignment: .fill, distribution: .fill, spacing: 0, axis: .vertical) { item in
+            self.setupThemeCell()
+                .configured(with: item)
         }
     }
-}
 
-private extension ThemeAppStackView {
-    private func setupThemeAppView(content: ThemeAppViewSettings) -> ThemeAppViewCell {
-        let themeAppView = ThemeAppViewCell()
-            .configure(content: content)
-
-        themeAppView.onTap { [weak self, weak themeAppView] in
-            guard let event = themeAppView?.event else { return }
-            self?.currentIsSelectedView.send(event)
-            self?.onEvent?(event)
+    private func setupThemeCell() -> ThemeAppViewCell {
+        let cell = ThemeAppViewCell()
+        themeCells.append(cell)
+        cell.onEvent = { [weak self] theme in
+            self?.curentTheme.send(theme)
         }
+        return cell
+    }
 
-        currentIsSelectedView.sink { [weak themeAppView] event in
-            if themeAppView?.event == event {
-                themeAppView?.isSelected.send(true)
-            } else {
-                themeAppView?.isSelected.send(false)
+    private func setupBindings() {
+        curentTheme.sink { [weak self] theme in
+            self?.themeCells.forEach { view in
+                view.isSelected(theme)
             }
         }.store(in: &cancellable)
+    }
 
-        if ThemeAppViewSettings.createItems.last == content {
-            themeAppView
-                .separatorIsHidden(true)
-        }
-
-        return themeAppView
+    // MARK: - Public Methods
+    @discardableResult
+    public func configure(with props: [ThemeAppViewCell.Props]) -> Self {
+        subviews.forEach { $0.removeFromSuperview() }
+        body(with: props).embed(in: self)
+        themeCells.last?.separatorIsHidden(true)
+        setupBindings()
+        return self
     }
 }

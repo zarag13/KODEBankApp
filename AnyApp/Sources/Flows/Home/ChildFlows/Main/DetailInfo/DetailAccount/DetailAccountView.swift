@@ -15,7 +15,6 @@ final class DetailAccountView: BackgroundPrimary {
 
     private let tableView = BaseTableView()
     private lazy var dataSource = DetailAccountDataSource(tableView: tableView)
-    let navigationBar = MainNavigationBar()
 
     override func setup() {
         super.setup()
@@ -24,11 +23,6 @@ final class DetailAccountView: BackgroundPrimary {
 
     private func body() -> UIView {
         VStack(alignment: .fill, distribution: .fill) {
-            BackgroundView(hPadding: 16) {
-                navigationBar
-                    .setuptile(title: "Cчета")
-                    .backgroundStyle(.backgroundSecondary)
-            }
             tableView
         }
     }

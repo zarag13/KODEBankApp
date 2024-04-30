@@ -10,18 +10,16 @@ import UI
 import AppIndependent
 
 final class SettingShimerView: BackgroundPrimary {
-
-    // MARK: - Public methods
-
     override public func setup() {
         super.setup()
         body().embed(in: self)
     }
 
-    // MARK: - Private methods
-
+    // MARK: - Private Methods
     private func body() -> UIView {
         VStack {
+            View()
+                .height(10)
             HStack(alignment: .center, distribution: .fill, spacing: 16) {
                 Shimmer(style: .default)
                     .height(40)
@@ -31,7 +29,8 @@ final class SettingShimerView: BackgroundPrimary {
                     .height(16)
                     .skeletonCornerRadius(8)
             }
-            .layoutMargins(.init(top: 10, left: 0, bottom: 6, right: 0))
+            Spacer(.px6)
         }
+        .layoutMargins(.make(hInsets: 16))
     }
 }

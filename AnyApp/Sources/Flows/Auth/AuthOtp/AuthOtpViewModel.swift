@@ -1,7 +1,9 @@
 import Services
+import UIKit
 import Combine
+import UI
 
-final class AuthOtpViewModel {
+final class AuthOtpViewModel: NetworkErrorHandler {
 
     enum Input {
         case didLoad
@@ -14,17 +16,21 @@ final class AuthOtpViewModel {
         case codeError
         case otpLenght(Int)
         case updateCode(Int)
+        case noInternet(UIAlertController)
+        case error(ErrorView.Props)
+        case errorViewClosed
     }
 
-    var onOutput: ((Output) -> Void)?
-
+    // MARK: - Private Properties
     private let authRequestManager: AuthRequestManagerAbstract
     private let appSession: AppSession
-
     private var cancellables = Set<AnyCancellable>()
+    private var configModel: ConfigAuthOtpModel
 
-    var configModel: ConfigAuthOtpModel
+    // MARK: - Public Properties
+    var onOutput: ((Output) -> Void)?
 
+    // MARK: - Private Methods
     init(
         authRequestManager: AuthRequestManagerAbstract,
         appSession: AppSession,
@@ -35,28 +41,27 @@ final class AuthOtpViewModel {
         self.configModel = configModel
     }
 
-    func handle(_ input: Input) {
-        switch input {
-        case .otpEntered(let code):
-            if code == configModel.code {
-                print("код верный")
-                confirmOtp()
-            } else {
-                self.onOutput?(.codeError)
-                print("код неверный")
-            }
-        case .didLoad:
-            onOutput?(.otpLenght(configModel.leghtCode))
-        case .refreshCode:
-            refreshCode(phone: configModel.phone)
-        }
-    }
-
-    private func confirmOtp() {
-        authRequestManager.authConfirm(otpId: "", phone: "", otpCode: "")
+    private func confirmOtp(otpCode: String) {
+        authRequestManager.authConfirm(otpId: configModel.codeId, phone: configModel.phone, otpCode: otpCode)
             .sink(
-                receiveCompletion: { _ in
-                    // handle error
+                receiveCompletion: { [weak self] error in
+                    guard case let .failure(error) = error else { return }
+                    guard let errorProps = self?.errorHandle(error, onTap: {
+                        if error.appError.kind == .timeout {
+                            self?.checkInternet(returnAlert: { alert in
+                                self?.onOutput?(.noInternet(alert))
+                            }, returnIsOn: {
+                                self?.confirmOtp(otpCode: otpCode)
+                            })
+                        } else {
+                            self?.confirmOtp(otpCode: otpCode)
+                        }
+                    }, closeTap: {
+                        self?.onOutput?(.errorViewClosed)
+                    }) else { return }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        self?.onOutput?(.error(errorProps))
+                    }
                 }, receiveValue: { [weak self] response in
                     self?.appSession.handle(.updateTokens(
                         accessToken: response.guestToken,
@@ -70,21 +75,24 @@ final class AuthOtpViewModel {
     private func refreshCode(phone: String) {
         authRequestManager.authLogin(phone: phone)
             .sink(
-                receiveCompletion: { error in
+                receiveCompletion: { [weak self] error in
                     guard case let .failure(error) = error else { return }
-                    switch error.appError.kind {
-                    case .network:
-                        print("network")
-                    case .timeout:
-                        print("нет интернета ошибка тут-")
-                    case .serverSendWrongData:
-                        print("serverSendWrongData")
-                    case .server(_):
-                        print("server")
-                    case .internal:
-                        print("internal")
+                    guard let errorProps = self?.errorHandle(error, onTap: {
+                        if error.appError.kind == .timeout {
+                            self?.checkInternet(returnAlert: { alert in
+                                self?.onOutput?(.noInternet(alert))
+                            }, returnIsOn: {
+                                self?.refreshCode(phone: phone)
+                            })
+                        } else {
+                            self?.refreshCode(phone: phone)
+                        }
+                    }, closeTap: {
+                        self?.onOutput?(.errorViewClosed)
+                    }) else { return }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        self?.onOutput?(.error(errorProps))
                     }
-                    print(error.appError.localizedDescription)
                 },
                 receiveValue: { [weak self] response in
                     let otpModel = ConfigAuthOtpModel(
@@ -97,5 +105,21 @@ final class AuthOtpViewModel {
                     print("download new code")
                 }
             ).store(in: &cancellables)
+    }
+
+    // MARK: - Public Methods
+    func handle(_ input: Input) {
+        switch input {
+        case .otpEntered(let code):
+            if code == configModel.code {
+                confirmOtp(otpCode: code)
+            } else {
+                self.onOutput?(.codeError)
+            }
+        case .didLoad:
+            onOutput?(.otpLenght(configModel.leghtCode))
+        case .refreshCode:
+            refreshCode(phone: configModel.phone)
+        }
     }
 }

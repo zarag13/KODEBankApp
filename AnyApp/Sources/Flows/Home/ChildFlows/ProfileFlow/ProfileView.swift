@@ -4,62 +4,45 @@ import AppIndependent
 import Combine
 
 final class ProfileView: BackgroundPrimary {
-    typealias StateView = ((State) -> Void)
-    typealias SettingViewAction = ((ModelSettingsView.Event) -> Void)
 
-    enum State {
-        case isBeingDownloadData
-        case hasBeenDownloadData(DetailInfoView.Props)
-    }
+    var onNewProduct: VoidHandler?
 
-    private var cancelable = Set<AnyCancellable>()
-    private var state = CurrentValueSubject<State, Never>(.isBeingDownloadData)
+    private let tableView = BaseTableView()
+    private let refreshControl = RefreshControll(contentStyle: .contentAccentTertiary)
+    private lazy var dataSource = ProfileDataSource(tableView: tableView)
 
-    private let detailInfoView = DetailInfoView()
-    private let settingsStackView = SettingsStackView()
-    private let shimerSettings = SettingsShimerStackView()
-    private let shimerDetail = ShimmerDetailInfoView()
-
-    public var event: SettingViewAction?
+    public var onRefresh: VoidHandler?
 
     override func setup() {
         super.setup()
+        body().embed(in: self)
+        tableView.alwaysBounceVertical = false
+        tableView.refreshControl = refreshControl
         setupBindings()
     }
 
-    private func contentBody() -> UIView {
-        return VStack {
-            detailInfoView
-            settingsStackView
-        }
-        .layoutMargins(.make(hInsets: 16))
-    }
-
-    private func shimmerBody() -> UIView {
-        VStack {
-            shimerDetail
-            shimerSettings
-        }.layoutMargins(.make(hInsets: 16))
-    }
-
     private func setupBindings() {
-        settingsStackView.action = { [weak self] event in
-            self?.event?(event)
+        self.refreshControl.onAction = { [weak self] in
+            self?.onRefresh?()
         }
-        
-        state.sink { [weak self] state in
-            switch state {
-            case .isBeingDownloadData:
-                self?.shimmerBody().embed(in: self ?? UIView())
-            case .hasBeenDownloadData(let props):
-                self?.shimmerBody().removeFromSuperview()
-                self?.detailInfoView.configured(with: props)
-                self?.contentBody().embed(in: self ?? UIView())
-            }
-        }.store(in: &cancelable)
     }
 
-    public func handle(_ state: State) {
-        self.state.send(state)
+    private func body() -> UIView {
+        tableView
+            .hidingScrollIndicators()
+    }
+}
+
+extension ProfileView: ConfigurableView {
+    typealias Model = ProfileViewProps
+
+    public func configure(with model: Model) {
+        dataSource.apply(sections: model.sections)
+        self.refreshControl.endRefreshing()
+    }
+
+    public func configureSettings(with section: Model.Section) {
+        dataSource.applySettingSection(section: section)
+        self.refreshControl.endRefreshing()
     }
 }

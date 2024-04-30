@@ -7,6 +7,7 @@ final class AuthOtpView: BackgroundPrimary {
     typealias EventHandler = ((Event) -> Void)
     enum State {
         case error
+        case clearCode
     }
     enum Event {
         case onOtpField(String)
@@ -20,7 +21,6 @@ final class AuthOtpView: BackgroundPrimary {
 
     // MARK: - Public Properties
     public var onEvent: EventHandler?
-    let navigationBar = MainNavigationBar()
 
     // MARK: - Private Methods
     override func setup() {
@@ -30,21 +30,17 @@ final class AuthOtpView: BackgroundPrimary {
 
     private func body(leght: Int) -> UIView {
         VStack {
-            navigationBar
-            VStack {
-                Label(text: Entrance.authCodeSend, foregroundStyle: .textPrimary, fontStyle: .body15r)
-                    .linesCount(0)
-                Spacer(.px24)
-                otp
-                    .configure(leght: leght)
-                    .height(48)
-                Spacer(.px8)
-                timerLable
-            }
-                .layoutMargins(.make(vInsets: 16))
+            Label(text: Entrance.authCodeSend, foregroundStyle: .textPrimary, fontStyle: .body15r)
+                .linesCount(0)
+            Spacer(.px24)
+            otp
+                .configure(leght: leght)
+                .height(48)
+            Spacer(.px8)
+            timerLable
             FlexibleSpacer()
-            Spacer(.px32)
-        }.layoutMargins(.make(vInsets: 16, hInsets: 16))
+        }
+        .layoutMargins(.make(vInsets: 16, hInsets: 16))
     }
 
     private func setupBindings() {
@@ -76,6 +72,8 @@ final class AuthOtpView: BackgroundPrimary {
         case .error:
             timerLable.handle(.error)
             otp.handle(event: .error)
+        case .clearCode:
+            otp.handle(event: .correct)
         }
     }
 
@@ -87,7 +85,7 @@ final class AuthOtpView: BackgroundPrimary {
     public func updateConfiguration(otpLenght: Int) {
         self.subviews.forEach { $0.removeFromSuperview() }
         self.otp.handleState(.enabled)
-        body(leght: 5).embed(in: self)
+        body(leght: otpLenght).embed(in: self)
         print(otp.stackLabels.labels.count)
         timerLable.handle(.process)
     }

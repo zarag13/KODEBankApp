@@ -11,39 +11,89 @@ import AppIndependent
 import Combine
 
 final class SettingView: BackgroundPrimary {
-    var state: ModelSettingsView.Event?
+    // MARK: - Private Properties
+    private var props: Props?
 
     override func setup() {
         super.setup()
     }
 
-    private var setiingIcon = UIImage()
-    private var settingName = String()
-    private var isDetailed = false
-
-    private func body() -> UIView {
-        HStack(spacing: 16) {
-            ImageView(image: setiingIcon)
-                .huggingPriority(.defaultHigh, axis: .horizontal)
-                .foregroundStyle(.textTertiary)
-            Label(text: settingName)
-                .fontStyle(.body15r)
-                .foregroundStyle(.textPrimary)
-                .huggingPriority(.defaultLow, axis: .horizontal)
-            ImageView(image: Asset.Icon24px.chevronRight.image)
-                .huggingPriority(.defaultHigh, axis: .horizontal)
-                .isHidden(!isDetailed)
-                .foregroundStyle(.textTertiary)
+    private func body(with props: Props) -> UIView {
+        VStack {
+            Spacer(.px16)
+                HStack(spacing: 16) {
+                    ImageView(image: props.leftImage)
+                        .huggingPriority(.defaultHigh, axis: .horizontal)
+                        .foregroundStyle(.textTertiary)
+                    Label(text: props.title)
+                        .fontStyle(.body15r)
+                        .foregroundStyle(.textPrimary)
+                        .huggingPriority(.defaultLow, axis: .horizontal)
+                    ImageView(image: Asset.Icon24px.chevronRight.image)
+                        .huggingPriority(.defaultHigh, axis: .horizontal)
+                        .isHidden(!props.isDetailedImage)
+                        .foregroundStyle(.textTertiary)
+                }
+                .onTap {
+                    props.onTap?(props.event)
+                }
+            Spacer(.px16)
         }
-        .layoutMargins(.make(vInsets: 16))
+        .layoutMargins(.make(hInsets: 16))
     }
+}
 
-    public func configure2(settingsInfo: ModelSettingsView) -> Self {
-        self.setiingIcon = settingsInfo.image
-        self.settingName = settingsInfo.title
-        self.isDetailed = settingsInfo.isDetailedImage
-        self.state = settingsInfo.state
-        body().embed(in: self)
-        return self
+// MARK: - Configurable
+extension SettingView: ConfigurableView {
+    enum Event: String {
+        case aboutApp
+        case themeApp
+        case supportService
+        case exit
+    }
+    
+    public typealias EventHandler = ((Event) -> Void)
+    public typealias Model = Props
+    
+    public struct Props: Hashable {
+        public let id: Int
+        public let title: String
+        public let event: Event
+        public let leftImage: UIImage
+        public let isDetailedImage: Bool
+        public var onTap: EventHandler?
+        
+        public init(
+            id: Int,
+            title: String,
+            event: Event,
+            leftImage: UIImage,
+            isDetailedImage: Bool,
+            onTap: EventHandler? = nil) {
+                self.id = id
+                self.title = title
+                self.event = event
+                self.leftImage = leftImage
+                self.isDetailedImage = isDetailedImage
+                self.onTap = onTap
+            }
+        public static func == (lhs: SettingView.Props, rhs: SettingView.Props) -> Bool {
+            lhs.hashValue == rhs.hashValue
+        }
+        
+        public func hash(into hasher: inout Hasher) {
+            hasher.combine(id)
+            hasher.combine(title)
+            hasher.combine(event)
+            hasher.combine(leftImage)
+            hasher.combine(isDetailedImage)
+        }
+    }
+    
+    public func configure(with model: Model) {
+        subviews.forEach { $0.removeFromSuperview() }
+        self.props = model
+        body(with: model).embed(in: self)
+        self.layoutIfNeeded()
     }
 }

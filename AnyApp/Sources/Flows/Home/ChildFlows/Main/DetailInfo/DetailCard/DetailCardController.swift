@@ -28,7 +28,6 @@ final class DetailCardController: TemplateViewController<DetailCardView> {
 
     private func configureNavigationItem() {
         navigationController?.navigationBar.isHidden = true
-        rootView.navigationBar.popController(navigation: self.navigationController)
     }
 
     private func setupBindings() {

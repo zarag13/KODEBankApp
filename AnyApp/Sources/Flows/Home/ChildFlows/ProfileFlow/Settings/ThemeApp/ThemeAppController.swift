@@ -7,11 +7,13 @@
 
 import UI
 import UIKit
+import AppIndependent
 
-final class ThemeAppController: TemplateViewController<ThemeAppView> {
+final class ThemeAppController: TemplateViewController<ThemeAppView>, NavigationBarAlwaysVisible {
 
     typealias ViewModel = ThemeAppViewModel
 
+    // MARK: - Private Properties
     private var viewModel: ViewModel!
 
     convenience init(viewModel: ViewModel) {
@@ -19,20 +21,24 @@ final class ThemeAppController: TemplateViewController<ThemeAppView> {
         self.viewModel = viewModel
     }
 
+    // MARK: - Private Methods
     override func setup() {
         super.setup()
-        setupBindings()
         configureNavigationItem()
+        setupBindings()
+        viewModel?.handle(.loadView)
     }
 
     private func configureNavigationItem() {
-        rootView.navigationBar
-            .popController(navigation: self.navigationController)
+        navigationItem.title = Profile.themeApp
     }
 
-    func setupBindings() {
-        self.rootView.themeAppStackView.onEvent = { [weak self] theme in
-            self?.viewModel.handle(.themeApp(theme))
+    private func setupBindings() {
+        viewModel.onEvent = { [weak self] event in
+            switch event {
+            case .themeCells(let props):
+                self?.rootView.configure(with: props)
+            }
         }
     }
 }

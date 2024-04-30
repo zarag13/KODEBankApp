@@ -17,46 +17,46 @@ public final class NavigationBar: BaseNavigationBar, Themeable {
     }
 
     public func updateAppearance() {
-//        let standardAppearance = UINavigationBarAppearance()
-//
-//        tintColor(Palette.Content.accent)
-//
-//        let arrowImage = Assets.Icons.backButton.image
-//            .withAlignmentRectInsets(.init(top: 0, left: -8, bottom: 0, right: 0))
-//
-//        standardAppearance.setBackIndicatorImage(arrowImage, transitionMaskImage: arrowImage)
-//
-//        standardAppearance.titleTextAttributes = [
-//            .foregroundColor: Palette.Content.primary.uiColor,
-//            .font: Typography.subhead1?.font ?? .preferredFont(forTextStyle: .headline)
-//        ]
-//
+        let standardAppearance = UINavigationBarAppearance()
+
+        tintColor(Palette.Content.accentTertiary)
+
+        let arrowImage = UIImage(named: "Icon24px/back") ?? UIImage()
+            .withAlignmentRectInsets(.init(top: 0, left: -8, bottom: 0, right: 0))
+
+        standardAppearance.setBackIndicatorImage(arrowImage, transitionMaskImage: arrowImage)
+
+        standardAppearance.titleTextAttributes = [
+            .foregroundColor: Palette.Text.primary,
+            .font: Typography.subtitle17sb?.font ?? .preferredFont(forTextStyle: .headline)
+        ]
+
 //        standardAppearance.buttonAppearance.normal.titleTextAttributes = [
-//            .font: Typography.subhead1?.font ?? .preferredFont(forTextStyle: .headline)
+//            .font: Typography.caption2?.font ?? .preferredFont(forTextStyle: .headline)
 //        ]
 //        standardAppearance.doneButtonAppearance.normal.titleTextAttributes = [
-//            .font: Typography.body1?.font ?? .preferredFont(forTextStyle: .body)
+//            .font: Typography.body15r?.font ?? .preferredFont(forTextStyle: .body)
 //        ]
-//
-//        standardAppearance.shadowColor = Palette.Border.regular.uiColor
-//
-//        let scrollEdgeAppearance = standardAppearance.copy()
-//        scrollEdgeAppearance.shadowColor = .clear
-//
-//        switch style {
-//        case .background:
-//            scrollEdgeAppearance.backgroundColor = Palette.Surface.background.uiColor
-//            standardAppearance.backgroundColor = Palette.Surface.layer2.uiColor
-//        case .layer1:
-//            scrollEdgeAppearance.backgroundColor = Palette.Surface.layer1.uiColor
-//            standardAppearance.backgroundColor = Palette.Surface.layer3.uiColor
-//        case .clear:
-//            standardAppearance.configureWithTransparentBackground()
-//            scrollEdgeAppearance.configureWithTransparentBackground()
-//        }
-//
-//        self.standardAppearance = standardAppearance
-//        self.scrollEdgeAppearance = scrollEdgeAppearance
+
+        standardAppearance.shadowColor = Palette.Shadow.dropShadow1
+
+        let scrollEdgeAppearance = standardAppearance.copy()
+        scrollEdgeAppearance.shadowColor = .clear
+
+        switch style {
+        case .background:
+            scrollEdgeAppearance.backgroundColor = Palette.Surface.backgroundPrimary
+            standardAppearance.backgroundColor = Palette.Surface.backgroundPrimary
+        case .layer1:
+            scrollEdgeAppearance.backgroundColor = Palette.Surface.backgroundPrimary
+            standardAppearance.backgroundColor = Palette.Surface.backgroundPrimary
+        case .clear:
+            standardAppearance.configureWithTransparentBackground()
+            scrollEdgeAppearance.configureWithTransparentBackground()
+        }
+
+        self.standardAppearance = standardAppearance
+        self.scrollEdgeAppearance = scrollEdgeAppearance
     }
 }
 

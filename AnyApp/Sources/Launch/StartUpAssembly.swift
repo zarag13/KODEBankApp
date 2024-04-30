@@ -13,7 +13,7 @@ final class StartUpAssembly: Assembly, Identifiable {
     func assemble(container: Container) {
 
         container.register(BaseNavigationController.self) { _ in
-            BaseNavigationController(navigationBarClass: BaseNavigationBar.self, toolbarClass: nil)
+            BaseNavigationController(navigationBarClass: NavigationBar.self, toolbarClass: nil)
         }
 
         container.register(Router.self, name: RouterName.root) { resolver in

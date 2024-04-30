@@ -246,6 +246,12 @@
 		ED28940B2BDC127800016DF6 /* ProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28940A2BDC127800016DF6 /* ProfileResponse.swift */; };
 		ED2894112BDC528E00016DF6 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28940F2BDC528E00016DF6 /* ErrorView.swift */; };
 		ED2894142BDDAF1C00016DF6 /* SpinnerForAuthPhoneTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2894132BDDAF1C00016DF6 /* SpinnerForAuthPhoneTF.swift */; };
+		ED5AB10F2BDEE77D0015059A /* NetworkErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5AB1092BDEE64A0015059A /* NetworkErrorHandler.swift */; };
+		ED5AB1112BDEFDB30015059A /* BlurLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5AB1102BDEFDB30015059A /* BlurLoadingView.swift */; };
+		ED5AB1182BE04B010015059A /* ProfileCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5AB1172BE04B010015059A /* ProfileCellFactory.swift */; };
+		ED5AB11B2BE04B2E0015059A /* ProfileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5AB11A2BE04B2E0015059A /* ProfileDataSource.swift */; };
+		ED5AB11D2BE04B450015059A /* ProfileViewProps.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5AB11C2BE04B450015059A /* ProfileViewProps.swift */; };
+		ED5AB11F2BE066840015059A /* RefreshControll.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5AB11E2BE066840015059A /* RefreshControll.swift */; };
 		EDC60DEBCAD6179A2C1DE924 /* PersistentLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375875A8550AAAF3D551B7EC /* PersistentLayer.swift */; };
 		EDFC44772BCBE4BD00034EAA /* AuthPhoneTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44762BCBE4BD00034EAA /* AuthPhoneTextField.swift */; };
 		EDFC447A2BCC1C9C00034EAA /* OtpTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44792BCC1C9C00034EAA /* OtpTextField.swift */; };
@@ -275,15 +281,11 @@
 		EDFC44BF2BCD1F3100034EAA /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44BA2BCD1F3100034EAA /* Theme.swift */; };
 		EDFC44C02BCD1F3100034EAA /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44BB2BCD1F3100034EAA /* Typography.swift */; };
 		EDFC44C52BCD202C00034EAA /* DetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44C42BCD202C00034EAA /* DetailInfoView.swift */; };
-		EDFC44C72BCD203800034EAA /* SettingsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44C62BCD203800034EAA /* SettingsStackView.swift */; };
 		EDFC44C92BCD205E00034EAA /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44C82BCD205E00034EAA /* SettingView.swift */; };
-		EDFC44D02BCEC44E00034EAA /* SettingsShimerStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44CF2BCEC44E00034EAA /* SettingsShimerStackView.swift */; };
 		EDFC44D22BCEC46100034EAA /* SettingShimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44D12BCEC46100034EAA /* SettingShimerView.swift */; };
 		EDFC44D52BCECC6000034EAA /* ShimmerDetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44D42BCECC6000034EAA /* ShimmerDetailInfoView.swift */; };
-		EDFC44D82BCEDD6B00034EAA /* ModelSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44D72BCEDD6A00034EAA /* ModelSettingsView.swift */; };
 		EDFC44DD2BCEE14300034EAA /* AboutAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44DC2BCEE14300034EAA /* AboutAppView.swift */; };
 		EDFC44DF2BCEE14E00034EAA /* ThemeAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44DE2BCEE14E00034EAA /* ThemeAppView.swift */; };
-		EDFC44E22BCEE1F200034EAA /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44E12BCEE1F200034EAA /* NavigationView.swift */; };
 		EDFC44E42BD282F300034EAA /* TemplateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44E32BD282F300034EAA /* TemplateAccountView.swift */; };
 		EDFC44E62BD2831200034EAA /* TemplateCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44E52BD2831200034EAA /* TemplateCardView.swift */; };
 		EDFC44ED2BD2D98000034EAA /* SmallBankCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44EC2BD2D98000034EAA /* SmallBankCardView.swift */; };
@@ -312,7 +314,6 @@
 		EDFC452B2BD6770200034EAA /* ProfileFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC452A2BD6770200034EAA /* ProfileFlowCoordinator.swift */; };
 		EDFC452F2BD710AA00034EAA /* ThemeAppViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC452E2BD710AA00034EAA /* ThemeAppViewCell.swift */; };
 		EDFC45312BD710FE00034EAA /* ThemeAppStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC45302BD710FE00034EAA /* ThemeAppStackView.swift */; };
-		EDFC45332BD7114B00034EAA /* ThemeAppViewSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC45322BD7114B00034EAA /* ThemeAppViewSettings.swift */; };
 		EDFC45392BD7F1CD00034EAA /* TimerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC45382BD7F1CD00034EAA /* TimerLabel.swift */; };
 		EDFC453C2BD935D800034EAA /* OtpTextField+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC453B2BD935D800034EAA /* OtpTextField+Delegate.swift */; };
 		EDFC453E2BD945A900034EAA /* StackLabelForOtpTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC453D2BD945A900034EAA /* StackLabelForOtpTextField.swift */; };
@@ -659,6 +660,12 @@
 		ED28940F2BDC528E00016DF6 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		ED2894132BDDAF1C00016DF6 /* SpinnerForAuthPhoneTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerForAuthPhoneTF.swift; sourceTree = "<group>"; };
 		ED41A51C20CE8AC50EC69605 /* UILabel+FadeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+FadeAnimation.swift"; sourceTree = "<group>"; };
+		ED5AB1092BDEE64A0015059A /* NetworkErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrorHandler.swift; sourceTree = "<group>"; };
+		ED5AB1102BDEFDB30015059A /* BlurLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurLoadingView.swift; sourceTree = "<group>"; };
+		ED5AB1172BE04B010015059A /* ProfileCellFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellFactory.swift; sourceTree = "<group>"; };
+		ED5AB11A2BE04B2E0015059A /* ProfileDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataSource.swift; sourceTree = "<group>"; };
+		ED5AB11C2BE04B450015059A /* ProfileViewProps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewProps.swift; sourceTree = "<group>"; };
+		ED5AB11E2BE066840015059A /* RefreshControll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshControll.swift; sourceTree = "<group>"; };
 		ED81BEF1ADE3C7DAE5510321 /* UITextView+Attributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Attributes.swift"; sourceTree = "<group>"; };
 		EDFC44762BCBE4BD00034EAA /* AuthPhoneTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPhoneTextField.swift; sourceTree = "<group>"; };
 		EDFC44792BCC1C9C00034EAA /* OtpTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpTextField.swift; sourceTree = "<group>"; };
@@ -688,16 +695,12 @@
 		EDFC44BA2BCD1F3100034EAA /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		EDFC44BB2BCD1F3100034EAA /* Typography.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
 		EDFC44C42BCD202C00034EAA /* DetailInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoView.swift; sourceTree = "<group>"; };
-		EDFC44C62BCD203800034EAA /* SettingsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStackView.swift; sourceTree = "<group>"; };
 		EDFC44C82BCD205E00034EAA /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		EDFC44CD2BCE8FC400034EAA /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
-		EDFC44CF2BCEC44E00034EAA /* SettingsShimerStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsShimerStackView.swift; sourceTree = "<group>"; };
 		EDFC44D12BCEC46100034EAA /* SettingShimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingShimerView.swift; sourceTree = "<group>"; };
 		EDFC44D42BCECC6000034EAA /* ShimmerDetailInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerDetailInfoView.swift; sourceTree = "<group>"; };
-		EDFC44D72BCEDD6A00034EAA /* ModelSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSettingsView.swift; sourceTree = "<group>"; };
 		EDFC44DC2BCEE14300034EAA /* AboutAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppView.swift; sourceTree = "<group>"; };
 		EDFC44DE2BCEE14E00034EAA /* ThemeAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeAppView.swift; sourceTree = "<group>"; };
-		EDFC44E12BCEE1F200034EAA /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
 		EDFC44E32BD282F300034EAA /* TemplateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateAccountView.swift; sourceTree = "<group>"; };
 		EDFC44E52BD2831200034EAA /* TemplateCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateCardView.swift; sourceTree = "<group>"; };
 		EDFC44EC2BD2D98000034EAA /* SmallBankCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallBankCardView.swift; sourceTree = "<group>"; };
@@ -726,7 +729,6 @@
 		EDFC452A2BD6770200034EAA /* ProfileFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFlowCoordinator.swift; sourceTree = "<group>"; };
 		EDFC452E2BD710AA00034EAA /* ThemeAppViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeAppViewCell.swift; sourceTree = "<group>"; };
 		EDFC45302BD710FE00034EAA /* ThemeAppStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeAppStackView.swift; sourceTree = "<group>"; };
-		EDFC45322BD7114B00034EAA /* ThemeAppViewSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeAppViewSettings.swift; sourceTree = "<group>"; };
 		EDFC45362BD7D38D00034EAA /* BackgroundPrimary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BackgroundPrimary+Extension.swift"; sourceTree = "<group>"; };
 		EDFC45382BD7F1CD00034EAA /* TimerLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerLabel.swift; sourceTree = "<group>"; };
 		EDFC453B2BD935D800034EAA /* OtpTextField+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OtpTextField+Delegate.swift"; sourceTree = "<group>"; };
@@ -1252,6 +1254,7 @@
 		54A63885EA00B1584DC0B510 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				ED5AB10E2BDEE6E70015059A /* SuppotingsFile */,
 				AC6BF9C33D8F2C07D4AC0404 /* Flows */,
 				EDFC44A82BCD1E7C00034EAA /* Launch */,
 			);
@@ -1507,7 +1510,6 @@
 		AC6BF9C33D8F2C07D4AC0404 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
-				EDFC44E02BCEE1DC00034EAA /* Navigation */,
 				E22C02841FBAAA5F57A15741 /* Auth */,
 				EDFC44912BCD1DC700034EAA /* Home */,
 			);
@@ -1605,6 +1607,7 @@
 				CED6E148488BCEE79D2ED30A /* Spinners */,
 				D1A52BC6ADA52598EA63F207 /* BackgroundView.swift */,
 				C20794B9A032747F7F65B342 /* GradientView.swift */,
+				ED5AB11E2BE066840015059A /* RefreshControll.swift */,
 				2FFC308AE07901090C89A552 /* ImageView.swift */,
 				4A0B5C38EBBD032B43466D5C /* Label.swift */,
 				451583F17BF1025820040FE0 /* NavigationBar.swift */,
@@ -1713,6 +1716,24 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		ED5AB10E2BDEE6E70015059A /* SuppotingsFile */ = {
+			isa = PBXGroup;
+			children = (
+				ED5AB1092BDEE64A0015059A /* NetworkErrorHandler.swift */,
+			);
+			path = SuppotingsFile;
+			sourceTree = "<group>";
+		};
+		ED5AB1162BE04AE10015059A /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				ED5AB1172BE04B010015059A /* ProfileCellFactory.swift */,
+				ED5AB11A2BE04B2E0015059A /* ProfileDataSource.swift */,
+				ED5AB11C2BE04B450015059A /* ProfileViewProps.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
 		EDFC44752BCBE48300034EAA /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -1725,8 +1746,9 @@
 		EDFC44782BCC1C8300034EAA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EDFC453A2BD9359F00034EAA /* OtpTextField */,
+				ED5AB1102BDEFDB30015059A /* BlurLoadingView.swift */,
 				EDFC45382BD7F1CD00034EAA /* TimerLabel.swift */,
+				EDFC453A2BD9359F00034EAA /* OtpTextField */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1831,24 +1853,6 @@
 			path = Kit;
 			sourceTree = "<group>";
 		};
-		EDFC44C12BCD1FED00034EAA /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				EDFC44C22BCD1FFB00034EAA /* DetailInfoView */,
-				EDFC44C32BCD201400034EAA /* SettingsView */,
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
-		EDFC44C22BCD1FFB00034EAA /* DetailInfoView */ = {
-			isa = PBXGroup;
-			children = (
-				EDFC44D42BCECC6000034EAA /* ShimmerDetailInfoView.swift */,
-				EDFC44C42BCD202C00034EAA /* DetailInfoView.swift */,
-			);
-			name = DetailInfoView;
-			sourceTree = "<group>";
-		};
 		EDFC44C32BCD201400034EAA /* SettingsView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1862,17 +1866,9 @@
 			isa = PBXGroup;
 			children = (
 				EDFC44D12BCEC46100034EAA /* SettingShimerView.swift */,
-				EDFC44CF2BCEC44E00034EAA /* SettingsShimerStackView.swift */,
+				EDFC44D42BCECC6000034EAA /* ShimmerDetailInfoView.swift */,
 			);
 			name = Shimmer;
-			sourceTree = "<group>";
-		};
-		EDFC44D62BCEDD5200034EAA /* Entity */ = {
-			isa = PBXGroup;
-			children = (
-				EDFC44D72BCEDD6A00034EAA /* ModelSettingsView.swift */,
-			);
-			name = Entity;
 			sourceTree = "<group>";
 		};
 		EDFC44D92BCEE0E000034EAA /* Settings */ = {
@@ -1887,7 +1883,6 @@
 		EDFC44DA2BCEE0F200034EAA /* ThemeApp */ = {
 			isa = PBXGroup;
 			children = (
-				EDFC45342BD7115400034EAA /* Entity */,
 				EDFC452D2BD7107100034EAA /* Views */,
 				EDFC44DE2BCEE14E00034EAA /* ThemeAppView.swift */,
 				EDFC45242BD6681500034EAA /* ThemeAppController.swift */,
@@ -1904,14 +1899,6 @@
 				EDFC45222BD6680200034EAA /* AboutAppViewModel.swift */,
 			);
 			path = AboutApp;
-			sourceTree = "<group>";
-		};
-		EDFC44E02BCEE1DC00034EAA /* Navigation */ = {
-			isa = PBXGroup;
-			children = (
-				EDFC44E12BCEE1F200034EAA /* NavigationView.swift */,
-			);
-			path = Navigation;
 			sourceTree = "<group>";
 		};
 		EDFC44E72BD2D8D600034EAA /* AccountCell */ = {
@@ -2061,8 +2048,8 @@
 		EDFC452C2BD6772700034EAA /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				EDFC44D62BCEDD5200034EAA /* Entity */,
-				EDFC44C12BCD1FED00034EAA /* Views */,
+				ED5AB1162BE04AE10015059A /* DataSource */,
+				EDFC44C32BCD201400034EAA /* SettingsView */,
 				EDFC448B2BCD1DC700034EAA /* ProfileView.swift */,
 				EDFC448A2BCD1DC700034EAA /* ProfileController.swift */,
 				EDFC448C2BCD1DC700034EAA /* ProfileViewModel.swift */,
@@ -2077,14 +2064,6 @@
 				EDFC45302BD710FE00034EAA /* ThemeAppStackView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		EDFC45342BD7115400034EAA /* Entity */ = {
-			isa = PBXGroup;
-			children = (
-				EDFC45322BD7114B00034EAA /* ThemeAppViewSettings.swift */,
-			);
-			path = Entity;
 			sourceTree = "<group>";
 		};
 		EDFC45352BD7CAFB00034EAA /* Entity */ = {
@@ -2109,7 +2088,7 @@
 			isa = PBXGroup;
 			children = (
 				EDFC44C82BCD205E00034EAA /* SettingView.swift */,
-				EDFC44C62BCD203800034EAA /* SettingsStackView.swift */,
+				EDFC44C42BCD202C00034EAA /* DetailInfoView.swift */,
 			);
 			name = Content;
 			sourceTree = "<group>";
@@ -2717,21 +2696,20 @@
 				EDFC44E62BD2831200034EAA /* TemplateCardView.swift in Sources */,
 				EDFC45232BD6680200034EAA /* AboutAppViewModel.swift in Sources */,
 				EDFC44DD2BCEE14300034EAA /* AboutAppView.swift in Sources */,
+				ED5AB11D2BE04B450015059A /* ProfileViewProps.swift in Sources */,
 				EDFC44942BCD1DC700034EAA /* MainViewProps.swift in Sources */,
+				ED5AB1112BDEFDB30015059A /* BlurLoadingView.swift in Sources */,
 				EDFC45392BD7F1CD00034EAA /* TimerLabel.swift in Sources */,
-				EDFC44D82BCEDD6B00034EAA /* ModelSettingsView.swift in Sources */,
 				EDFC44C52BCD202C00034EAA /* DetailInfoView.swift in Sources */,
 				EDFC44FD2BD3358300034EAA /* DetailAccountDataSource.swift in Sources */,
 				EDFC44A92BCD1E7C00034EAA /* AppCoordinator.swift in Sources */,
-				EDFC44E22BCEE1F200034EAA /* NavigationView.swift in Sources */,
-				EDFC45332BD7114B00034EAA /* ThemeAppViewSettings.swift in Sources */,
 				EDFC45472BD9B61800034EAA /* TemplateShimmerHeader.swift in Sources */,
 				EDFC449D2BCD1DC700034EAA /* ProfileController.swift in Sources */,
+				ED5AB1182BE04B010015059A /* ProfileCellFactory.swift in Sources */,
 				EDFC45112BD3B19C00034EAA /* ActionsTabsView.swift in Sources */,
 				10E588222BC0577A00D05347 /* AuthOtpView.swift in Sources */,
 				EDFC44AA2BCD1E7D00034EAA /* AppDelegate.swift in Sources */,
 				EDFC45312BD710FE00034EAA /* ThemeAppStackView.swift in Sources */,
-				EDFC44D02BCEC44E00034EAA /* SettingsShimerStackView.swift in Sources */,
 				EDFC44D52BCECC6000034EAA /* ShimmerDetailInfoView.swift in Sources */,
 				10E588122BC04F4D00D05347 /* AuthPhoneController.swift in Sources */,
 				EDFC45272BD6682700034EAA /* ThemeAppViewModel.swift in Sources */,
@@ -2764,6 +2742,7 @@
 				EDFC44F42BD32F8600034EAA /* DetailAccountHeaderView.swift in Sources */,
 				EDFC45252BD6681500034EAA /* ThemeAppController.swift in Sources */,
 				EDFC452B2BD6770200034EAA /* ProfileFlowCoordinator.swift in Sources */,
+				ED5AB11B2BE04B2E0015059A /* ProfileDataSource.swift in Sources */,
 				EDFC44922BCD1DC700034EAA /* MainCellFactory.swift in Sources */,
 				EDFC450D2BD3373900034EAA /* DetailAccountController.swift in Sources */,
 				EDFC452F2BD710AA00034EAA /* ThemeAppViewCell.swift in Sources */,
@@ -2785,10 +2764,10 @@
 				EDFC45082BD336CD00034EAA /* FavoritesAccountView.swift in Sources */,
 				EDFC44F02BD2EE7300034EAA /* TemplateDepositsView.swift in Sources */,
 				EDFC45052BD336A400034EAA /* SettingsAccountView.swift in Sources */,
+				ED5AB10F2BDEE77D0015059A /* NetworkErrorHandler.swift in Sources */,
 				EDFC449F2BCD1DC700034EAA /* ProfileViewModel.swift in Sources */,
 				EDFC449E2BCD1DC700034EAA /* ProfileView.swift in Sources */,
 				EDFC44AB2BCD1E7D00034EAA /* LibraryManager.swift in Sources */,
-				EDFC44C72BCD203800034EAA /* SettingsStackView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2923,6 +2902,7 @@
 				E6E43A458202B31D02A43E44 /* ForEach.swift in Sources */,
 				1B00B4823B5426CC5247406B /* HStack.swift in Sources */,
 				CFFD4AF41E979425C76CDD8C /* VStack.swift in Sources */,
+				ED5AB11F2BE066840015059A /* RefreshControll.swift in Sources */,
 				8BC2E7C803A12C023242564E /* ZStack.swift in Sources */,
 				FC16C2A98309C480CEF45A7C /* KeyboardChangeListener.swift in Sources */,
 				60529ED87A26419E981944CF /* Label.swift in Sources */,

@@ -28,8 +28,8 @@ final class AuthPhoneTextField: BackgroundPrimary {
     private let spinner = SpinnerForAuthPhoneTF()
     private lazy var authTF: TextField = {
         TextField(placeholder: Entrance.phone, configurator: { textField in
-            textField.becomeFirstResponder()
             textField.textColor = ForegroundStyle.textPrimary.color
+            textField.becomeFirstResponder()
         })
             .huggingPriority(.defaultLow, axis: .horizontal)
             .keyboardType(.numberPad)
@@ -64,7 +64,13 @@ final class AuthPhoneTextField: BackgroundPrimary {
 
     private func setupBindings() {
         authTF.textPublisher
-            .map { ($0.maskPhoneNumber(pattern: "+7 (###) ### ## ##")) }
+            .map {
+                if $0.count < 7 {
+                    $0.maskEnterPhoneNumber(pattern: "+7 ### ### ## ##")
+                } else {
+                    ($0.maskEnterPhoneNumber(pattern: "+7 (###) ### ## ##"))
+                }
+            }
             .assign(to: \.text, on: authTF)
             .store(in: &cancelable)
         authTF.textPublisher

@@ -61,7 +61,8 @@ open class ViewController: BaseController, Themeable {
         case .error(let props):
             self.errorView?
                 .configured(with: props)
-            self.errorView?.embed(in: view)
+            //self.errorView?.embed(in: view)
+            self.errorView?.embed(in: view, useSafeAreaGuide: false)
         }
     }
 
@@ -71,5 +72,23 @@ open class ViewController: BaseController, Themeable {
 
     public func stopErrorAnimation() {
         errorView?.stopAnimation()
+    }
+
+    public func changeTabBar(
+        hidden:Bool,
+        animated: Bool) {
+        guard let tabBar = self.tabBarController?.tabBar else { return }
+        if tabBar.isHidden == hidden { return }
+        let frame = tabBar.frame
+        let offset = hidden ? frame.size.height : -frame.size.height
+        let duration: TimeInterval = animated ? 0.5 : 0.0
+        tabBar.isHidden = false
+        UIView.animate(
+            withDuration: duration,
+            animations: {
+            tabBar.frame = frame.offsetBy(dx: 0, dy: offset)
+        }, completion: { _ in
+            tabBar.isHidden = hidden
+        })
     }
 }

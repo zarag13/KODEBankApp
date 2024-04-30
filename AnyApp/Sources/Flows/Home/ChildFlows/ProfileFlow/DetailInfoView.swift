@@ -11,15 +11,19 @@ import AppIndependent
 import Combine
 
 final class DetailInfoView: BackgroundPrimary {
+    // MARK: - Private Properties
+    private var phoneState = CurrentValueSubject<Model.PhoneState, Never>(.close)
+    private var cancelable = Set<AnyCancellable>()
+
     override func setup() {
         super.setup()
     }
 
-    private var phoneState = CurrentValueSubject<Model.PhoneState, Never>(.close)
-    private var cancelable = Set<AnyCancellable>()
-
+    // MARK: - Private Methods
     private func body(props: Model) -> UIView {
         VStack {
+            View()
+                .height(52)
             ImageView(image: props.avatar)
                 .huggingPriority(.defaultHigh, axis: .horizontal)
             Spacer(.px16)
@@ -28,11 +32,11 @@ final class DetailInfoView: BackgroundPrimary {
                 .foregroundStyle(.textPrimary)
                 .textAlignment(.center)
                 .multiline()
-          createPhoneLabnel(props: props)
+            createPhoneLabnel(props: props)
+            View()
+                .height(46)
         }
-        .layoutMargins(.init(top: 52, left: 0, bottom: 46, right: 0))
     }
-
     private func createPhoneLabnel(props: Model) -> UIView {
         let phoneLabel = Label()
             .fontStyle(.caption11)
@@ -115,5 +119,6 @@ extension DetailInfoView: ConfigurableView {
     public func configure(with model: Model) {
         subviews.forEach { $0.removeFromSuperview() }
         body(props: model).embed(in: self)
+        self.layoutIfNeeded()
     }
 }

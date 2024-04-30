@@ -7,13 +7,15 @@
 
 import UI
 import UIKit
+import AppIndependent
 
-final class AboutAppController: TemplateViewController<AboutAppView> {
-
+final class AboutAppController: TemplateViewController<AboutAppView>, NavigationBarAlwaysVisible {
     typealias ViewModel = AboutAppViewModel
 
+    // MARK: - Private Properties
     private var viewModel: ViewModel!
 
+    // MARK: - Private Methods
     convenience init(viewModel: ViewModel) {
         self.init()
         self.viewModel = viewModel
@@ -21,16 +23,15 @@ final class AboutAppController: TemplateViewController<AboutAppView> {
 
     override func setup() {
         super.setup()
-        setupBindings()
         configureNavigationItem()
+        setupBindings()
     }
 
     private func configureNavigationItem() {
-        rootView.navigationBar
-            .popController(navigation: self.navigationController)
+        navigationItem.title = Profile.aboutApp
     }
 
-    func setupBindings() {
+    private func setupBindings() {
         viewModel.event = { [weak self] event in
             switch event {
             case .varsion(let version):

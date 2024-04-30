@@ -15,15 +15,18 @@ final class AboutAppViewModel {
     enum Output {
         case varsion(String)
     }
+    // MARK: - Private Properties
+    private let lastVersion: String
+    
+    // MARK: - Public Properties
+    public var event: ((Output) -> Void)?
 
-    var event: ((Output) -> Void)?
-
-    let lastVersion: String
-
+    
     init(lastVersion: String) {
         self.lastVersion = lastVersion
     }
 
+    // MARK: - Public Methods
     func handler(_ input: Input) {
         switch input {
         case .getVersion:

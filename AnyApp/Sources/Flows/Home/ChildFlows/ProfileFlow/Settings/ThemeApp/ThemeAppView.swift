@@ -12,20 +12,22 @@ import Combine
 
 final class ThemeAppView: BackgroundPrimary {
 
-    override func setup() {
-        super.setup()
-        body().embed(in: self)
-    }
+    // MARK: - Private Properties
+    private let themeAppStackView = ThemeAppStackView()
 
-    let themeAppStackView = ThemeAppStackView()
-    let navigationBar = MainNavigationBar()
-
-    private func body() -> UIView {
+    // MARK: - Private Methods
+    private func body(with props: [ThemeAppViewCell.Props]) -> UIView {
         VStack {
-            navigationBar
-                .setuptile(title: Profile.themeApp)
             themeAppStackView
+                .configure(with: props)
+            FlexibleSpacer()
         }
             .layoutMargins(.make(hInsets: 16))
+    }
+
+    // MARK: - Public Methods
+    public func configure(with props: [ThemeAppViewCell.Props]) {
+        subviews.forEach { $0.removeFromSuperview() }
+        body(with: props).embed(in: self)
     }
 }

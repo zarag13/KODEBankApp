@@ -1,15 +1,14 @@
-import Services
-import UIKit
-import Foundation
-import Combine
 import UI
-import Core
+import UIKit
+import Services
+import Combine
 
-final class AuthPhoneViewModel: ErrorUIHandler {
+final class AuthPhoneViewModel: NetworkErrorHandler {
     enum Output {
         case otp(ConfigAuthOtpModel)
         case incorrectNumber
         case error(ErrorView.Props)
+        case noInternet(UIAlertController)
     }
     enum Input {
         case phoneEntered(String)
@@ -34,10 +33,16 @@ final class AuthPhoneViewModel: ErrorUIHandler {
                     guard case let .failure(error) = error else { return }
                     guard let errorProps = self?.errorHandle(error, onTap: {
                         if error.appError.kind == .timeout {
-                            self?.checkInternet()
+                            self?.checkInternet(returnAlert: { alert in
+                                self?.onOutput?(.noInternet(alert))
+                            }, returnIsOn: {
+                                self?.login(phone: phone)
+                            })
+                        } else {
+                            self?.login(phone: phone)
                         }
-                        self?.login(phone: phone)
                     }) else { return }
+                    
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         self?.onOutput?(.error(errorProps))
                     }
@@ -64,42 +69,5 @@ final class AuthPhoneViewModel: ErrorUIHandler {
                 self.onOutput?(.incorrectNumber)
             }
         }
-    }
-}
-
-import Network
-// swiftlint:disable:next final_class
-class ErrorUIHandler {
-    
-    private var monitor: NWPathMonitor?
-
-    func errorHandle(_ error: ErrorWithContext, onTap: @escaping (() -> Void)) -> ErrorView.Props {
-        switch error.appError.kind {
-        case .timeout:
-            return .init(title: Common.attention, message: Common.Error.noInternet, image: Asset.BigIlustration.notWifi.image, buttonTitle: Common.repeat, onTap: onTap)
-        case .serverSendWrongData:
-            return .init(title: Common.attention, message: Common.Error.serverNotFound, image: Asset.BigIlustration.notData.image, buttonTitle: Common.repeat, onTap: onTap)
-        default:
-            return .init(title: Common.attention, message: Common.Error.engineringWorks, image: Asset.BigIlustration.notData.image, buttonTitle: Common.repeat, onTap: onTap)
-        }
-    }
-
-    func checkInternet() {
-        monitor = NWPathMonitor()
-        self.monitor?.pathUpdateHandler = { pathUpdateHandler in
-            if pathUpdateHandler.status == .satisfied {
-                print("Internet connection is on.")
-            } else {
-                if let url = URL(string: UIApplication.openSettingsURLString) {
-                    if UIApplication.shared.canOpenURL(url) {
-                      print("Can open real Divace")
-                    }
-                }
-            }
-            self.monitor?.cancel()
-            self.monitor = nil
-            print("123")
-        }
-        self.monitor?.start(queue: .main)
     }
 }

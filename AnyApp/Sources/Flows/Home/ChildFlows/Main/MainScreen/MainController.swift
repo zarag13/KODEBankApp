@@ -24,6 +24,9 @@ final class MainController: TemplateViewController<MainView>, NavigationBarAlway
         setupBindings()
         configureNavigationItem()
         viewModel.handle(.loadData)
+        rootView.button.onTap {
+            self.changeTabBar(hidden: false, animated: true)
+        }
     }
 
     private func configureNavigationItem() {

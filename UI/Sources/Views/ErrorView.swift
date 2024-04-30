@@ -20,7 +20,7 @@ public final class ErrorView: BackgroundPrimary {
 
     private func body(with props: Props) -> UIView {
         VStack {
-            navigatiomBar()
+            navigatiomBar(props.closeTap)
             FlexibleGroupedSpacer()
             imageView
                 .image(props.image)
@@ -42,12 +42,13 @@ public final class ErrorView: BackgroundPrimary {
         .layoutMargins(.init(top: 0, left: 16, bottom: 32, right: 16))
     }
 
-    private func navigatiomBar() -> UIView {
+    private func navigatiomBar(_ tap: VoidHandler?) -> UIView {
         HStack {
             ImageView(image: UIImage(named: "Icon24px/close"), foregroundStyle: .textPrimary)
                 .huggingPriority(.defaultHigh, axis: .horizontal)
                 .onTap { [weak self] in
                     self?.removeFromSuperview()
+                    tap?()
                 }
             FlexibleSpacer()
         }
@@ -72,19 +73,21 @@ extension ErrorView: ConfigurableView {
 
         public var buttonTitle: String
         public var onTap: VoidHandler?
+        public var closeTap: VoidHandler?
 
-        public init(title: String, message: String, image: UIImage, buttonTitle: String, onTap: VoidHandler? = nil) {
+        public init(title: String, message: String, image: UIImage, buttonTitle: String, onTap: VoidHandler? = nil, closeTap: VoidHandler? = nil) {
             self.title = title
             self.message = message
             self.image = image
             self.buttonTitle = buttonTitle
             self.onTap = onTap
+            self.closeTap = closeTap
         }
     }
 
     public func configure(with model: Props) {
         self.props = model
         subviews.forEach { $0.removeFromSuperview() }
-        body(with: model).embed(in: self)
+        body(with: model).embed(in: self, useSafeAreaGuide: false)
     }
 }
