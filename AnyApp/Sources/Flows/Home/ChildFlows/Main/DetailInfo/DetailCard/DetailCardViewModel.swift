@@ -84,6 +84,12 @@ final class DetailCardViewModel {
 
     private func loadData() {
         print(cardId.codeId)
+        coreRequestManager.detailCard(cardId.codeId).sink { error in
+            print(error)
+        } receiveValue: { response in
+            print(response.expiredAt)
+            print(response.number)
+        }.store(in: &cancellables)
         onOutput?(.content(.init(sections: [
             .detailHeader(headCartData + actionData),
             historyData

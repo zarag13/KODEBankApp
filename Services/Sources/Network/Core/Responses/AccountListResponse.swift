@@ -6,7 +6,7 @@
 //
 
 import Foundation
-//AccountListResponse
+
 public struct AccountListResponse: Decodable {
     public let accounts: [Account]
 }

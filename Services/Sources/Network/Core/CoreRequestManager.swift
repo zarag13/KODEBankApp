@@ -14,6 +14,8 @@ public protocol CoreManagerAbstract: AnyObject {
     func profileData() -> AppPublisher<ProfileResponse>
     func accountListData() -> AppPublisher<AccountListResponse>
     func depositListData() -> AppPublisher<DepositListReponse>
+    func detailAccount(_ id: Int) -> AppPublisher<DetailAccount>
+    func detailCard(_ id: String) -> AppPublisher<DetailCard>
 }
 
 final class CoreRequestManager: NetworkRequestManager, CoreManagerAbstract {
@@ -25,5 +27,11 @@ final class CoreRequestManager: NetworkRequestManager, CoreManagerAbstract {
     }
     func depositListData() -> AppPublisher<DepositListReponse> {
         request(path: CorePath.depositList)
+    }
+    func detailAccount(_ id: Int) -> AppPublisher<DetailAccount> {
+        request(path: CorePath.detailAccount, pathParams: ["id": id])
+    }
+    func detailCard(_ id: String) -> Core.AppPublisher<DetailCard> {
+        request(path: CorePath.detailCard, pathParams: ["id": id])
     }
 }

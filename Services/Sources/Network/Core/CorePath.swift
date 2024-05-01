@@ -11,6 +11,8 @@ enum CorePath: String, Path, CaseIterable {
     case profile
     case accocuntList
     case depositList
+    case detailAccount
+    case detailCard
 
     var id: String {
         switch self {
@@ -20,6 +22,10 @@ enum CorePath: String, Path, CaseIterable {
             return "accocuntList"
         case .depositList:
             return "depositList"
+        case .detailAccount:
+            return "detailAccount"
+        case .detailCard:
+            return "detailCard"
         }
     }
 
@@ -35,6 +41,10 @@ enum CorePath: String, Path, CaseIterable {
             return "\(version)core/account/list"
         case .depositList:
             return "\(version)core/deposit/list"
+        case .detailAccount:
+            return "\(version)core/account/{id}"
+        case .detailCard:
+            return "\(version)core/card/{id}"
         }
     }
 
@@ -48,6 +58,10 @@ enum CorePath: String, Path, CaseIterable {
             return .core(.accountList)
         case .depositList:
             return .core(.depositList)
+        case .detailAccount:
+            return .core(.account)
+        case .detailCard:
+            return .core(.card)
         }
     }
 }
@@ -63,6 +77,10 @@ extension CorePath {
             return "Receive Account List"
         case .depositList:
             return "Receive Deposit List"
+        case .detailAccount:
+            return "Receive Detail Account"
+        case .detailCard:
+            return "Receive Detail Card"
         }
     }
 

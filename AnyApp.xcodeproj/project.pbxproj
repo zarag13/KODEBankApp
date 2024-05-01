@@ -260,6 +260,8 @@
 		ED75B4E12BE1E77A0020000B /* ConfigurationDetailAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED75B4E02BE1E77A0020000B /* ConfigurationDetailAccountModel.swift */; };
 		ED9CD4872BE2077200757E12 /* Main.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED9CD4862BE2077200757E12 /* Main.strings */; };
 		ED9CD4892BE207DF00757E12 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9CD4882BE207DF00757E12 /* Main.swift */; };
+		ED9CD48B2BE24E4000757E12 /* DetailAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9CD48A2BE24E4000757E12 /* DetailAccount.swift */; };
+		ED9CD48D2BE2509D00757E12 /* DetailCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9CD48C2BE2509D00757E12 /* DetailCard.swift */; };
 		EDC60DEBCAD6179A2C1DE924 /* PersistentLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375875A8550AAAF3D551B7EC /* PersistentLayer.swift */; };
 		EDFC44772BCBE4BD00034EAA /* AuthPhoneTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44762BCBE4BD00034EAA /* AuthPhoneTextField.swift */; };
 		EDFC447A2BCC1C9C00034EAA /* OtpTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44792BCC1C9C00034EAA /* OtpTextField.swift */; };
@@ -683,6 +685,8 @@
 		ED81BEF1ADE3C7DAE5510321 /* UITextView+Attributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Attributes.swift"; sourceTree = "<group>"; };
 		ED9CD4862BE2077200757E12 /* Main.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Main.strings; sourceTree = "<group>"; };
 		ED9CD4882BE207DF00757E12 /* Main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
+		ED9CD48A2BE24E4000757E12 /* DetailAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAccount.swift; sourceTree = "<group>"; };
+		ED9CD48C2BE2509D00757E12 /* DetailCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCard.swift; sourceTree = "<group>"; };
 		EDFC44762BCBE4BD00034EAA /* AuthPhoneTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPhoneTextField.swift; sourceTree = "<group>"; };
 		EDFC44792BCC1C9C00034EAA /* OtpTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpTextField.swift; sourceTree = "<group>"; };
 		EDFC447B2BCD1DC700034EAA /* MainCellFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCellFactory.swift; sourceTree = "<group>"; };
@@ -1715,6 +1719,8 @@
 				ED28940A2BDC127800016DF6 /* ProfileResponse.swift */,
 				ED5AB1202BE10C330015059A /* AccountListResponse.swift */,
 				ED5AB1222BE10C410015059A /* DepositListReponse.swift */,
+				ED9CD48A2BE24E4000757E12 /* DetailAccount.swift */,
+				ED9CD48C2BE2509D00757E12 /* DetailCard.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -2880,6 +2886,8 @@
 				2D2904046A7203699AB3465E /* RequestInterceptor.swift in Sources */,
 				10E588192BC051C100D05347 /* AuthRequestManager.swift in Sources */,
 				62005363BF978419E779EF53 /* RequestRouter.swift in Sources */,
+				ED9CD48B2BE24E4000757E12 /* DetailAccount.swift in Sources */,
+				ED9CD48D2BE2509D00757E12 /* DetailCard.swift in Sources */,
 				9C40E0FA08B68CF1A046F430 /* Server.swift in Sources */,
 				153DB832A6F06DFC5204522B /* ServiceLayer.swift in Sources */,
 				B985D209AEA4FF65D48F550F /* ServicesFactory.swift in Sources */,
