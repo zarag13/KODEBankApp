@@ -29,12 +29,14 @@ final class MainFlowAssembly: Assembly, Identifiable {
             let viewModel = MainViewModel(authRequestManager: (resolver ~> NetworkFactory.self).makeCoreRequestManager())
             return MainController(viewModel: viewModel)
         }
-        container.register(DetailCardController.self) { _ in
-            let viewModel = DetailCardViewModel()
+
+        container.register(DetailCardController.self) { resolver, model in
+            let viewModel = DetailCardViewModel(cardId: model, coreRequestManager: (resolver ~> NetworkFactory.self).makeCoreRequestManager())
             return DetailCardController(viewModel: viewModel)
         }
-        container.register(DetailAccountController.self) { resolver in
-            let viewModel = DetailAccountViewModel()
+
+        container.register(DetailAccountController.self) { resolver, model in
+            let viewModel = DetailAccountViewModel(configurationModel: model, coreRequestManager: (resolver ~> NetworkFactory.self).makeCoreRequestManager())
             return DetailAccountController(viewModel: viewModel)
         }
     }

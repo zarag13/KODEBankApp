@@ -23,6 +23,16 @@ final class DetailAccountViewModel {
     }
 
     var onOutput: ((Output) -> Void)?
+    
+    private let configurationModel: ConfigurationDetailAccountModel
+    private let coreRequestManager: CoreManagerAbstract
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(configurationModel: ConfigurationDetailAccountModel, coreRequestManager: CoreManagerAbstract) {
+        self.configurationModel = configurationModel
+        self.coreRequestManager = coreRequestManager
+    }
+    
 
     func handle(_ input: Input) {
         switch input {
@@ -74,6 +84,7 @@ final class DetailAccountViewModel {
     ]
 
     private func loadData() {
+        print(configurationModel.accountId)
         onOutput?(.content(.init(sections: [
             .detailHeader(headCartData + actionData),
             historyData

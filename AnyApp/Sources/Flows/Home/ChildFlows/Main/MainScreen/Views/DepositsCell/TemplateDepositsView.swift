@@ -8,6 +8,7 @@
 import UIKit
 import UI
 import AppIndependent
+import Services
 
 final class TemplateDepositsView: BackgroundPrimary {
 
@@ -22,8 +23,7 @@ final class TemplateDepositsView: BackgroundPrimary {
     // MARK: - Private methods
     private func body(with props: Props) -> UIView {
         HStack(alignment: .center, distribution: .fill, spacing: 16) {
-            ImageView(image: props.rightImage)
-                .huggingPriority(.defaultHigh, axis: .horizontal)
+            self.setupLeftIcon(image: props.leftImage)
             VStack(spacing: 8) {
                 HStack(alignment: .center) {
                     Label(text: props.title, foregroundStyle: .textPrimary, fontStyle: .body15r)
@@ -32,7 +32,7 @@ final class TemplateDepositsView: BackgroundPrimary {
                         .huggingPriority(.defaultHigh, axis: .horizontal)
                 }
                 HStack(alignment: .center) {
-                    Label(text: props.description, foregroundStyle: .contentAccentPrimary, fontStyle: .body15r)
+                    Label(text: props.balance, foregroundStyle: .contentAccentPrimary, fontStyle: .body15r)
                         .huggingPriority(.defaultLow, axis: .horizontal)
                     Label(text: props.date, foregroundStyle: .textTertiary, fontStyle: .caption11)
                         .huggingPriority(.defaultHigh, axis: .horizontal)
@@ -42,8 +42,20 @@ final class TemplateDepositsView: BackgroundPrimary {
         }
         .layoutMargins(.make(vInsets: 14, hInsets: 16))
         .onTap { [weak self] in
-            self?.props?.onTap?(props.id)
+            self?.props?.onTap?("\(props.id)")
         }
+    }
+
+    private func setupLeftIcon(image: UIImage) -> UIView {
+        BackgroundView() {
+            ImageView(image: image)
+                .foregroundStyle(.textPrimary)
+                .huggingPriority(.defaultHigh, axis: .horizontal)
+                .backgroundColor(.clear)
+        }
+        .backgroundStyle(.contentSecondary)
+        .masksToBounds(true)
+        .cornerRadius(20)
     }
 }
 
@@ -53,10 +65,30 @@ extension TemplateDepositsView: ConfigurableView {
     typealias Model = Props
 
     struct Props: Hashable {
-        let id: String
-        let title: String
-        let description: String
-        let rightImage: UIImage
+        let networkProps: Deposit
+        var id: Int {
+            networkProps.depositID
+        }
+        var title: String {
+            networkProps.name
+        }
+        var balance: String {
+            switch networkProps.currency {
+            case .rub:
+                let nf = NumberFormatter()
+                nf.minimumFractionDigits = 2
+                nf.maximumFractionDigits = 2
+                nf.numberStyle = .decimal
+                nf.locale = Locale.current
+                return "\(nf.string(from: networkProps.balance as NSNumber) ?? "0") ₽"
+            }
+        }
+        var leftImage: UIImage {
+            switch networkProps.currency {
+            case .rub:
+                return Asset.Icon40px.rub.image
+            }
+        }
         let percentStake: String
         let date: String
         var onTap: StringHandler?
@@ -68,8 +100,8 @@ extension TemplateDepositsView: ConfigurableView {
         public func hash(into hasher: inout Hasher) {
             hasher.combine(id)
             hasher.combine(title)
-            hasher.combine(description)
-            hasher.combine(rightImage)
+            hasher.combine(balance)
+            hasher.combine(leftImage)
             hasher.combine(percentStake)
             hasher.combine(date)
         }
@@ -79,5 +111,6 @@ extension TemplateDepositsView: ConfigurableView {
         self.props = model
         subviews.forEach { $0.removeFromSuperview() }
         body(with: model).embed(in: self)
+        self.layoutIfNeeded()
     }
 }

@@ -26,23 +26,23 @@ final class MainFlowCoordinator: Coordinator {
         innerRouter.setRootModule(controller)
         controller.openDetailController = { [weak self] event in
             switch event {
-            case .detailCard:
-                self?.detailCardController()
-            case .detailAccount:
-                self?.detailAccountController()
+            case .detailCard(let model):
+                self?.detailCardController(model)
+            case .detailAccount(let model):
+                self?.detailAccountController(model)
             }
         }
         return innerRouter.rootController
     }
 
-    private func detailCardController() {
-        let controller = resolver ~> DetailCardController.self
+    private func detailCardController(_ id: DetailCardModel) {
+        let controller = resolver ~> (DetailCardController.self, id)
         controller.hidesBottomBarWhenPushed = true
         innerRouter.push(controller)
     }
 
-    private func detailAccountController() {
-        let controller = resolver ~> DetailAccountController.self
+    private func detailAccountController(_ model: ConfigurationDetailAccountModel) {
+        let controller = resolver ~> (DetailAccountController.self, model)
         controller.hidesBottomBarWhenPushed = true
         innerRouter.push(controller)
     }

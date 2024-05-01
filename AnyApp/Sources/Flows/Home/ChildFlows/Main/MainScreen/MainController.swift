@@ -7,8 +7,8 @@ final class MainController: TemplateViewController<MainView>, NavigationBarAlway
     typealias ViewModel = MainViewModel
 
     enum Event {
-        case detailCard
-        case detailAccount
+        case detailCard(DetailCardModel)
+        case detailAccount(ConfigurationDetailAccountModel)
     }
     var openDetailController: ((Event) -> Void)?
 
@@ -24,14 +24,15 @@ final class MainController: TemplateViewController<MainView>, NavigationBarAlway
         setupBindings()
         configureNavigationItem()
         viewModel.handle(.loadData)
-        rootView.button.onTap {
-            self.changeTabBar(hidden: false, animated: true)
-        }
     }
 
     private func configureNavigationItem() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Главная"
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
 
     private func setupBindings() {
@@ -43,10 +44,10 @@ final class MainController: TemplateViewController<MainView>, NavigationBarAlway
                 self?.rootView.addNewItems(nweItems: new, into: section)
             case .closeHiddenContent(let items):
                 self?.rootView.closeNewItems(nweItems: items)
-            case .open:
-                self?.openDetailController?(.detailAccount)
-            case .openCard:
-                self?.openDetailController?(.detailCard)
+            case .openCard(let model):
+                self?.openDetailController?(.detailCard(model))
+            case .openDetailAccount(let model):
+                self?.openDetailController?(.detailAccount(model))
             }
         }
 

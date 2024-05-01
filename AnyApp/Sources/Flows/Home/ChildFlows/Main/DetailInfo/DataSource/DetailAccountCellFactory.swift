@@ -41,7 +41,7 @@ final class DetailAccountCellFactory {
             view.configure(with: props)
         }
     }
-    
+
     func makeSettingsAccountCell(
         for indexPath: IndexPath,
         with props: SettingsAccountView.Props
@@ -68,10 +68,10 @@ final class DetailAccountCellFactory {
 
     func makeTemplateHeaderCell(
         for indexPath: IndexPath,
-        with props: TemplateHeaderView.Props
+        with props: HeaderDetailInfoCell.Props
     ) -> UITableViewCell {
         tableView.dequeueTemplateCell(
-            forView: TemplateHeaderView.self,
+            forView: HeaderDetailInfoCell.self,
             for: indexPath
         ) { view, _ in
             view.configure(with: props)
@@ -109,7 +109,7 @@ final class DetailAccountCellFactory {
             view.configure(with: props)
         }
     }
-    
+
     func makeDetailAccountHeaderView(
         for indexPath: IndexPath,
         with props: DetailAccountHeaderView.Props

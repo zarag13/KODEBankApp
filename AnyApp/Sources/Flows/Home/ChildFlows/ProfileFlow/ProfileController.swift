@@ -30,6 +30,8 @@ final class ProfileController: TemplateViewController<ProfileView>, NavigationBa
         viewModel.onOutput = { [weak self] event in
             switch event {
             case .content(let props):
+                self?.changeTabBar(hidden: false, animated: true)
+                self?.stopErrorAnimation()
                 self?.rootView.configured(with: props)
             case .error(let error, let section):
                 if self?.tabBarController?.selectedIndex == 1 {

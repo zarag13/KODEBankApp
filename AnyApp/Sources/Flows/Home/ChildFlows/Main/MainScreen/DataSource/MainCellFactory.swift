@@ -28,7 +28,6 @@ final class MainCellFactory {
         )
     }
 
-    // MARK: - Cells
     func makeTemplateCardCell(
         for indexPath: IndexPath,
         with props: TemplateCardView.Props
@@ -82,7 +81,6 @@ final class MainCellFactory {
         with props: BaseTableSpacer.Props
     ) -> UITableViewCell {
         tableView.dequeueSpacer(props, for: indexPath)
-            .backgroundColor(BackgroundStyle.backgroundPrimary.color)
     }
 
     func makeErrorDownloadCell(

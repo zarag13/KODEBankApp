@@ -239,7 +239,6 @@
 		ED2893FB2BD9C42600016DF6 /* Plurals.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = ED2893FA2BD9C42600016DF6 /* Plurals.stringsdict */; };
 		ED2893FE2BD9DE0900016DF6 /* ErrorDownloadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2893FD2BD9DE0900016DF6 /* ErrorDownloadCell.swift */; };
 		ED2894012BDA5E0200016DF6 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2894002BDA5E0200016DF6 /* String+Extension.swift */; };
-		ED2894022BDA5E5E00016DF6 /* BackgroundPrimary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC45362BD7D38D00034EAA /* BackgroundPrimary+Extension.swift */; };
 		ED2894032BDA5E6200016DF6 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44CD2BCE8FC400034EAA /* UITextField+Extension.swift */; };
 		ED2894062BDC11FC00016DF6 /* CorePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2894052BDC11FC00016DF6 /* CorePath.swift */; };
 		ED2894082BDC120C00016DF6 /* CoreRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2894072BDC120C00016DF6 /* CoreRequestManager.swift */; };
@@ -255,6 +254,10 @@
 		ED5AB1212BE10C330015059A /* AccountListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5AB1202BE10C330015059A /* AccountListResponse.swift */; };
 		ED5AB1232BE10C410015059A /* DepositListReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5AB1222BE10C410015059A /* DepositListReponse.swift */; };
 		ED5AB1262BE161200015059A /* AuthPhoneTextField+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5AB1252BE161200015059A /* AuthPhoneTextField+Delegate.swift */; };
+		ED75B4D62BE1E49F0020000B /* BackgroundPrimary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC45362BD7D38D00034EAA /* BackgroundPrimary+Extension.swift */; };
+		ED75B4D82BE1E5540020000B /* HeaderDetailInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED75B4D72BE1E5540020000B /* HeaderDetailInfoCell.swift */; };
+		ED75B4DC2BE1E6120020000B /* DetailCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED75B4DB2BE1E6120020000B /* DetailCardModel.swift */; };
+		ED75B4E12BE1E77A0020000B /* ConfigurationDetailAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED75B4E02BE1E77A0020000B /* ConfigurationDetailAccountModel.swift */; };
 		EDC60DEBCAD6179A2C1DE924 /* PersistentLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375875A8550AAAF3D551B7EC /* PersistentLayer.swift */; };
 		EDFC44772BCBE4BD00034EAA /* AuthPhoneTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44762BCBE4BD00034EAA /* AuthPhoneTextField.swift */; };
 		EDFC447A2BCC1C9C00034EAA /* OtpTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC44792BCC1C9C00034EAA /* OtpTextField.swift */; };
@@ -672,6 +675,9 @@
 		ED5AB1202BE10C330015059A /* AccountListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountListResponse.swift; sourceTree = "<group>"; };
 		ED5AB1222BE10C410015059A /* DepositListReponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositListReponse.swift; sourceTree = "<group>"; };
 		ED5AB1252BE161200015059A /* AuthPhoneTextField+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthPhoneTextField+Delegate.swift"; sourceTree = "<group>"; };
+		ED75B4D72BE1E5540020000B /* HeaderDetailInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderDetailInfoCell.swift; sourceTree = "<group>"; };
+		ED75B4DB2BE1E6120020000B /* DetailCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCardModel.swift; sourceTree = "<group>"; };
+		ED75B4E02BE1E77A0020000B /* ConfigurationDetailAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationDetailAccountModel.swift; sourceTree = "<group>"; };
 		ED81BEF1ADE3C7DAE5510321 /* UITextView+Attributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Attributes.swift"; sourceTree = "<group>"; };
 		EDFC44762BCBE4BD00034EAA /* AuthPhoneTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPhoneTextField.swift; sourceTree = "<group>"; };
 		EDFC44792BCC1C9C00034EAA /* OtpTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpTextField.swift; sourceTree = "<group>"; };
@@ -1751,6 +1757,22 @@
 			path = AuthPhoneTextField;
 			sourceTree = "<group>";
 		};
+		ED75B4D92BE1E5F10020000B /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				ED75B4DB2BE1E6120020000B /* DetailCardModel.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		ED75B4DF2BE1E7510020000B /* Entuty */ = {
+			isa = PBXGroup;
+			children = (
+				ED75B4E02BE1E77A0020000B /* ConfigurationDetailAccountModel.swift */,
+			);
+			path = Entuty;
+			sourceTree = "<group>";
+		};
 		EDFC44752BCBE48300034EAA /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -1971,6 +1993,7 @@
 		EDFC44F12BD32F0B00034EAA /* DetailAccount */ = {
 			isa = PBXGroup;
 			children = (
+				ED75B4DF2BE1E7510020000B /* Entuty */,
 				EDFC44F22BD32F4100034EAA /* Views */,
 				EDFC44F72BD32FCD00034EAA /* DetailAccountView.swift */,
 				EDFC450C2BD3373900034EAA /* DetailAccountController.swift */,
@@ -2035,6 +2058,7 @@
 		EDFC45132BD3CD6B00034EAA /* DetailCard */ = {
 			isa = PBXGroup;
 			children = (
+				ED75B4D92BE1E5F10020000B /* Entity */,
 				EDFC45152BD3CDEE00034EAA /* Views */,
 				EDFC45162BD3CE0500034EAA /* DetailCardView.swift */,
 				EDFC45182BD3CE1B00034EAA /* DetailCardController.swift */,
@@ -2046,6 +2070,7 @@
 		EDFC45142BD3CDAE00034EAA /* CommonViews */ = {
 			isa = PBXGroup;
 			children = (
+				ED75B4D72BE1E5540020000B /* HeaderDetailInfoCell.swift */,
 				EDFC45102BD3B19C00034EAA /* ActionsTabsView.swift */,
 				EDFC45002BD335ED00034EAA /* HistoryAccountCell */,
 				EDFC45032BD3368000034EAA /* SettingsAccountCell */,
@@ -2730,6 +2755,7 @@
 				EDFC44D52BCECC6000034EAA /* ShimmerDetailInfoView.swift in Sources */,
 				10E588122BC04F4D00D05347 /* AuthPhoneController.swift in Sources */,
 				EDFC45272BD6682700034EAA /* ThemeAppViewModel.swift in Sources */,
+				ED75B4DC2BE1E6120020000B /* DetailCardModel.swift in Sources */,
 				EDFC449A2BCD1DC700034EAA /* MainViewModel.swift in Sources */,
 				3FBF1D8B7572FCB2720E545B /* Assets.swift in Sources */,
 				EDFC44932BCD1DC700034EAA /* MainDataSource.swift in Sources */,
@@ -2764,6 +2790,7 @@
 				EDFC450D2BD3373900034EAA /* DetailAccountController.swift in Sources */,
 				EDFC452F2BD710AA00034EAA /* ThemeAppViewCell.swift in Sources */,
 				10E588142BC04FED00D05347 /* AuthPhoneView.swift in Sources */,
+				ED75B4D82BE1E5540020000B /* HeaderDetailInfoCell.swift in Sources */,
 				EDFC44DF2BCEE14E00034EAA /* ThemeAppView.swift in Sources */,
 				EDFC44772BCBE4BD00034EAA /* AuthPhoneTextField.swift in Sources */,
 				EDFC45492BD9C20C00034EAA /* Plurals.swift in Sources */,
@@ -2786,6 +2813,7 @@
 				EDFC449F2BCD1DC700034EAA /* ProfileViewModel.swift in Sources */,
 				EDFC449E2BCD1DC700034EAA /* ProfileView.swift in Sources */,
 				EDFC44AB2BCD1E7D00034EAA /* LibraryManager.swift in Sources */,
+				ED75B4E12BE1E77A0020000B /* ConfigurationDetailAccountModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2998,6 +3026,7 @@
 				27A229FE8FE4BA51B617BCEB /* UITextField+QuickProps.swift in Sources */,
 				EDFC44BD2BCD1F3100034EAA /* Palette.swift in Sources */,
 				D671B558E940649A66EFB739 /* UITextView+Attributes.swift in Sources */,
+				ED75B4D62BE1E49F0020000B /* BackgroundPrimary+Extension.swift in Sources */,
 				4BDE0AD217C65CAA1DFF6BBF /* UITextView+QuickProps.swift in Sources */,
 				D7C45D988A9BAAC39027B6DF /* UIView+Animations.swift in Sources */,
 				C40422861A9BABCA1BA25C49 /* UIView+CommonExtensions.swift in Sources */,
@@ -3028,7 +3057,6 @@
 				A76950C75822447BA4B89351 /* DateFormat.swift in Sources */,
 				40007024B01549F16117D144 /* DefaultParsers+Date.swift in Sources */,
 				5FAF38112F516D46DA79B771 /* DefaultParsers.swift in Sources */,
-				ED2894022BDA5E5E00016DF6 /* BackgroundPrimary+Extension.swift in Sources */,
 				ED2894032BDA5E6200016DF6 /* UITextField+Extension.swift in Sources */,
 				9891FE3CC141203505CBA2FF /* ErrorWithContext.swift in Sources */,
 				938BCAE642091FE8FC1E6427 /* RequestContext.swift in Sources */,

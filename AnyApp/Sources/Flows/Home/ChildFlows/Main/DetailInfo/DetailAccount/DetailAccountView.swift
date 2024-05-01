@@ -14,6 +14,7 @@ final class DetailAccountView: BackgroundPrimary {
     var onNewProduct: VoidHandler?
 
     private let tableView = BaseTableView()
+        .hidingScrollIndicators()
     private lazy var dataSource = DetailAccountDataSource(tableView: tableView)
 
     override func setup() {

@@ -1,8 +1,15 @@
+//
+//  HeaderDetailInfoCell.swift
+//  AnyApp
+//
+//  Created by Kirill on 01.05.2024.
+//
+
 import UIKit
 import UI
 import AppIndependent
 
-final class TemplateHeaderView: BackgroundPrimary {
+final class HeaderDetailInfoCell: BackgroundPrimary {
 
     // MARK: - Private Properties
 
@@ -25,20 +32,20 @@ final class TemplateHeaderView: BackgroundPrimary {
                 .fontStyle(.body15sb)
                 .foregroundStyle(.textTertiary)
         }
-        .backgroundStyle(.backgroundSecondary)
+        .backgroundStyle(.backgroundPrimary)
     }
 }
 
 // MARK: - Configurable
 
-extension TemplateHeaderView: ConfigurableView {
+extension HeaderDetailInfoCell: ConfigurableView {
 
     typealias Model = Props
 
     struct Props: Hashable {
         let title: String
 
-        public static func == (lhs: TemplateHeaderView.Props, rhs: TemplateHeaderView.Props) -> Bool {
+        public static func == (lhs: HeaderDetailInfoCell.Props, rhs: HeaderDetailInfoCell.Props) -> Bool {
             lhs.hashValue == rhs.hashValue
         }
 
@@ -49,6 +56,5 @@ extension TemplateHeaderView: ConfigurableView {
 
     public func configure(with model: Props) {
         titleLabel.text(model.title)
-        self.layoutIfNeeded()
     }
 }

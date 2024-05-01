@@ -23,6 +23,15 @@ final class DetailCardViewModel {
     }
 
     var onOutput: ((Output) -> Void)?
+    
+    private let cardId: DetailCardModel
+    private let coreRequestManager: CoreManagerAbstract
+    private var cancellables = Set<AnyCancellable>()
+
+    init(cardId: DetailCardModel, coreRequestManager: CoreManagerAbstract) {
+        self.cardId = cardId
+        self.coreRequestManager = coreRequestManager
+    }
 
     func handle(_ input: Input) {
         switch input {
@@ -74,6 +83,7 @@ final class DetailCardViewModel {
     ]
 
     private func loadData() {
+        print(cardId.codeId)
         onOutput?(.content(.init(sections: [
             .detailHeader(headCartData + actionData),
             historyData

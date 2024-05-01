@@ -8,6 +8,7 @@ final class ProfileView: BackgroundPrimary {
     var onNewProduct: VoidHandler?
 
     private let tableView = BaseTableView()
+        .hidingScrollIndicators()
     private let refreshControl = RefreshControll(contentStyle: .contentAccentTertiary)
     private lazy var dataSource = ProfileDataSource(tableView: tableView)
 
@@ -29,7 +30,6 @@ final class ProfileView: BackgroundPrimary {
 
     private func body() -> UIView {
         tableView
-            .hidingScrollIndicators()
     }
 }
 

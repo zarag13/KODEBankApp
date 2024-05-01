@@ -24,16 +24,13 @@ final class ErrorDownloadCell: BackgroundPrimary {
     private func body(with props: Props) -> UIView {
         VStack(alignment: .center, distribution: .fill) {
             Spacer(.px36)
-            //props.title
             Label(text: "Упс, что-то пошло не так", foregroundStyle: .textPrimary, fontStyle: .subtitle17sb)
                 .textAlignment(.center)
             Spacer(.px6)
-            //props.description
             Label(text: "Не удалось загрузить \nчасть контента", foregroundStyle: .textSecondary, fontStyle: .body15r)
                 .textAlignment(.center)
                 .multiline()
             Spacer(.px16)
-            //props.titleButton
             BackgroundView(vPadding: 1, hPadding: 1) {
                 errorLabel
                     .textAlignment(.center)

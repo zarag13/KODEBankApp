@@ -29,7 +29,7 @@ public extension UITableView {
 }
 
 public extension UITableView {
-    
+
     func dequeueCell<T: UITableViewCell>(
         forCellClass cellClass: T.Type,
         for indexPath: IndexPath,
@@ -40,7 +40,7 @@ public extension UITableView {
         cell.configure(with: model)
         return cell
     }
-    
+
     func dequeueTemplateCell<V: UIView>(
         forView _: V.Type,
         for indexPath: IndexPath,
@@ -50,11 +50,11 @@ public extension UITableView {
         cell.view.configure(with: model)
         return cell
     }
-    
+
     func dequeueSpacer(_ model: BaseTableSpacer.Model, for indexPath: IndexPath) -> UITableViewCell {
         return dequeueTemplateCell(forView: BaseTableSpacer.self, for: indexPath, withModel: model)
     }
-    
+
     func dequeueSeparator(_ props: BaseSeparator.Props, for indexPath: IndexPath) -> UITableViewCell {
         return dequeueTemplateCell(forView: BaseSeparator.self, for: indexPath, withModel: props)
     }

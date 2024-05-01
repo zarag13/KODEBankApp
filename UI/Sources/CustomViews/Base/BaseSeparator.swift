@@ -3,7 +3,7 @@ import UIKit
 // swiftlint:disable:next final_class
 open class BaseSeparator: BaseView, ConfigurableView {
 
-    public struct Props {
+    public struct Props: Hashable {
 
         public let height: CGFloat
         public let backgroundColor: UIColor
@@ -20,6 +20,15 @@ open class BaseSeparator: BaseView, ConfigurableView {
             self.backgroundColor = backgroundColor
             self.separatorColor = separatorColor
             self.insets = insets
+        }
+        public static func == (lhs: BaseSeparator.Props, rhs: BaseSeparator.Props) -> Bool {
+            lhs.hashValue == rhs.hashValue
+        }
+
+        public func hash(into hasher: inout Hasher) {
+            hasher.combine(height)
+            hasher.combine(backgroundColor)
+            hasher.combine(separatorColor)
         }
     }
 

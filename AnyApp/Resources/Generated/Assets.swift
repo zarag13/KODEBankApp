@@ -160,20 +160,19 @@ public enum Asset {
   public static let logoM = ImageAsset(name: "LogoM")
   public static let logoS = ImageAsset(name: "LogoS")
   public enum SmallIcon {
-    public static let masterCard = ImageAsset(name: "SmallIcon/MasterCard")
     public static let messages = ImageAsset(name: "SmallIcon/Messages")
     public static let notificationBadge = ImageAsset(name: "SmallIcon/Notification Badge")
     public static let property1Normal = ImageAsset(name: "SmallIcon/Property 1=Normal")
     public static let property1Modle = ImageAsset(name: "SmallIcon/Property 1=modle")
     public static let property1Small = ImageAsset(name: "SmallIcon/Property 1=small")
-    public static let visa = ImageAsset(name: "SmallIcon/Visa")
+    public static let masterCard = ImageAsset(name: "SmallIcon/masterCard")
+    public static let visa = ImageAsset(name: "SmallIcon/visa")
     public static let whitePlusDots = ImageAsset(name: "SmallIcon/white_plus dots")
   }
   public enum MiniBankCard {
-    public static let bankCard = ImageAsset(name: "miniBankCard/BankCard")
-    public static let bankCardDisable = ImageAsset(name: "miniBankCard/BankCardDisable")
-    public static let raiffaizen = ImageAsset(name: "miniBankCard/Raiffaizen")
-    public static let sberbank = ImageAsset(name: "miniBankCard/Sberbank")
+    public static let bankCard = ImageAsset(name: "miniBankCard/bankCard")
+    public static let raiffaizen = ImageAsset(name: "miniBankCard/raiffaizen")
+    public static let sberbank = ImageAsset(name: "miniBankCard/sberbank")
   }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name

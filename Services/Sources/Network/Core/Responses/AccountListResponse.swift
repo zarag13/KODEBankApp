@@ -43,7 +43,8 @@ public struct Card: Decodable {
     public enum CardType: String, Decodable {
         case physical, digital
     }
-    public let name, number, status, cardID: String
+    public let status: Status
+    public let name, number, cardID: String
     public let cardType: CardType
     public let paymentSystem: PaymentSystem
     enum CodingKeys: String, CodingKey {

@@ -9,6 +9,7 @@ import UIKit
 import UI
 import AppIndependent
 import Combine
+import Services
 
 final class TemplateAccountView: BackgroundPrimary {
     enum State {
@@ -29,11 +30,10 @@ final class TemplateAccountView: BackgroundPrimary {
     // MARK: - Private methods
     private func body(with props: Props) -> UIView {
         HStack(alignment: .center, distribution: .fill, spacing: 16) {
-            ImageView(image: props.leftImage)
-                .huggingPriority(.defaultHigh, axis: .horizontal)
+            setupLeftIcon(image: props.leftImage)
             VStack(spacing: 6) {
                 Label(text: props.title, foregroundStyle: .contentAccentTertiary, fontStyle: .body15r)
-                Label(text: props.description, foregroundStyle: .contentAccentPrimary, fontStyle: .body15r)
+                Label(text: props.balanceMask, foregroundStyle: .contentAccentPrimary, fontStyle: .body15r)
             }
                 .huggingPriority(.defaultLow, axis: .horizontal)
             BackgroundView(vPadding: 2) {
@@ -46,13 +46,25 @@ final class TemplateAccountView: BackgroundPrimary {
         }
         .layoutMargins(.init(top: 16, left: 16, bottom: 14, right: 16))
         .onTap { [weak self] in
-            self?.props?.openTap?()
+            self?.props?.openTap?(props.id)
         }
+    }
+
+    private func setupLeftIcon(image: UIImage) -> UIView {
+        BackgroundView() {
+            ImageView(image: image)
+                .foregroundStyle(.textPrimary)
+                .huggingPriority(.defaultHigh, axis: .horizontal)
+                .backgroundColor(.clear)
+        }
+        .backgroundStyle(.contentSecondary)
+        .masksToBounds(true)
+        .cornerRadius(20)
     }
 
     private func configureRightImage(props: Props) -> ImageView {
         let rightImage = ImageView()
-            .foregroundStyle(.contentTertiary)
+            .foregroundStyle(.textTertiary)
             .onTap {
                 [weak self] in
                    switch self?.state.value {
@@ -83,13 +95,30 @@ extension TemplateAccountView: ConfigurableView {
     typealias Model = Props
 
     struct Props: Hashable {
-        let id: String
-        let title: String
-        let description: String
-        let leftImage: UIImage
-        
+        public let title: String
+        public let networkProps: Account
+        public var id: Int {
+            return networkProps.accountID
+        }
+        public var leftImage: UIImage {
+            switch networkProps.currency {
+            case .rub:
+                return Asset.Icon40px.rub.image
+            }
+        }
+        public var balanceMask: String {
+            switch networkProps.currency {
+            case .rub:
+                let nf = NumberFormatter()
+                nf.minimumFractionDigits = 2
+                nf.maximumFractionDigits = 2
+                nf.numberStyle = .decimal
+                nf.locale = Locale.current
+                return "\(nf.string(from: networkProps.balance as NSNumber) ?? "0") ₽"
+            }
+        }
         var onTap: ((Props, State) -> Void)?
-        var openTap: (() -> Void)?
+        var openTap: ((Int) -> Void)?
 
         public static func == (lhs: TemplateAccountView.Props, rhs: TemplateAccountView.Props) -> Bool {
             lhs.hashValue == rhs.hashValue
@@ -98,8 +127,6 @@ extension TemplateAccountView: ConfigurableView {
         public func hash(into hasher: inout Hasher) {
             hasher.combine(id)
             hasher.combine(title)
-            hasher.combine(description)
-            hasher.combine(leftImage)
         }
     }
 
@@ -107,5 +134,6 @@ extension TemplateAccountView: ConfigurableView {
         self.props = model
         subviews.forEach { $0.removeFromSuperview() }
         body(with: model).embed(in: self)
+        self.layoutIfNeeded()
     }
 }

@@ -12,9 +12,11 @@ public class BaseTableSpacer: BaseView, ConfigurableView {
     public struct Props: Hashable {
         public let id = UUID()
         public let height: CGFloat
+        public let style: BackgroundStyle?
 
-        public init(height: CGFloat) {
+        public init(height: CGFloat, style: BackgroundStyle?) {
             self.height = height
+            self.style = style
         }
     }
 
@@ -22,6 +24,6 @@ public class BaseTableSpacer: BaseView, ConfigurableView {
 
     public func configure(with model: Model) {
         subviews.forEach { $0.removeFromSuperview() }
-        BaseView().height(model.height).embed(in: self)
+        BackgroundView().height(model.height).backgroundStyle(model.style ?? .none).embed(in: self)
     }
 }

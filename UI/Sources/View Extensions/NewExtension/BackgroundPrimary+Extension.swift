@@ -5,8 +5,6 @@
 //  Created by Kirill on 23.04.2024.
 //
 
-import UI
-
 extension BackgroundPrimary {
     @discardableResult
     public func roundingFiftyPercentFromWidth() -> Self {

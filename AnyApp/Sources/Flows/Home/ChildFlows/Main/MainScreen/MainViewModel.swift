@@ -1,4 +1,5 @@
 import Services
+import UIKit
 import Combine
 import UI
 
@@ -10,8 +11,8 @@ final class MainViewModel {
         case content(Props)
         case openHiddenContent([Props.Item], Props.Item)
         case closeHiddenContent([Props.Item])
-        case open
-        case openCard
+        case openCard(DetailCardModel)
+        case openDetailAccount(ConfigurationDetailAccountModel)
     }
 
     enum Input {
@@ -19,10 +20,10 @@ final class MainViewModel {
     }
 
     var onOutput: ((Output) -> Void)?
-    
+
     private let coreRequestManager: CoreManagerAbstract
     private var cancellables = Set<AnyCancellable>()
-    
+
     init(authRequestManager: CoreManagerAbstract) {
         self.coreRequestManager = authRequestManager
     }
@@ -34,72 +35,94 @@ final class MainViewModel {
         }
     }
 
-    lazy var openItem: [Props.Item] = [
-        .card(.init(id: "2", title: "Карта зарплатная", description: "Физическая", rightImage: .init(cardNumber: "7789", backgroundCardImage: Asset.MiniBankCard.bankCard.image, iconBankImage: Asset.SmallIcon.masterCard.image), leftImage: Asset.Icon24px.input.image, state: .availabil,  onTap: { _ in
-            self.onOutput?(.openCard)
-        })),
-        .card(.init(id: "3", title: "Дополнительная карта", description: "Заблокирована", rightImage: .init(cardNumber: "8435", backgroundCardImage: Asset.MiniBankCard.bankCardDisable.image, iconBankImage: Asset.SmallIcon.visa.image), leftImage: Asset.Icon24px.input.image, state: .unavailabil))
-    ]
-
     private func loadData() {
-        self.coreRequestManager.accountListData().sink { error in
-            //
-        } receiveValue: { response in
-            for account in response.accounts {
-                print("111111111111111 - \(account.status)")
-                print("111111111111111 - \(account.cards.first?.cardType)")
-            }
-        }
-        .store(in: &cancellables)
-
-        
-        onOutput?(.content(.init(sections: [
+        self.onOutput?(.content(.init(sections: [
             .accounts(
-                [.spacer(.init(height: 16))] +
+                [.spacer(.init(height: 16, style: nil))] +
                 [.shimmerHeader()] +
                 (1...3).map { _ in .shimmerCell() }
-                ),
+            ),
             .deposits(
-                [.spacer(.init(height: 16))] +
+                [.spacer(.init(height: 16, style: nil))] +
                 [.shimmerHeader()] +
                 (1...3).map { _ in .shimmerCell() }
             )
         ])))
 
-        // request:
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+        self.coreRequestManager.accountListData().combineLatest(self.coreRequestManager.depositListData()).sink { _ in
+            // error
+        } receiveValue: { [weak self] accounts, deposits in
             self?.onOutput?(.content(.init(sections: [
-                .accounts([
-                    .header(.init(title: "Счета")),
-                    .account(.init(id: "1", title: "Счет расчетный", description: "457 334,00 ₽", leftImage: Asset.Icon40px.rub.image, onTap: { value, state  in
-                        if value.id == "1" {
-                            switch state {
-                            case .open:
-                                self?.onOutput?(.openHiddenContent(
-                                    self?.openItem ?? [],
-                                    .account(value)
-                                ))
-                            case .close:
-                                self?.onOutput?(.closeHiddenContent(
-                                    self?.openItem ?? []))
-                            }
-                        }
-                    }, openTap: {
-                        self?.onOutput?(.open)
-                    }))
-                ] +
-                          (self?.openItem ?? [])
+                .accounts(
+                    (self?.accountsViewProps(accounts) ?? [])
                 ),
-                .deposits([
-                    .spacer(.init(height: 16)),
-                    .header(.init(title: "Вклады")),
-                    .error(.init(id: "1", title: "", description: "", titleButton: ""))
-//                    .deposit(.init(id: "1", title: "Мой вклад", description: "1 515 000,78 ₽", rightImage: Asset.Icon40px.rub.image, percentStake: "Ставка 7.65%", date: "до 31.08.2024")),
-//                    .deposit(.init(id: "2", title: "Накопительный", description: "3 719,19 $", rightImage: Asset.Icon40px.icUsd.image, percentStake: "Ставка 11.05%", date: "до 31.08.2024")),
-//                    .deposit(.init(id: "3", title: "EUR вклад", description: "1 513,62 €", rightImage: Asset.Icon40px.icEur.image, percentStake: "Ставка 8.65%", date: "до 31.08.2026"))
-                ])
+                .deposits(
+                    (self?.depositsViewProps(deposits) ?? [])
+                )
             ])))
+        }
+        .store(in: &cancellables)
+    }
+
+    func depositeViewProps(_ response: Deposit) -> MainViewProps.Item {
+        MainViewProps.Item.deposit(.init(networkProps: response, percentStake: "Ставка 7.65%", date: "до 31.08.2024", onTap: { _ in
+        }))
+    }
+
+    var arrayCards = [TemplateCardView.Props]()
+
+    func depositsViewProps(_ response: DepositListReponse) -> [MainViewProps.Item] {
+        [.spacer(.init(height: 16, style: .backgroundPrimary))] +
+        [.header(.init(title: "Вклады"))] +
+        response.deposits.map({ deposit in
+            self.depositeViewProps(deposit)
+        })
+    }
+
+    func accountsViewProps(_ response: AccountListResponse) -> [MainViewProps.Item] {
+        [.header(.init(title: "Счета"))] +
+        response.accounts.flatMap({ account in
+            self.accountViewProps(account)
+        })
+    }
+
+    func accountViewProps(_ response: Account) -> [MainViewProps.Item] {
+        let account = [
+            MainViewProps.Item.account(.init(
+                title: "Счет расчетный",
+                networkProps: response,
+                onTap: { props, state in
+            let cards = self.createAndSearchCardForAccount(props, self.arrayCards)
+            switch state {
+            case .open:
+                self.onOutput?(.openHiddenContent(cards, .account(props)))
+            case .close:
+                self.onOutput?(.closeHiddenContent(cards))
+            }
+        }, openTap: { [weak self] id in
+            let config = ConfigurationDetailAccountModel(accountId: id)
+            self?.onOutput?(.openDetailAccount(config))
+        }))
+        ]
+        let cards = response.cards.map { card in
+            let props = TemplateCardView.Props(networkProps: card, accountId: response.accountID, cardNumber: response.number) { id in
+                let model = DetailCardModel(codeId: id)
+                self.onOutput?(.openCard(model))
+            }
+            arrayCards.append(props)
+            return MainViewProps.Item.card(props)
+        }
+
+        return account + cards
+    }
+
+    private func createAndSearchCardForAccount(
+        _ props: TemplateAccountView.Props,
+        _ cards: [TemplateCardView.Props]) -> [Props.Item] {
+        return cards.filter { card in
+            card.accountId == props.id
+        }.map { card in
+            Props.Item.card(card)
         }
     }
 }

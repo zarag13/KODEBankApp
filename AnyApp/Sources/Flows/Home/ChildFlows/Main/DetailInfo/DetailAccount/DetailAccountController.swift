@@ -7,8 +7,9 @@
 
 import UI
 import UIKit
+import AppIndependent
 
-final class DetailAccountController: TemplateViewController<DetailAccountView> {
+final class DetailAccountController: TemplateViewController<DetailAccountView>, NavigationBarAlwaysVisible {
 
     typealias ViewModel = DetailAccountViewModel
 
@@ -27,9 +28,15 @@ final class DetailAccountController: TemplateViewController<DetailAccountView> {
     }
 
     private func configureNavigationItem() {
-        navigationBarStyle(.layer1)
-        navigationController?.navigationBar.isHidden = true
+        navigationItem.title = "Счета"
+        navigationController?.navigationBar.prefersLargeTitles = false
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureNavigationItem()
+    }
+    
 
     private func setupBindings() {
         viewModel.onOutput = { [weak self] output in

@@ -53,10 +53,8 @@ final class MainDataSource {
         tableView.registerTemplateCell(forView: TemplateDepositsView.self)
         tableView.registerTemplateCell(forView: TemplateHeaderView.self)
         tableView.registerTemplateCell(forView: BaseTableSpacer.self)
-        //shimmer
         tableView.registerTemplateCell(forView: TemplateShimmerView.self)
         tableView.registerTemplateCell(forView: TemplateShimmerHeader.self)
-        //Error
         tableView.registerTemplateCell(forView: ErrorDownloadCell.self)
     }
 

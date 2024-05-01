@@ -13,7 +13,7 @@ public protocol CoreManagerAbstract: AnyObject {
 
     func profileData() -> AppPublisher<ProfileResponse>
     func accountListData() -> AppPublisher<AccountListResponse>
-    func depositListData() -> AppPublisher<[DepositListReponse]>
+    func depositListData() -> AppPublisher<DepositListReponse>
 }
 
 final class CoreRequestManager: NetworkRequestManager, CoreManagerAbstract {
@@ -23,7 +23,7 @@ final class CoreRequestManager: NetworkRequestManager, CoreManagerAbstract {
     func accountListData() -> AppPublisher<AccountListResponse> {
         request(path: CorePath.accocuntList)
     }
-    func depositListData() -> AppPublisher<[DepositListReponse]> {
+    func depositListData() -> AppPublisher<DepositListReponse> {
         request(path: CorePath.depositList)
     }
 }

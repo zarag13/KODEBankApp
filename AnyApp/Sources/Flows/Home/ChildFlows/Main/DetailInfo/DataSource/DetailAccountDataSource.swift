@@ -51,7 +51,7 @@ final class DetailAccountDataSource {
         snaphot.deleteItems(nweItems)
         dataSource?.apply(snaphot, animatingDifferences: false)
     }
-    
+
     public func applyNewItem(items: Section) {
         guard let source = dataSource else { return }
         var snaphot = source.snapshot()
@@ -69,7 +69,7 @@ final class DetailAccountDataSource {
     private func setup() {
         tableView.contentInsets(.init(top: 16, left: 0, bottom: 92, right: 0))
         tableView.registerTemplateCell(forView: TemplateShimmerView.self)
-        tableView.registerTemplateCell(forView: TemplateHeaderView.self)
+        tableView.registerTemplateCell(forView: HeaderDetailInfoCell.self)
         tableView.registerTemplateCell(forView: BaseTableSpacer.self)
         
         tableView.registerTemplateCell(forView: FavoritesAccountView.self)

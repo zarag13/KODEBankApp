@@ -7,8 +7,9 @@
 
 import UI
 import UIKit
+import AppIndependent
 
-final class DetailCardController: TemplateViewController<DetailCardView> {
+final class DetailCardController: TemplateViewController<DetailCardView>, NavigationBarAlwaysVisible {
 
     typealias ViewModel = DetailCardViewModel
 
@@ -22,12 +23,17 @@ final class DetailCardController: TemplateViewController<DetailCardView> {
     override func setup() {
         super.setup()
         setupBindings()
-        configureNavigationItem()
         viewModel.handle(.loadData)
     }
 
     private func configureNavigationItem() {
-        navigationController?.navigationBar.isHidden = true
+        navigationItem.title = "Карты"
+        navigationController?.navigationBar.prefersLargeTitles = false
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureNavigationItem()
     }
 
     private func setupBindings() {
