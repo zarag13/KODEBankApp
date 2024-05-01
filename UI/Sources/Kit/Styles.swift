@@ -14,6 +14,8 @@ public enum BackgroundStyle {
     case calendarPeriod
     case contentSecondary
     case textTertiary
+    case contentAccentTertiary
+    case textSecondary
 }
 
 // Defines textColor and tintColor
@@ -95,6 +97,10 @@ public extension BackgroundStyle {
             Palette.Content.secondary
         case .textTertiary:
             Palette.Text.tertiary
+        case .contentAccentTertiary:
+            Palette.Content.accentTertiary
+        case .textSecondary:
+            Palette.Text.secondary
         }
     }
 }

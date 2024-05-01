@@ -41,8 +41,10 @@ final class MainController: TemplateViewController<MainView>, NavigationBarAlway
             case .shimmer(let props):
                 self?.rootView.configured(with: props)
             case .content(let props):
+                self?.navigationController?.setNavigationBarHidden(false, animated: false)
                 self?.changeTabBar(hidden: false, animated: true)
                 self?.stopErrorAnimation()
+                self?.removeAdditionalState()
                 self?.rootView.buttonIsHidden(false)
                 self?.rootView.configured(with: props)
             case .openHiddenContent(let new, let section):

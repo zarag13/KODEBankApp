@@ -33,6 +33,7 @@ final class ProfileController: TemplateViewController<ProfileView>, NavigationBa
                 self?.changeTabBar(hidden: false, animated: true)
                 self?.stopErrorAnimation()
                 self?.rootView.configured(with: props)
+                self?.removeAdditionalState()
             case .error(let error, let section):
                 if self?.tabBarController?.selectedIndex == 1 {
                     self?.changeTabBar(hidden: true, animated: false)

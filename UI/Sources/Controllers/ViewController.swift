@@ -61,7 +61,6 @@ open class ViewController: BaseController, Themeable {
         case .error(let props):
             self.errorView?
                 .configured(with: props)
-            //self.errorView?.embed(in: view)
             self.errorView?.embed(in: view, useSafeAreaGuide: false)
         }
     }

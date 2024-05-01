@@ -30,6 +30,16 @@ final class FavoritesAccountView: BackgroundPrimary {
         }
         .layoutMargins(.make(vInsets: 14, hInsets: 16))
         .onTap { [weak self] in
+            UIView.animate(
+                withDuration: 0.15
+            ) {
+                self?.alpha = 0.55
+            } completion: { _ in
+                UIView.animate(withDuration: 0.15) {
+                    self?.alpha = 1
+                }
+            }
+            SnackCenter.shared.showSnack(withProps: .init(message: Main.featureInDevelopment, style: .basic))
             self?.props?.onTap?(props.id)
         }
     }

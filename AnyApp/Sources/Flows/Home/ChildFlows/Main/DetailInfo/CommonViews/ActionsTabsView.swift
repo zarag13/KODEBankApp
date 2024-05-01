@@ -40,23 +40,18 @@ final class ActionsTabsView: BackgroundPrimary {
             Spacer(.px16)
         }
         .layoutMargins(.make(hInsets: 36))
-        //vInsets: 16,
     }
 
     func createAction(event: State) -> UIView {
         let imageView = ImageView()
-        let stack = VStack {
-            VStack {
-                imageView
-                    .foregroundStyle(.button)
-            }
-            .layoutMargins(.all(16))
+        let stack = BackgroundView(vPadding: 16, hPadding: 16) {
+            imageView
+                .foregroundStyle(.button)
         }
-        stack.backgroundColor(ForegroundStyle.contentSecondary.color)
+        stack.backgroundStyle(.contentSecondary)
         stack.onTap { [weak self] in
             self?.state.send(event)
         }
-
         switch event {
         case .history:
             imageView.image = Asset.Icon24px.history.image
@@ -73,12 +68,12 @@ final class ActionsTabsView: BackgroundPrimary {
                 imageView
                     .foregroundStyle(.contentAccentPrimary)
                 stack
-                    .backgroundColor(ForegroundStyle.button.color)
+                    .backgroundStyle(.textSecondary)
             } else {
                 imageView
-                    .foregroundStyle(.button)
+                    .foregroundStyle(.contentAccentTertiary)
                 stack
-                    .backgroundColor(ForegroundStyle.contentSecondary.color)
+                    .backgroundStyle(.contentSecondary)
             }
         }.store(in: &cancellable)
         return stack

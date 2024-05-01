@@ -14,6 +14,10 @@ public enum Main {
   public static let accounts = Main.tr("Main", "accounts", fallback: "Счета")
   /// Вклады
   public static let deposits = Main.tr("Main", "deposits", fallback: "Вклады")
+  /// Подробный просмотр истории, временно не доступен
+  public static let detailHistory = Main.tr("Main", "detailHistory", fallback: "Подробный просмотр истории, временно не доступен")
+  /// Функция находится в разработке
+  public static let featureInDevelopment = Main.tr("Main", "featureInDevelopment", fallback: "Функция находится в разработке")
   /// Главная
   public static let main = Main.tr("Main", "main", fallback: "Главная")
   /// Функция временно не доступна
