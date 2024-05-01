@@ -7,13 +7,26 @@ final class MainView: BackgroundPrimary {
     var onNewProduct: VoidHandler?
 
     private let tableView = BaseTableView()
+        .hidingScrollIndicators()
     private let button = ButtonPrimary(title: "Открыть новый счет или продукт")
     private lazy var dataSource = MainDataSource(tableView: tableView)
+    private let refreshControl = RefreshControll(contentStyle: .contentAccentTertiary)
+
+    public var onRefresh: VoidHandler?
 
     override func setup() {
         super.setup()
         body().embed(in: self)
         setupButton()
+        tableView.alwaysBounceVertical = false
+        tableView.refreshControl = refreshControl
+        setupBindings()
+    }
+
+    private func setupBindings() {
+        self.refreshControl.onAction = { [weak self] in
+            self?.onRefresh?()
+        }
     }
 
     private func body() -> UIView {
@@ -29,6 +42,15 @@ final class MainView: BackgroundPrimary {
         button.onTap { [weak self] in
             self?.onNewProduct?()
         }
+        button.isHidden = true
+    }
+
+    public func stopRefresh() {
+        self.refreshControl.endRefreshing()
+    }
+
+    public func buttonIsHidden(_ isHidden: Bool) {
+        button.isHidden = isHidden
     }
 }
 
@@ -37,6 +59,7 @@ extension MainView: ConfigurableView {
 
     func configure(with model: MainViewProps) {
         dataSource.apply(sections: model.sections)
+        stopRefresh()
     }
     func addNewItems(nweItems: [MainViewProps.Item], into section: MainViewProps.Item) {
         dataSource.applyNewItemInSection(nweItems: nweItems, into: section)

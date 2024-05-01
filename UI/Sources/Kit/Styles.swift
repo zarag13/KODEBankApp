@@ -13,6 +13,7 @@ public enum BackgroundStyle {
     case overlay
     case calendarPeriod
     case contentSecondary
+    case textTertiary
 }
 
 // Defines textColor and tintColor
@@ -92,6 +93,8 @@ public extension BackgroundStyle {
             Palette.ErrorColor.indicatorContentSuccess
         case .contentSecondary:
             Palette.Content.secondary
+        case .textTertiary:
+            Palette.Text.tertiary
         }
     }
 }

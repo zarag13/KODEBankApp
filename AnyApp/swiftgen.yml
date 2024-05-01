@@ -7,6 +7,14 @@ strings:
         enumName: Common
         publicAccess: true
 
+- inputs: Resources/Localizable/Main.strings
+  outputs:
+    templateName: structured-swift5
+    output: Resources/Generated/Main.swift
+    params:
+        enumName: Main
+        publicAccess: true
+
 - inputs: Resources/Localizable/Auth.strings
   outputs:
     templateName: structured-swift5

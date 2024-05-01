@@ -98,9 +98,7 @@ public final class SnackView: View {
         titleLabel.text(props.message)
 
         backgroundStyle(
-            props.style == .basic ? .backgroundPrimary : .indicatorContentError
-//                ? .layerContrast
-//                : .layerNegative
+            props.style == .basic ? .textTertiary : .indicatorContentError
         )
 
         cornerRadius(12)

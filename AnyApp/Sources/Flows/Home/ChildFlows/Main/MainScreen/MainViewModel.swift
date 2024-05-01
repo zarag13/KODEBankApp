@@ -3,40 +3,39 @@ import UIKit
 import Combine
 import UI
 
-final class MainViewModel {
+final class MainViewModel: NetworkErrorHandler {
 
     typealias Props = MainViewProps
 
     enum Output {
+        case shimmer(Props)
         case content(Props)
         case openHiddenContent([Props.Item], Props.Item)
         case closeHiddenContent([Props.Item])
         case openCard(DetailCardModel)
         case openDetailAccount(ConfigurationDetailAccountModel)
+        case noInternet(UIAlertController)
+        case errorViewClosed
+        case error(ErrorView.Props)
     }
 
     enum Input {
         case loadData
+        case resfresh
     }
 
-    var onOutput: ((Output) -> Void)?
-
+    private var arrayCards = [TemplateCardView.Props]()
     private let coreRequestManager: CoreManagerAbstract
     private var cancellables = Set<AnyCancellable>()
+
+    public var onOutput: ((Output) -> Void)?
 
     init(authRequestManager: CoreManagerAbstract) {
         self.coreRequestManager = authRequestManager
     }
 
-    func handle(_ input: Input) {
-        switch input {
-        case .loadData:
-            loadData()
-        }
-    }
-
-    private func loadData() {
-        self.onOutput?(.content(.init(sections: [
+    private func lodIsStart() {
+        self.onOutput?(.shimmer(.init(sections: [
             .accounts(
                 [.spacer(.init(height: 16, style: nil))] +
                 [.shimmerHeader()] +
@@ -48,9 +47,28 @@ final class MainViewModel {
                 (1...3).map { _ in .shimmerCell() }
             )
         ])))
+    }
 
-        self.coreRequestManager.accountListData().combineLatest(self.coreRequestManager.depositListData()).sink { _ in
-            // error
+    private func loadData() {
+        self.coreRequestManager.accountListData().combineLatest(self.coreRequestManager.depositListData()).sink { [weak self] error in
+            guard case let .failure(error) = error else { return }
+            guard let errorProps = self?.errorHandle(
+                error,
+                onTap: {
+                if error.appError.kind == .timeout {
+                    self?.checkInternet(returnAlert: { alert in
+                        self?.onOutput?(.noInternet(alert))
+                    }, returnIsOn: {
+                        self?.loadData()
+                    })
+                } else {
+                    self?.loadData()
+                }
+            },
+                closeTap: {
+                self?.onOutput?(.errorViewClosed)
+            }) else { return }
+            self?.onOutput?(.error(errorProps))
         } receiveValue: { [weak self] accounts, deposits in
             self?.onOutput?(.content(.init(sections: [
                 .accounts(
@@ -64,29 +82,27 @@ final class MainViewModel {
         .store(in: &cancellables)
     }
 
-    func depositeViewProps(_ response: Deposit) -> MainViewProps.Item {
+    private func depositeViewProps(_ response: Deposit) -> MainViewProps.Item {
         MainViewProps.Item.deposit(.init(networkProps: response, percentStake: "Ставка 7.65%", date: "до 31.08.2024", onTap: { _ in
         }))
     }
 
-    var arrayCards = [TemplateCardView.Props]()
-
-    func depositsViewProps(_ response: DepositListReponse) -> [MainViewProps.Item] {
+    private func depositsViewProps(_ response: DepositListReponse) -> [MainViewProps.Item] {
         [.spacer(.init(height: 16, style: .backgroundPrimary))] +
-        [.header(.init(title: "Вклады"))] +
+        [.header(.init(title: Main.deposits))] +
         response.deposits.map({ deposit in
             self.depositeViewProps(deposit)
         })
     }
 
-    func accountsViewProps(_ response: AccountListResponse) -> [MainViewProps.Item] {
-        [.header(.init(title: "Счета"))] +
+    private func accountsViewProps(_ response: AccountListResponse) -> [MainViewProps.Item] {
+        [.header(.init(title: Main.accounts))] +
         response.accounts.flatMap({ account in
             self.accountViewProps(account)
         })
     }
 
-    func accountViewProps(_ response: Account) -> [MainViewProps.Item] {
+    private func accountViewProps(_ response: Account) -> [MainViewProps.Item] {
         let account = [
             MainViewProps.Item.account(.init(
                 title: "Счет расчетный",
@@ -109,7 +125,9 @@ final class MainViewModel {
                 let model = DetailCardModel(codeId: id)
                 self.onOutput?(.openCard(model))
             }
-            arrayCards.append(props)
+            if !arrayCards.contains(props) {
+                arrayCards.append(props)
+            }
             return MainViewProps.Item.card(props)
         }
 
@@ -123,6 +141,16 @@ final class MainViewModel {
             card.accountId == props.id
         }.map { card in
             Props.Item.card(card)
+        }
+    }
+
+    public func handle(_ input: Input) {
+        switch input {
+        case .loadData:
+            lodIsStart()
+            loadData()
+        case .resfresh:
+            loadData()
         }
     }
 }

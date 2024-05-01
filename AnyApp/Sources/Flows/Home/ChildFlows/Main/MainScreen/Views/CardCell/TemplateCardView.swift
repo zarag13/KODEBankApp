@@ -114,6 +114,8 @@ extension TemplateCardView: ConfigurableView {
         public func hash(into hasher: inout Hasher) {
             hasher.combine(id)
             hasher.combine(title)
+            hasher.combine(accountId)
+            hasher.combine(cardNumber)
         }
     }
 

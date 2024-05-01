@@ -27,18 +27,23 @@ final class MainController: TemplateViewController<MainView>, NavigationBarAlway
     }
 
     private func configureNavigationItem() {
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "Главная"
+        //navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = Main.main
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.prefersLargeTitles = true
+        //navigationController?.navigationBar.prefersLargeTitles = true
     }
 
     private func setupBindings() {
         viewModel.onOutput = { [weak self] output in
             switch output {
+            case .shimmer(let props):
+                self?.rootView.configured(with: props)
             case .content(let props):
+                self?.changeTabBar(hidden: false, animated: true)
+                self?.stopErrorAnimation()
+                self?.rootView.buttonIsHidden(false)
                 self?.rootView.configured(with: props)
             case .openHiddenContent(let new, let section):
                 self?.rootView.addNewItems(nweItems: new, into: section)
@@ -48,11 +53,29 @@ final class MainController: TemplateViewController<MainView>, NavigationBarAlway
                 self?.openDetailController?(.detailCard(model))
             case .openDetailAccount(let model):
                 self?.openDetailController?(.detailAccount(model))
+            case .noInternet(let alert):
+                self?.stopErrorAnimation()
+                self?.present(alert, animated: true)
+            case .errorViewClosed:
+                self?.navigationController?.setNavigationBarHidden(false, animated: false)
+                self?.changeTabBar(hidden: false, animated: true)
+            case .error(let error):
+                if self?.tabBarController?.selectedIndex == 0 {
+                    self?.navigationController?.setNavigationBarHidden(true, animated: false)
+                    self?.changeTabBar(hidden: true, animated: false)
+                    self?.stopErrorAnimation()
+                    self?.setAdditionState(.error(error))
+                }
+                self?.rootView.stopRefresh()
             }
         }
 
-        rootView.onNewProduct = { [weak self] in
-            SnackCenter.shared.showSnack(withProps: .init(message: "!New Product"))
+        rootView.onRefresh = { [weak self] in
+            self?.viewModel.handle(.resfresh)
+        }
+
+        rootView.onNewProduct = {
+            SnackCenter.shared.showSnack(withProps: .init(message: Main.newProducts, style: .basic))
         }
     }
 }

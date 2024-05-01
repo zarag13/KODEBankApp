@@ -90,10 +90,8 @@ final class ProfileViewModel: NetworkErrorHandler {
                 closeTap: {
                 self?.onOutput?(.errorViewClosed)
             }) else { return }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                guard let section = self?.createSettingsList() else { return }
-                self?.onOutput?(.error(errorProps, section))
-            }
+            guard let section = self?.createSettingsList() else { return }
+            self?.onOutput?(.error(errorProps, section))
         } receiveValue: { [weak self] value in
             guard let section = self?.createSettingsList() else { return }
             self?.onOutput?(.content(.init(sections: [
