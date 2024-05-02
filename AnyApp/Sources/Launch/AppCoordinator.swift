@@ -76,6 +76,7 @@ final class AppCoordinator: BaseCoordinator {
     }
 
     private func runHomeFlow() {
+        self.removeAllDependencies()
         DIContainer.shared.assemble(assembly: HomeAssembly())
         let coordinator = resolver ~> (HomeFlowCoordinator.self, router)
 
@@ -97,6 +98,7 @@ final class AppCoordinator: BaseCoordinator {
                 default:
                     break
                 }
+                self?.removeAllDependencies()
                 self?.start()
             default:
                 break

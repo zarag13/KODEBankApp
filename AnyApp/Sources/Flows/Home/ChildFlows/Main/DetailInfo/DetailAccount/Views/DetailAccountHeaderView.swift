@@ -20,6 +20,7 @@ final class DetailAccountHeaderView: BackgroundPrimary {
 
     override func setup() {
         super.setup()
+        self.backgroundStyle(.backgroundSecondary)
     }
     private func body(with props: Props) -> UIView {
         VStack(alignment: .center, distribution: .fill) {
@@ -148,6 +149,5 @@ extension DetailAccountHeaderView: ConfigurableView {
         self.props = model
         subviews.forEach { $0.removeFromSuperview() }
         body(with: model).embed(in: self)
-            .backgroundColor(BackgroundStyle.backgroundSecondary.color)
     }
 }

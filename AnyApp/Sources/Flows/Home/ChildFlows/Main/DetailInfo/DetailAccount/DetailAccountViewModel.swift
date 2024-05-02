@@ -46,14 +46,15 @@ final class DetailAccountViewModel: NetworkErrorHandler {
 
     lazy var favoritesData: Props.Section =
         .history([
-            .header(.init(title: "Платежи")),
-            .favorites(.init(id: "1", title: "Мобильная связь", leftImage: Asset.Icon24px.mobile.image)),
-            .favorites(.init(id: "2", title: "ЖКХ", leftImage: Asset.Icon24px.jkh.image)),
-            .favorites(.init(id: "3", title: "Интернет", leftImage: Asset.Icon24px.internet.image))
+            .spacer(.init(height: 16, style: .backgroundPrimary)),
+            .favorites(.init(id: "1", title:  Main.Account.mobileCommunication, leftImage: Asset.Icon24px.mobile.image)),
+            .favorites(.init(id: "2", title:  Main.Account.hcs, leftImage: Asset.Icon24px.jkh.image)),
+            .favorites(.init(id: "3", title:  Main.Account.internet, leftImage: Asset.Icon24px.internet.image))
         ])
 
     lazy var historyData: Props.Section =
         .history([
+            .spacer(.init(height: 16, style: .backgroundPrimary)),
             .header(.init(title: "Июнь 2021")),
             .history(.init(id: "1", title: "25 июня, 18:52", description: "Оплата ООО «ЯнтарьЭнерго»", leftImage: Asset.Icon40px.yantar.image, money: "-1 500,00 ₽")),
             .history(.init(id: "2", title: "25 июня, 17:52", description: "Зачисление зарплаты", leftImage: Asset.Icon24px.cardPay.image, money: "+15 000,00 ₽")),
@@ -62,30 +63,32 @@ final class DetailAccountViewModel: NetworkErrorHandler {
 
     lazy var settingsData: Props.Section =
         .history([
-            .settings(.init(id: "1", title: "Переименовать карту", leftImage: Asset.Icon24px.rename.image, rightImage: false)),
-            .settings(.init(id: "2", title: "Реквизиты счета", leftImage: Asset.Icon24px.requisites.image, rightImage: false)),
-            .settings(.init(id: "3", title: "Информация о карте", leftImage: Asset.Icon24px.card.image, rightImage: false)),
-            .settings(.init(id: "4", title: "Перевыпустить карту", leftImage: Asset.Icon24px.cardOut.image, rightImage: false)),
-            .settings(.init(id: "5", title: "Заблокировать карту", leftImage: Asset.Icon24px.lock.image, rightImage: false))
+            .spacer(.init(height: 16, style: .backgroundPrimary)),
+            .settings(.init(id: "1", title: Main.Account.linkedCards, leftImage: Asset.Icon24px.cardWhite.image, rightImage: true)),
+            .settings(.init(id: "2", title: Main.Account.renameAccount, leftImage: Asset.Icon24px.rename.image, rightImage: false)),
+            .settings(.init(id: "3", title: Main.Account.details, leftImage: Asset.Icon24px.requisites.image, rightImage: false)),
+            .settings(.init(id: "4", title: Main.Account.close, leftImage: Asset.Icon24px.bankAccount.image, rightImage: false))
         ])
 
     lazy var actionData: [Props.Item] = [
-        .actions(.init(id: "2", onTap: { state in
-            self.state = state
+        .actions(.init(id: "2", onTap: { [weak self] state in
+            self?.state = state
             switch state {
             case .history:
-                self.onOutput?(.addNewItems(self.historyData))
+                guard let history = self?.historyData else { return }
+                self?.onOutput?(.addNewItems(history))
             case .settings:
-                self.onOutput?(.addNewItems(self.settingsData))
+                guard let settings = self?.settingsData else { return }
+                self?.onOutput?(.addNewItems(settings))
             case .favorites:
-                self.onOutput?(.addNewItems(self.favoritesData))
+                guard let favorites = self?.favoritesData else { return }
+                self?.onOutput?(.addNewItems(favorites))
             }
         }))
     ]
 
     private func loadData() {
         coreRequestManager.detailAccount(configurationModel.accountId).sink { [weak self] error in
-            
             guard case let .failure(error) = error else { return }
             guard let errorProps = self?.errorHandle(
                 error,
@@ -104,12 +107,11 @@ final class DetailAccountViewModel: NetworkErrorHandler {
                 self?.onOutput?(.errorViewClosed)
             }) else { return }
             self?.onOutput?(.error(errorProps))
-            
         } receiveValue: { [weak self] response in
             guard let history = self?.reloadHistory() else { return }
             self?.onOutput?(.content(.init(sections: [
                 .detailHeader([
-                    .account(.init(networkProps: response, title: "Счет расчетный "))
+                    .account(.init(networkProps: response, title: Main.detailAccount))
                 ] + (self?.actionData ?? [])),
                 history
             ])))
@@ -127,4 +129,3 @@ final class DetailAccountViewModel: NetworkErrorHandler {
         }
     }
 }
-

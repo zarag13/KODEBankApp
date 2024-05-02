@@ -4,3 +4,25 @@
 "newProducts" = "Функция временно не доступна";
 "featureInDevelopment" = "Функция находится в разработке";
 "detailHistory" = "Подробный просмотр истории, временно не доступен";
+"detailAccount" = "Счет расчетный";
+"payments" = "Платежи";
+
+//MARK: - Detail Account
+"account.linkedCards" = "Привязанные карты";
+"account.renameAccount" = "Переименовать счет";
+"account.details" = "Реквизиты счета";
+"account.close" = "Закрыть счет";
+"account.mobileCommunication" = "Мобильная связь";
+"account.hcs" = "ЖКХ";
+"account.internet" = "Интернет";
+
+//MARK: - Detail Card
+"card.renameCard" = "Переименовать карту";
+"card.accountDetails" = "Реквизиты счета";
+"card.informationAboutCard" = "Информация о карте";
+"card.reissueCard" = "Перевыпустить карту";
+"card.blockCard" = "Заблокировать карту";
+"card.mobileCommunication" = "Мобильная связь";
+"card.hcs" = "ЖКХ";
+"card.internet" = "Интернет";
+

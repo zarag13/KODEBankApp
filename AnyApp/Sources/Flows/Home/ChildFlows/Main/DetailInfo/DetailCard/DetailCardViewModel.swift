@@ -42,10 +42,10 @@ final class DetailCardViewModel {
 
     lazy var favoritesData: Props.Section =
         .history([
-            .header(.init(title: "Платежи")),
-            .favorites(.init(id: "1", title: "Мобильная связь", leftImage: Asset.Icon24px.mobile.image)),
-            .favorites(.init(id: "2", title: "ЖКХ", leftImage: Asset.Icon24px.jkh.image)),
-            .favorites(.init(id: "3", title: "Интернет", leftImage: Asset.Icon24px.internet.image)),
+            .header(.init(title: Main.payments)),
+            .favorites(.init(id: "1", title: Main.Card.mobileCommunication, leftImage: Asset.Icon24px.mobile.image)),
+            .favorites(.init(id: "2", title: Main.Card.hcs, leftImage: Asset.Icon24px.jkh.image)),
+            .favorites(.init(id: "3", title: Main.Card.internet, leftImage: Asset.Icon24px.internet.image))
         ])
 
     lazy var historyData: Props.Section =
@@ -53,16 +53,16 @@ final class DetailCardViewModel {
             .header(.init(title: "Июнь 2021")),
             .history(.init(id: "1", title: "25 июня, 18:52", description: "Оплата ООО «ЯнтарьЭнерго»", leftImage: Asset.Icon40px.yantar.image, money: "-1 500,00 ₽")),
             .history(.init(id: "2", title: "25 июня, 17:52", description: "Зачисление зарплаты", leftImage: Asset.Icon24px.cardPay.image, money: "+15 000,00 ₽")),
-            .history(.init(id: "3", title: "25 июня, 16:52", description: "Перевод Александру Олеговичу С.", leftImage: Asset.Icon24px.accountPay.image, money: "6 000,00 ₽")),
+            .history(.init(id: "3", title: "25 июня, 16:52", description: "Перевод Александру Олеговичу С.", leftImage: Asset.Icon24px.accountPay.image, money: "6 000,00 ₽"))
         ])
 
     lazy var settingsData: Props.Section =
         .history([
-            .settings(.init(id: "1", title: "Переименовать карту", leftImage: Asset.Icon24px.rename.image, rightImage: false)),
-            .settings(.init(id: "2", title: "Реквизиты счета", leftImage: Asset.Icon24px.requisites.image, rightImage: false)),
-            .settings(.init(id: "3", title: "Информация о карте", leftImage: Asset.Icon24px.card.image, rightImage: false)),
-            .settings(.init(id: "4", title: "Перевыпустить карту", leftImage: Asset.Icon24px.cardOut.image, rightImage: false)),
-            .settings(.init(id: "5", title: "Заблокировать карту", leftImage: Asset.Icon24px.lock.image, rightImage: false)),
+            .settings(.init(id: "1", title: Main.Card.renameCard, leftImage: Asset.Icon24px.rename.image, rightImage: false)),
+            .settings(.init(id: "2", title: Main.Card.accountDetails, leftImage: Asset.Icon24px.requisites.image, rightImage: false)),
+            .settings(.init(id: "3", title: Main.Card.informationAboutCard, leftImage: Asset.Icon24px.card.image, rightImage: false)),
+            .settings(.init(id: "4", title: Main.Card.reissueCard, leftImage: Asset.Icon24px.cardOut.image, rightImage: false)),
+            .settings(.init(id: "5", title: Main.Card.blockCard, leftImage: Asset.Icon24px.lock.image, rightImage: false))
         ])
 
     lazy var headCartData: [Props.Item] = [

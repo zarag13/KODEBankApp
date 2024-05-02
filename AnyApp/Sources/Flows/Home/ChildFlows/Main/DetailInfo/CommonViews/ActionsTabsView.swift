@@ -26,7 +26,6 @@ final class ActionsTabsView: BackgroundPrimary {
         super.setup()
         self.backgroundStyle(.backgroundSecondary)
         body().embed(in: self)
-            .backgroundColor(BackgroundStyle.backgroundSecondary.color)
         state.sink { state in
             self.props?.onTap?(state)
         }.store(in: &cancellable)
@@ -46,7 +45,7 @@ final class ActionsTabsView: BackgroundPrimary {
         let imageView = ImageView()
         let stack = BackgroundView(vPadding: 16, hPadding: 16) {
             imageView
-                .foregroundStyle(.button)
+                //.foregroundStyle(.button)
         }
         stack.backgroundStyle(.contentSecondary)
         stack.onTap { [weak self] in
@@ -68,7 +67,7 @@ final class ActionsTabsView: BackgroundPrimary {
                 imageView
                     .foregroundStyle(.contentAccentPrimary)
                 stack
-                    .backgroundStyle(.textSecondary)
+                    .backgroundStyle(.contentAccentTertiary)
             } else {
                 imageView
                     .foregroundStyle(.contentAccentTertiary)

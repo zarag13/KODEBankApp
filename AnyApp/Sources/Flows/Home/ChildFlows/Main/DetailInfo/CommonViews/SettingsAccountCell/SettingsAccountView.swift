@@ -31,7 +31,7 @@ final class SettingsAccountView: BackgroundPrimary {
                 .huggingPriority(.defaultLow, axis: .horizontal)
             configureRightImage(state: props.rightImage)
         }
-        .layoutMargins(.make(vInsets: 14, hInsets: 16))
+        .layoutMargins(.make(vInsets: 16, hInsets: 16))
         .onTap { [weak self] in
             UIView.animate(
                 withDuration: 0.15
