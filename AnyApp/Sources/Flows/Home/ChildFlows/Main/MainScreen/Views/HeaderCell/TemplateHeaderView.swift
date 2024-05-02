@@ -20,10 +20,14 @@ final class TemplateHeaderView: BackgroundPrimary {
     // MARK: - Private methods
 
     private func body() -> UIView {
-        BackgroundView(vPadding: 17, hPadding: 16) {
-            titleLabel
-                .fontStyle(.body15sb)
-                .foregroundStyle(.textTertiary)
+        BackgroundView(hPadding: 16) {
+            VStack {
+                Spacer(.px16)
+                titleLabel
+                    .fontStyle(.body15sb)
+                    .foregroundStyle(.textTertiary)
+                Spacer(.px16)
+            }
         }
         .backgroundStyle(.backgroundSecondary)
     }

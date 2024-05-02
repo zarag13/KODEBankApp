@@ -30,11 +30,12 @@ final class DetailCardHeaderView: BackgroundPrimary {
     }
 
     private func crateCards(with props: Props) -> UIView {
+        let image = ImageView(image: props.styleCard)
         let imageView = VStack(alignment: .center, distribution: .fill) {
             Spacer(.px16)
-            ImageView(image: props.styleCard)
-                .clipsToBounds(true)
-                .contentMode(.scaleAspectFit)
+            image
+                .masksToBounds(true)
+                .contentMode(.scaleToFill)
                 .cornerRadius(10)
         }
             .layoutMargins(.make(hInsets: 20))
@@ -44,7 +45,7 @@ final class DetailCardHeaderView: BackgroundPrimary {
             .shadowOpacity(0.4)
 
         let content = VStack {
-            Spacer(.px32)
+            Spacer(.px24)
             HStack(spacing: 16) {
                 ImageView(image: props.companyCard)
                     .width(32)
@@ -71,11 +72,11 @@ final class DetailCardHeaderView: BackgroundPrimary {
                     .foregroundStyle(.textSecondary)
                     .huggingPriority(.defaultHigh, axis: .horizontal)
             }
-            Spacer(.px32)
+            Spacer(.px24)
         }
-            .layoutMargins(.make(hInsets: 48))
+            .layoutMargins(.make(hInsets: 16))
             .backgroundColor(.clear)
-        content.embed(in: imageView)
+        content.embed(in: image)
         return imageView
     }
 

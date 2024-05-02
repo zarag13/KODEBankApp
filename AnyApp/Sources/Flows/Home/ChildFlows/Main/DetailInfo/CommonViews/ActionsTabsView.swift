@@ -33,12 +33,16 @@ final class ActionsTabsView: BackgroundPrimary {
     private func body() -> UIView {
         VStack {
             Spacer(.px16)
-            ForEach(collection: State.allCases, alignment: .fill, distribution: .fillEqually, spacing: 40, axis: .horizontal) { state in
-                self.createAction(event: state)
+            HStack {
+                FlexibleGroupedSpacer()
+                ForEach(collection: State.allCases, alignment: .fill, distribution: .fillEqually, spacing: 40, axis: .horizontal) { state in
+                    self.createAction(event: state)
+                }
+                FlexibleGroupedSpacer()
             }
+            .linkGroupedSpacers()
             Spacer(.px16)
         }
-        .layoutMargins(.make(hInsets: 36))
     }
 
     func createAction(event: State) -> UIView {
