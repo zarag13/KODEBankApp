@@ -27,12 +27,7 @@ final class MainController: TemplateViewController<MainView>, NavigationBarAlway
     }
 
     private func configureNavigationItem() {
-        //navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = Main.main
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        //navigationController?.navigationBar.prefersLargeTitles = true
     }
 
     private func setupBindings() {

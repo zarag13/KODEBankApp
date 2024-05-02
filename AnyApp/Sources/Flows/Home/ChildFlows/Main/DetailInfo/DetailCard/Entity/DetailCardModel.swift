@@ -9,4 +9,5 @@ import Foundation
 
 struct DetailCardModel {
     let codeId: String
+    let nameCard: String
 }

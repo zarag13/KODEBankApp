@@ -61,7 +61,6 @@ final class DetailAccountDataSource {
         }
         snaphot.appendSections([items])
         snaphot.appendItems(items.items, toSection: items)
-        print(snaphot.sectionIdentifiers.count)
         dataSource?.apply(snaphot, animatingDifferences: false)
     }
 
@@ -71,14 +70,11 @@ final class DetailAccountDataSource {
         tableView.registerTemplateCell(forView: TemplateShimmerView.self)
         tableView.registerTemplateCell(forView: HeaderDetailInfoCell.self)
         tableView.registerTemplateCell(forView: BaseTableSpacer.self)
-        
         tableView.registerTemplateCell(forView: FavoritesAccountView.self)
         tableView.registerTemplateCell(forView: SettingsAccountView.self)
         tableView.registerTemplateCell(forView: HistoryAccountView.self)
-        
         tableView.registerTemplateCell(forView: DetailCardHeaderView.self)
         tableView.registerTemplateCell(forView: ActionsTabsView.self)
-        
         tableView.registerTemplateCell(forView: DetailAccountHeaderView.self)
     }
 

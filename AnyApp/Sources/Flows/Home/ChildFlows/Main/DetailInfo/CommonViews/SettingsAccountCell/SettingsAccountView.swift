@@ -48,7 +48,7 @@ final class SettingsAccountView: BackgroundPrimary {
     }
 
     private func configureRightImage(state: Bool) -> ImageView {
-        let image = ImageView(image: Asset.Icon24px.chevronDown.image)
+        let image = ImageView(image: Asset.Icon24px.chevronRight.image)
         image.huggingPriority(.defaultHigh, axis: .horizontal)
         image.foregroundStyle(.textTertiary)
         if state {

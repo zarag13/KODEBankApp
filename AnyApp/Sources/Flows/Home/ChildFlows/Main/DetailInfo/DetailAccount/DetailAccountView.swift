@@ -33,9 +33,7 @@ final class DetailAccountView: BackgroundPrimary {
     }
 
     private func body() -> UIView {
-        VStack(alignment: .fill, distribution: .fill) {
-            tableView
-        }
+        tableView
     }
 
     public func stopRefresh() {

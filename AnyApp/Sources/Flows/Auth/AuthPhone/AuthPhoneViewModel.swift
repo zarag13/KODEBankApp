@@ -32,7 +32,9 @@ final class AuthPhoneViewModel: NetworkErrorHandler {
             .sink(
                 receiveCompletion: { [weak self] error in
                     guard case let .failure(error) = error else { return }
-                    guard let errorProps = self?.errorHandle(error, onTap: {
+                    guard let errorProps = self?.errorHandle(
+                        error,
+                        onTap: {
                         if error.appError.kind == .timeout {
                             self?.checkInternet(returnAlert: { alert in
                                 self?.onOutput?(.noInternet(alert))

@@ -86,7 +86,7 @@ final class ProfileViewModel: NetworkErrorHandler {
                 } else {
                     self?.getDataProfile()
                 }
-            }, 
+            },
                 closeTap: {
                 self?.onOutput?(.errorViewClosed)
             }) else { return }

@@ -17,11 +17,10 @@ final class AboutAppViewModel {
     }
     // MARK: - Private Properties
     private let lastVersion: String
-    
+
     // MARK: - Public Properties
     public var event: ((Output) -> Void)?
 
-    
     init(lastVersion: String) {
         self.lastVersion = lastVersion
     }

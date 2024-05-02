@@ -98,7 +98,7 @@ final class AuthPhoneTextField: BackgroundPrimary {
     public func state(_ state: AuthTFState) {
         self.state.send(state)
     }
-    
+
     public func openKeyboard() {
         self.authTF.becomeFirstResponder()
     }

@@ -8,14 +8,18 @@
 import Services
 import Combine
 import UI
+import UIKit
 
-final class DetailCardViewModel {
+final class DetailCardViewModel: NetworkErrorHandler {
 
     typealias Props = DetailAccountViewProps
 
     enum Output {
         case content(Props)
         case addNewItems(Props.Section)
+        case noInternet(UIAlertController)
+        case errorViewClosed
+        case error(ErrorView.Props)
     }
 
     enum Input {
@@ -23,13 +27,14 @@ final class DetailCardViewModel {
     }
 
     var onOutput: ((Output) -> Void)?
-    
-    private let cardId: DetailCardModel
+
+    private var state: ActionsTabsView.State = .history
+    private let cardModel: DetailCardModel
     private let coreRequestManager: CoreManagerAbstract
     private var cancellables = Set<AnyCancellable>()
 
-    init(cardId: DetailCardModel, coreRequestManager: CoreManagerAbstract) {
-        self.cardId = cardId
+    init(cardModel: DetailCardModel, coreRequestManager: CoreManagerAbstract) {
+        self.cardModel = cardModel
         self.coreRequestManager = coreRequestManager
     }
 
@@ -42,6 +47,7 @@ final class DetailCardViewModel {
 
     lazy var favoritesData: Props.Section =
         .history([
+            .spacer(.init(height: 16, style: .backgroundSecondary)),
             .header(.init(title: Main.payments)),
             .favorites(.init(id: "1", title: Main.Card.mobileCommunication, leftImage: Asset.Icon24px.mobile.image)),
             .favorites(.init(id: "2", title: Main.Card.hcs, leftImage: Asset.Icon24px.jkh.image)),
@@ -50,6 +56,7 @@ final class DetailCardViewModel {
 
     lazy var historyData: Props.Section =
         .history([
+            .spacer(.init(height: 16, style: .backgroundSecondary)),
             .header(.init(title: "Июнь 2021")),
             .history(.init(id: "1", title: "25 июня, 18:52", description: "Оплата ООО «ЯнтарьЭнерго»", leftImage: Asset.Icon40px.yantar.image, money: "-1 500,00 ₽")),
             .history(.init(id: "2", title: "25 июня, 17:52", description: "Зачисление зарплаты", leftImage: Asset.Icon24px.cardPay.image, money: "+15 000,00 ₽")),
@@ -58,6 +65,7 @@ final class DetailCardViewModel {
 
     lazy var settingsData: Props.Section =
         .history([
+            .spacer(.init(height: 16, style: .backgroundSecondary)),
             .settings(.init(id: "1", title: Main.Card.renameCard, leftImage: Asset.Icon24px.rename.image, rightImage: false)),
             .settings(.init(id: "2", title: Main.Card.accountDetails, leftImage: Asset.Icon24px.requisites.image, rightImage: false)),
             .settings(.init(id: "3", title: Main.Card.informationAboutCard, leftImage: Asset.Icon24px.card.image, rightImage: false)),
@@ -65,34 +73,62 @@ final class DetailCardViewModel {
             .settings(.init(id: "5", title: Main.Card.blockCard, leftImage: Asset.Icon24px.lock.image, rightImage: false))
         ])
 
-    lazy var headCartData: [Props.Item] = [
-        .card(.init(id: "1", title: "Карта зарплатная", sumMoney: "457 334,00 ₽", numberCard: "**** 7789", dateCard: "05/22", styleCard: Asset.BigBankCard.debit.image, companyCard: Asset.SmallIcon.masterCard.image, rightImage: Asset.Icon24px.payPass.image))
-    ]
-
-    lazy var actionData: [Props.Item] = [
-        .actions(.init(id: "2", onTap: { state in
+    lazy var actionData: Props.Item = .actions(.init(id: "2", onTap: { [weak self] state in
+        self?.state = state
             switch state {
             case .history:
-                self.onOutput?(.addNewItems(self.historyData))
+                guard let history = self?.historyData else { return }
+                self?.onOutput?(.addNewItems(history))
             case .settings:
-                self.onOutput?(.addNewItems(self.settingsData))
+                guard let settings = self?.settingsData else { return }
+                self?.onOutput?(.addNewItems(settings))
             case .favorites:
-                self.onOutput?(.addNewItems(self.favoritesData))
+                guard let favorites = self?.favoritesData else { return }
+                self?.onOutput?(.addNewItems(favorites))
             }
         }))
-    ]
 
     private func loadData() {
-        print(cardId.codeId)
-        coreRequestManager.detailCard(cardId.codeId).sink { error in
-            print(error)
-        } receiveValue: { response in
-            print(response.expiredAt)
-            print(response.number)
+        coreRequestManager.detailCard(cardModel.codeId).sink { [weak self] error in
+            guard case let .failure(error) = error else { return }
+            guard let errorProps = self?.errorHandle(
+                error,
+                onTap: {
+                if error.appError.kind == .timeout {
+                    self?.checkInternet(returnAlert: { alert in
+                        self?.onOutput?(.noInternet(alert))
+                    }, returnIsOn: {
+                        self?.loadData()
+                    })
+                } else {
+                    self?.loadData()
+                }
+            },
+                closeTap: {
+                self?.onOutput?(.errorViewClosed)
+            }) else { return }
+            self?.onOutput?(.error(errorProps))
+        } receiveValue: { [weak self] response in
+            guard let actionView = self?.actionData else { return }
+            guard let history = self?.reloadHistory() else { return }
+            self?.onOutput?(.content(.init(sections: [
+                .detailHeader([
+                    .card(.init(networkProps: response, title: self?.cardModel.nameCard ?? "", sumMoney: "457 334,00 ₽", styleCard: Asset.BigBankCard.debit.image)),
+                    actionView
+                ]),
+                history
+            ])))
         }.store(in: &cancellables)
-        onOutput?(.content(.init(sections: [
-            .detailHeader(headCartData + actionData),
-            historyData
-        ])))
+    }
+
+    private func reloadHistory() -> Props.Section {
+        switch state {
+        case .history:
+            return self.historyData
+        case .settings:
+            return self.settingsData
+        case .favorites:
+            return self.favoritesData
+        }
     }
 }

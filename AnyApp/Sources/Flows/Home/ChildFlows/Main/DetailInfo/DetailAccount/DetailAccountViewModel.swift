@@ -47,9 +47,9 @@ final class DetailAccountViewModel: NetworkErrorHandler {
     lazy var favoritesData: Props.Section =
         .history([
             .spacer(.init(height: 16, style: .backgroundPrimary)),
-            .favorites(.init(id: "1", title:  Main.Account.mobileCommunication, leftImage: Asset.Icon24px.mobile.image)),
-            .favorites(.init(id: "2", title:  Main.Account.hcs, leftImage: Asset.Icon24px.jkh.image)),
-            .favorites(.init(id: "3", title:  Main.Account.internet, leftImage: Asset.Icon24px.internet.image))
+            .favorites(.init(id: "1", title: Main.Account.mobileCommunication, leftImage: Asset.Icon24px.mobile.image)),
+            .favorites(.init(id: "2", title: Main.Account.hcs, leftImage: Asset.Icon24px.jkh.image)),
+            .favorites(.init(id: "3", title: Main.Account.internet, leftImage: Asset.Icon24px.internet.image))
         ])
 
     lazy var historyData: Props.Section =

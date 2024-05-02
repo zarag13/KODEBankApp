@@ -88,9 +88,9 @@ final class HistoryAccountView: BackgroundPrimary {
             return .error
         }
     }
-    
+
     private func configureImage(image: UIImage) -> UIView {
-        
+
         if image.size.width >= 40 {
             let imageView = ImageView(image: image)
             imageView.huggingPriority(.defaultHigh, axis: .horizontal)

@@ -121,8 +121,8 @@ final class MainViewModel: NetworkErrorHandler {
         }))
         ]
         let cards = response.cards.map { card in
-            let props = TemplateCardView.Props(networkProps: card, accountId: response.accountID, cardNumber: response.number) { id in
-                let model = DetailCardModel(codeId: id)
+            let props = TemplateCardView.Props(networkProps: card, accountId: response.accountID, cardNumber: response.number) { id, title in
+                let model = DetailCardModel(codeId: id, nameCard: title)
                 self.onOutput?(.openCard(model))
             }
             if !arrayCards.contains(props) {

@@ -28,18 +28,3 @@ public struct DetailCard: Decodable {
         case number, expiredAt, paymentSystem, status, name
     }
 }
-
-// MARK: - Empty
-struct Empty: Codable {
-    let id: Int
-    let name, number, status: String
-    let accountID: Int
-    let expiredAt: Date
-    let paymentSystem: String
-
-    enum CodingKeys: String, CodingKey {
-        case id, name, number, status
-        case accountID = "accountId"
-        case expiredAt, paymentSystem
-    }
-}

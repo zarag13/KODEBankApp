@@ -34,7 +34,6 @@ final class ThemeAppViewModel {
                 .init(title: Profile.system, event: .auto, onTap: eventForThemeCell),
                 .init(title: Profile.dark, event: .dark, onTap: eventForThemeCell),
                 .init(title: Profile.light, event: .light, onTap: eventForThemeCell)
-                
             ]))
         }
     }

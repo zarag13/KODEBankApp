@@ -37,9 +37,9 @@ final class TemplateCardView: BackgroundPrimary {
         }
         .layoutMargins(.init(top: 16, left: 24, bottom: 17, right: 16))
         .onTap { [weak self] in
-            self?.props?.onTap?(props.id)
+            self?.props?.onTap?(props.id, props.title)
         }
-        
+
 //        let separator = setupSeparatorCell(id: props.id)
 //        stack.addSubview(separator)
 //        separator.snp.makeConstraints { make in
@@ -78,6 +78,7 @@ final class TemplateCardView: BackgroundPrimary {
 // MARK: - Configurable
 extension TemplateCardView: ConfigurableView {
     typealias Model = Props
+    typealias CardHendler = ((String, String) -> Void)
 
     struct Props: Hashable {
 
@@ -105,7 +106,7 @@ extension TemplateCardView: ConfigurableView {
         }
         let leftImage = Asset.Icon24px.input.image
 
-        var onTap: StringHandler?
+        var onTap: CardHendler?
 
         public static func == (lhs: TemplateCardView.Props, rhs: TemplateCardView.Props) -> Bool {
             lhs.hashValue == rhs.hashValue

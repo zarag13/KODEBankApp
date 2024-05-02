@@ -62,7 +62,7 @@ extension SettingView: ConfigurableView {
         public let leftImage: UIImage
         public let isDetailedImage: Bool
         public var onTap: EventHandler?
-        
+
         public init(
             id: Int,
             title: String,

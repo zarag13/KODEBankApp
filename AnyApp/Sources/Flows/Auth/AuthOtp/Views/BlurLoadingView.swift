@@ -45,7 +45,6 @@ public final class BlurLoadingView: BackgroundPrimary {
     override public func setup() {
         super.setup()
         self.embed(subview: blureView, useSafeAreaGuide: false)
-        //body().embed(in: self)
         body().embed(in: self, useSafeAreaGuide: false)
         self.backgroundStyle(.none)
     }

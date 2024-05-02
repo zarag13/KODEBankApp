@@ -45,7 +45,6 @@ final class ActionsTabsView: BackgroundPrimary {
         let imageView = ImageView()
         let stack = BackgroundView(vPadding: 16, hPadding: 16) {
             imageView
-                //.foregroundStyle(.button)
         }
         stack.backgroundStyle(.contentSecondary)
         stack.onTap { [weak self] in
@@ -102,6 +101,5 @@ extension ActionsTabsView: ConfigurableView {
         subviews.forEach { $0.removeFromSuperview() }
         body().embed(in: self)
             .backgroundColor(.clear)
-        print("111111111111111111 \(state.value)")
     }
 }

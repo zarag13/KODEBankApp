@@ -14,6 +14,8 @@ public enum Main {
   public static let accounts = Main.tr("Main", "accounts", fallback: "Счета")
   /// Вклады
   public static let deposits = Main.tr("Main", "deposits", fallback: "Вклады")
+  /// Функция детального просмотра вклада находится в разработке
+  public static let depositsSnak = Main.tr("Main", "depositsSnak", fallback: "Функция детального просмотра вклада находится в разработке")
   /// Счет расчетный
   public static let detailAccount = Main.tr("Main", "detailAccount", fallback: "Счет расчетный")
   /// Подробный просмотр истории, временно не доступен
@@ -59,6 +61,8 @@ public enum Main {
     public static let reissueCard = Main.tr("Main", "card.reissueCard", fallback: "Перевыпустить карту")
     /// Переименовать карту
     public static let renameCard = Main.tr("Main", "card.renameCard", fallback: "Переименовать карту")
+    /// Карты
+    public static let title = Main.tr("Main", "card.title", fallback: "Карты")
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

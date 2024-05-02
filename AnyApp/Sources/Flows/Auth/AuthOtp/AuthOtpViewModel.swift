@@ -46,7 +46,9 @@ final class AuthOtpViewModel: NetworkErrorHandler {
             .sink(
                 receiveCompletion: { [weak self] error in
                     guard case let .failure(error) = error else { return }
-                    guard let errorProps = self?.errorHandle(error, onTap: {
+                    guard let errorProps = self?.errorHandle(
+                        error,
+                        onTap: {
                         if error.appError.kind == .timeout {
                             self?.checkInternet(returnAlert: { alert in
                                 self?.onOutput?(.noInternet(alert))
@@ -59,9 +61,7 @@ final class AuthOtpViewModel: NetworkErrorHandler {
                     }, closeTap: {
                         self?.onOutput?(.errorViewClosed)
                     }) else { return }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                        self?.onOutput?(.error(errorProps))
-                    }
+                    self?.onOutput?(.error(errorProps))
                 }, receiveValue: { [weak self] response in
                     self?.appSession.handle(.updateTokens(
                         accessToken: response.guestToken,
@@ -77,22 +77,22 @@ final class AuthOtpViewModel: NetworkErrorHandler {
             .sink(
                 receiveCompletion: { [weak self] error in
                     guard case let .failure(error) = error else { return }
-                    guard let errorProps = self?.errorHandle(error, onTap: {
-                        if error.appError.kind == .timeout {
-                            self?.checkInternet(returnAlert: { alert in
-                                self?.onOutput?(.noInternet(alert))
-                            }, returnIsOn: {
+                    guard let errorProps = self?.errorHandle(
+                        error,
+                        onTap: {
+                            if error.appError.kind == .timeout {
+                                self?.checkInternet(returnAlert: { alert in
+                                    self?.onOutput?(.noInternet(alert))
+                                }, returnIsOn: {
+                                    self?.refreshCode(phone: phone)
+                                })
+                            } else {
                                 self?.refreshCode(phone: phone)
-                            })
-                        } else {
-                            self?.refreshCode(phone: phone)
-                        }
-                    }, closeTap: {
-                        self?.onOutput?(.errorViewClosed)
-                    }) else { return }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                        self?.onOutput?(.error(errorProps))
-                    }
+                            }
+                        }, closeTap: {
+                            self?.onOutput?(.errorViewClosed)
+                        }) else { return }
+                    self?.onOutput?(.error(errorProps))
                 },
                 receiveValue: { [weak self] response in
                     let otpModel = ConfigAuthOtpModel(
@@ -101,8 +101,7 @@ final class AuthOtpViewModel: NetworkErrorHandler {
                         leghtCode: response.otpLen,
                         codeId: response.otpId)
                     self?.configModel = otpModel
-                        self?.onOutput?(.updateCode(otpModel.leghtCode))
-                    print("download new code")
+                    self?.onOutput?(.updateCode(otpModel.leghtCode))
                 }
             ).store(in: &cancellables)
     }

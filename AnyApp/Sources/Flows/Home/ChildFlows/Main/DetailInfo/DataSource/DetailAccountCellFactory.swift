@@ -53,7 +53,7 @@ final class DetailAccountCellFactory {
             view.configure(with: props)
         }
     }
-    
+
     func makeFavoritesAccountCell(
         for indexPath: IndexPath,
         with props: FavoritesAccountView.Props

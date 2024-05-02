@@ -31,7 +31,7 @@ final class MainFlowAssembly: Assembly, Identifiable {
         }
 
         container.register(DetailCardController.self) { resolver, model in
-            let viewModel = DetailCardViewModel(cardId: model, coreRequestManager: (resolver ~> NetworkFactory.self).makeCoreRequestManager())
+            let viewModel = DetailCardViewModel(cardModel: model, coreRequestManager: (resolver ~> NetworkFactory.self).makeCoreRequestManager())
             return DetailCardController(viewModel: viewModel)
         }
 
