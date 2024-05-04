@@ -31,6 +31,7 @@ final class DetailCardHeaderView: BackgroundPrimary {
 
     private func crateCards(with props: Props) -> UIView {
         let image = ImageView(image: props.styleCard)
+            .userInteraction(enabled: true)
         let imageView = VStack(alignment: .center, distribution: .fill) {
             Spacer(.px16)
             image
@@ -96,12 +97,12 @@ final class DetailCardHeaderView: BackgroundPrimary {
             }
         }.store(in: &cancelable)
 
-        return BackgroundView(vPadding: 4) {
+        let view = BackgroundView(vPadding: 4) {
             numberLabel
-        }
-        .onTap { [weak self] in
+        }.onTap { [weak self] in
             self?.numberState.value == .close ? self?.numberState.send(.open) : self?.numberState.send(.close)
         }
+        return view
     }
 }
 
