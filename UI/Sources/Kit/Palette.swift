@@ -4,7 +4,7 @@ import SkeletonView
 private var currentTheme: Theme { AppearanceManager.shared.theme }
 
 // swiftlint:disable type_body_length
-public enum   {
+public enum Palette {
 
     // MARK: - Surface
 
