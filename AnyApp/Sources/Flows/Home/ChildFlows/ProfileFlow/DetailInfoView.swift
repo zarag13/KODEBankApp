@@ -60,6 +60,70 @@ final class DetailInfoView: BackgroundPrimary {
         }
     }}
 
+//extension DetailInfoView: ConfigurableView {
+//
+//    typealias Model = Props
+//
+//    struct Props: Hashable {
+//
+//        enum PhoneState {
+//            case open
+//            case close
+//        }
+//
+//        private let id: Int
+//        private let firstName: String
+//        private let middleName: String
+//        private let lastName: String
+//        private let country: String
+//        private let phone: String
+//        public let avatar: UIImage
+//
+//        public static func == (lhs: DetailInfoView.Props, rhs: DetailInfoView.Props) -> Bool {
+//            lhs.hashValue == rhs.hashValue
+//        }
+//
+//        public func hash(into hasher: inout Hasher) {
+//            hasher.combine(id)
+//            hasher.combine(firstName)
+//            hasher.combine(middleName)
+//            hasher.combine(lastName)
+//            hasher.combine(phone)
+//            hasher.combine(avatar)
+//        }
+//
+//        init(id: Int, firstName: String, middleName: String, lastName: String, country: String, phone: String, avatar: UIImage) {
+//            self.id = id
+//            self.firstName = firstName
+//            self.middleName = middleName
+//            self.lastName = lastName
+//            self.country = country
+//            self.phone = phone
+//            self.avatar = avatar
+//        }
+//
+//        public var fullName: String {
+//            return "\(firstName) \(lastName) \(middleName)"
+//        }
+//
+//        func togglePhoneMask(state: PhoneState) -> String {
+//            switch state {
+//            case .open:
+//                return phone.maskPhoneNumber(pattern: "+7 (###) ### - ## - ##")
+//            case .close:
+//                return phone.maskPhoneNumber(pattern: "+7 (###) *** - ** - ##")
+//            }
+//        }
+//    }
+//
+//    public func configure(with model: Model) {
+//        subviews.forEach { $0.removeFromSuperview() }
+//        body(props: model).embed(in: self)
+//        self.layoutIfNeeded()
+//    }
+//}
+
+
 extension DetailInfoView: ConfigurableView {
 
     typealias Model = Props
@@ -72,12 +136,7 @@ extension DetailInfoView: ConfigurableView {
         }
 
         private let id: Int
-        private let firstName: String
-        private let middleName: String
-        private let lastName: String
-        private let country: String
-        private let phone: String
-        public let avatar: UIImage
+        private let phone: PhoneState
 
         public static func == (lhs: DetailInfoView.Props, rhs: DetailInfoView.Props) -> Bool {
             lhs.hashValue == rhs.hashValue
@@ -85,34 +144,12 @@ extension DetailInfoView: ConfigurableView {
 
         public func hash(into hasher: inout Hasher) {
             hasher.combine(id)
-            hasher.combine(firstName)
-            hasher.combine(middleName)
-            hasher.combine(lastName)
             hasher.combine(phone)
-            hasher.combine(avatar)
         }
 
-        init(id: Int, firstName: String, middleName: String, lastName: String, country: String, phone: String, avatar: UIImage) {
+        init(id: Int, phone: PhoneState) {
             self.id = id
-            self.firstName = firstName
-            self.middleName = middleName
-            self.lastName = lastName
-            self.country = country
             self.phone = phone
-            self.avatar = avatar
-        }
-
-        public var fullName: String {
-            return "\(firstName) \(lastName) \(middleName)"
-        }
-
-        func togglePhoneMask(state: PhoneState) -> String {
-            switch state {
-            case .open:
-                return phone.maskPhoneNumber(pattern: "+7 (###) ### - ## - ##")
-            case .close:
-                return phone.maskPhoneNumber(pattern: "+7 (###) *** - ** - ##")
-            }
         }
     }
 
